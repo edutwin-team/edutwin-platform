@@ -1,1 +1,1 @@
-# edutwin-platform
+# edutwin-platforms
