@@ -1,4 +1,66 @@
-# edutwin-platform
+# EduTwin Platform
+
+## 🚀 Description
+
+EduTwin Platform est une application React + TypeScript pour le projet fil rouge « Jumeaux numériques d'élèves ».  
+Elle utilise :  
+
+- **React 18 + Vite** pour le front-end rapide et moderne  
+- **TypeScript** pour la sécurité de typage  
+- **DaisyUI + TailwindCSS** pour le design et les composants UI  
+- **Vitest + React Testing Library** pour les tests unitaires  
+
+
+## 📂 Structure du projet
+
+EduTwin
+
+│  ├─ api/          # fonctions pour appels API  
+│  ├─ assets/       # images, icônes, logos  
+│  ├─ components/   # composants réutilisables (Navbar, Button…)  
+│  ├─ context/      # context API pour le state global  
+│  ├─ hooks/        # hooks personnalisés  
+│  ├─ layouts/      # layout généraux (ex. Navbar + Footer)  
+│  ├─ pages/        # pages du site (Home.tsx, Quiz.tsx…)  
+│  ├─ services/     # services externes / utils API  
+│  ├─ styles/       # fichiers CSS globaux  
+│  ├─ types/        # types TypeScript personnalisés  
+│  ├─ utils/        # fonctions utilitaires  
+│  ├─ App.tsx       # point d’entrée du routeur  
+│  └─ main.tsx      # bootstrap React + TailwindCSS  
+├─ tests/            # tests unitaires avec Vitest + React Testing Library  
+├─ public/           # fichiers statiques  
+├─ design/           # maquettes / assets design  
+├─ docs/             # documentation du projet  
+├─ tsconfig.*.json   # configurations TypeScript  
+├─ vite.config.ts    # configuration Vite + Vitest + TailwindCSS  
+├─ package.json      # dépendances et scripts  
+└─ README.md  
+
+## ⚡ Installation
+
+1. Cloner le projet :  
+```bash
+git clone https://github.com/edutwin-team/edutwin-platform.git
+cd edutwin-platform 
+npm install
+npm run dev
+```
+## ✅ Tests unitaires
+```bash
+npm run test
+npm run test:watch
+```
+##  🧩 Scripts utiles
+| Commande             | Description                                 |
+| -------------------- | ------------------------------------------- |
+| `npm run dev`        | Lance le serveur de développement Vite      |
+| `npm run build`      | Compile le projet pour la production        |
+| `npm run preview`    | Prévisualise la build production localement |
+| `npm run test`       | Lance tous les tests Vitest                 |
+| `npm run test:watch` | Lance les tests en mode watch               |
+
+
 # 📘 Workflow Git pour le projet
 
 ## 1. Introduction
