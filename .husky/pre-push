@@ -1,0 +1,11 @@
+
+
+# Lancer les tests avant chaque push
+echo "⚡ Lancement des tests avant le push..."
+npm test
+
+# Vérifie si les tests ont échoué
+if [ $? -ne 0 ]; then
+  echo "❌ Push annulé : les tests ont échoué !"
+  exit 1
+fi
