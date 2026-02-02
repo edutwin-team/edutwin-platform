@@ -1,28 +1,28 @@
-export default function Dashboard() {
+import React from "react";
+import DigitalTwinCard from "../../components/twin/DigitalTwinCard";
+import type { DigitalTwin } from "../../types/types";
+
+const twins: DigitalTwin[] = [
+  { id: 1, name: "Étudiant A", behavior: "Toujours absent", attention: 40, absence: 90 },
+  { id: 2, name: "Étudiant B", behavior: "Très attentif", attention: 95, absence: 5 },
+  { id: 3, name: "Étudiant C", behavior: "En retard souvent", attention: 60, absence: 30 },
+  { id: 4, name: "Étudiant D", behavior: "Handicap dyslexie", attention: 80, absence: 10 },
+];
+
+const Dashboard: React.FC = () => {
   return (
-    <div className="p-8 space-y-4">
-      <h1 className="text-3xl font-bold">Dashboard Élève</h1>
-
-      <p>
-        Vue globale du parcours pédagogique de l’élève.
+    <div>
+      <h1 className="text-3xl font-bold mb-4">Dashboard Professeur</h1>
+      <p className="mb-6">
+        Visualisation des jumeaux numériques et simulation des comportements.
       </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="card bg-base-200 p-4">
-          <h2 className="font-semibold">Niveau estimé</h2>
-          <p>Intermédiaire</p>
-        </div>
-
-        <div className="card bg-base-200 p-4">
-          <h2 className="font-semibold">Quiz réalisés</h2>
-          <p>3</p>
-        </div>
-
-        <div className="card bg-base-200 p-4">
-          <h2 className="font-semibold">Axes de progrès</h2>
-          <p>Logique, compréhension</p>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {twins.map((twin) => (
+          <DigitalTwinCard key={twin.id} twin={twin} />
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Dashboard;
