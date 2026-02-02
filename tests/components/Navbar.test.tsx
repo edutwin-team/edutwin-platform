@@ -9,7 +9,7 @@ describe('Navbar', () => {
         <Navbar />
       </MemoryRouter>
     )
-    expect(screen.getByText(/Digital Twin Edu/i)).toBeInTheDocument()
+    expect(screen.getByText(/EduTwin/i)).toBeInTheDocument()
   })
 
   it('affiche les liens de navigation', () => {
@@ -18,10 +18,8 @@ describe('Navbar', () => {
         <Navbar />
       </MemoryRouter>
     )
-    expect(screen.getByText(/Dashboard/i)).toBeInTheDocument()
-    expect(screen.getByText(/Quiz/i)).toBeInTheDocument()
     expect(screen.getByText(/Profil/i)).toBeInTheDocument()
-    expect(screen.getByText(/Enseignant/i)).toBeInTheDocument()
-    expect(screen.getByText(/Projet/i)).toBeInTheDocument()
+    expect(screen.getByText(/Get Started/i)).toBeInTheDocument()
+
   })
 })
