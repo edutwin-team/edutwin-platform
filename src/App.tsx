@@ -1,25 +1,24 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Navbar from "./components/navbar/Navbar";
-import Sidebar from "./components/sidebar/Sidebar";
+import React from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import Navbar from './components/navbar/Navbar';
+import Sidebar from './components/sidebar/Sidebar';
 
 // Pages
-import Home from "./pages/home/Home";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Profile from "./pages/profile/Profile";
-import Quiz from "./pages/quiz/Quiz";
-import Question from "./pages/question/Question";
-import Results from "./pages/results/Results";
-import Teacher from "./pages/teacher/Teacher";
-import About from "./pages/about/About";
-import Settings from "./pages/settings/Settings";
-import NotFound from "./pages/static/NotFound";
-
+import Home from './pages/home/Home';
+import Dashboard from './pages/dashboard/Dashboard';
+import Profile from './pages/profile/Profile';
+import Quiz from './pages/quiz/Quiz';
+import Question from './pages/question/Question';
+import Results from './pages/results/Results';
+import Teacher from './pages/teacher/Teacher';
+import About from './pages/about/About';
+import Settings from './pages/settings/Settings';
+import NotFound from './pages/static/NotFound';
 
 const Layout: React.FC = () => {
   const location = useLocation();
-  const hideSidebar = location.pathname === "/";
-  const isHome = location.pathname === "/";
+  const hideSidebar = location.pathname === '/';
+  const isHome = location.pathname === '/';
 
   return (
     <>
@@ -28,14 +27,11 @@ const Layout: React.FC = () => {
       <div className="flex min-h-[calc(100vh-64px)]">
         {!hideSidebar && <Sidebar />}
 
-    <div
-  className={`flex-1 ${
-    isHome
-      ? "p-0 bg-transparent overflow-y-auto"
-      : "p-4 bg-base-100 overflow-y-auto"
-  }`}
->
-
+        <div
+          className={`flex-1 ${
+            isHome ? 'p-0 bg-transparent overflow-y-auto' : 'p-4 bg-base-100 overflow-y-auto'
+          }`}
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -53,7 +49,6 @@ const Layout: React.FC = () => {
     </>
   );
 };
-
 
 const App: React.FC = () => (
   <BrowserRouter>
