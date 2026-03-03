@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
+import Footer from './components/footer/footer';
 
 // Pages
 import Home from './pages/home/Home';
@@ -21,32 +22,44 @@ const Layout: React.FC = () => {
   const isHome = location.pathname === '/';
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar en haut */}
       <Navbar />
 
-      <div className="flex min-h-[calc(100vh-64px)]">
+      {/* Contenu principal */}
+      <div className="flex flex-1">
         {!hideSidebar && <Sidebar />}
 
+        {/* Content wrapper */}
         <div
-          className={`flex-1 ${
-            isHome ? 'p-0 bg-transparent overflow-y-auto' : 'p-4 bg-base-100 overflow-y-auto'
+          className={`flex-1 flex flex-col ${
+            isHome
+              ? 'bg-gradient-to-b from-[#0b1020] via-[#0c1226] to-[#0b1020]'
+              : 'bg-base-100 p-4'
           }`}
         >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/quiz" element={<Quiz />} />
-            <Route path="/question" element={<Question />} />
-            <Route path="/results" element={<Results />} />
-            <Route path="/teacher" element={<Teacher />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <div className="flex-1 overflow-y-auto">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/quiz" element={<Quiz />} />
+              <Route path="/question" element={<Question />} />
+              <Route path="/results" element={<Results />} />
+              <Route path="/teacher" element={<Teacher />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+
+          {/* Footer collé en bas */}
+          <div className="mt-auto">
+            <Footer />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
