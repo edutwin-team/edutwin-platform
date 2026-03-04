@@ -15,7 +15,6 @@ export default function Footer() {
             Next-generation AI tools to enhance learning materials and simulate student behavior.
           </p>
         </div>
-
         {/* Navigation Links */}
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Navigation</h3>

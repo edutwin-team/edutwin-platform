@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Footer from "../../src/components/footer/footer";
+import Footer from "../../src/components/footer/Footer";
 
 describe("Footer", () => {
   beforeEach(() => {

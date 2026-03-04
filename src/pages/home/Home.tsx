@@ -4,7 +4,7 @@ import { FeatureCard } from "../../components/home/FeatureCard";
 import { FiZap } from "react-icons/fi";
 import { BsRainbow } from "react-icons/bs";
 import { BiShield } from "react-icons/bi";
-
+import Footer from "../../components/footer/Footer";
 const Home: React.FC = () => {
   return (
     <div className="h-full min-h-[calc(100vh-64px)] bg-gradient-to-b from-[#0b1020] via-[#0c1226] to-[#0b1020] text-white flex flex-col justify-between">
@@ -70,6 +70,8 @@ const Home: React.FC = () => {
           />
         </div>
 
+        <Footer />
+      
       </main>
     </div>
 

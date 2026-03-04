@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
-import Footer from './components/footer/footer';
 
 // Pages
 import Home from './pages/home/Home';
@@ -52,14 +51,9 @@ const Layout: React.FC = () => {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
-
-          {/* Footer collé en bas */}
-          <div className="mt-auto">
-            <Footer />
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
