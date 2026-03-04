@@ -4,13 +4,14 @@ import { FeatureCard } from "../../components/home/FeatureCard";
 import { FiZap } from "react-icons/fi";
 import { BsRainbow } from "react-icons/bs";
 import { BiShield } from "react-icons/bi";
-
+import Footer from "../../components/footer/Footer";
 const Home: React.FC = () => {
   return (
-    <div className="h-full  min-h-[calc(100vh-64px)] bg-gradient-to-b from-[#0b1020] via-[#0c1226] to-[#0b1020] text-white flex items-center justify-center">
-      
+    <div className="h-full min-h-[calc(100vh-64px)] bg-gradient-to-b from-[#0b1020] via-[#0c1226] to-[#0b1020] text-white flex flex-col justify-between">
+
+      {/* MAIN CONTENT */}
       <main className="flex mt-5 flex-col items-center text-center px-6">
-        
+
         {/* Badge */}
         <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-900/40 border border-indigo-700/40 text-indigo-300 text-xs font-semibold tracking-wide">
           ⚡ NEXT-GEN EDUCATIONAL TECH
@@ -47,28 +48,33 @@ const Home: React.FC = () => {
             Create Digital Twin
           </Link>
         </div>
-     <div className="grid gap-6 md:grid-cols-3 mb-10 mt-10">
-      <FeatureCard
-        icon={<BsRainbow className="text-indigo-400" />}
-        title="Digital Twin Concept"
-        description="Digital twins are virtual replicas of physical students. In education, they model cognitive patterns, attention spans, and learning disabilities."
-      />
 
-      <FeatureCard
-        icon={<FiZap className="text-yellow-400" />}
-        title="AI Pedagogical Content"
-        description="Test your course materials against various simulated student personas to identify misunderstood concepts."
-      />
+        {/* Features */}
+        <div className="grid gap-6 md:grid-cols-3 mb-10 mt-10">
+          <FeatureCard
+            icon={<BsRainbow className="text-indigo-400" />}
+            title="Digital Twin Concept"
+            description="Digital twins are virtual replicas of physical students. In education, they model cognitive patterns, attention spans, and learning disabilities."
+          />
 
-      <FeatureCard
-        icon={<BiShield className="text-emerald-400" />}
-        title="Inclusive Design"
-        description="Simulate students with disabilities to ensure your materials are truly accessible."
-      />
-    </div>
+          <FeatureCard
+            icon={<FiZap className="text-yellow-400" />}
+            title="AI Pedagogical Content"
+            description="Test your course materials against various simulated student personas to identify misunderstood concepts."
+          />
 
+          <FeatureCard
+            icon={<BiShield className="text-emerald-400" />}
+            title="Inclusive Design"
+            description="Simulate students with disabilities to ensure your materials are truly accessible."
+          />
+        </div>
+
+        <Footer />
+      
       </main>
     </div>
+
   );
 };
 
