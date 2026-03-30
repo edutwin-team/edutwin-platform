@@ -16,17 +16,19 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         <div className="max-h-[80vh] overflow-y-scroll p-4">
           <h3 className="font-bold mb-4 text-5xl text-center">Connexion</h3>
 
-          <p className="text-info-content text-center">
+          <p className="text-info-content text-center dark:text-white">
             Veuillez entrer vos informations pour accéder à votre compte.
           </p>
 
-          <hr className="mx-auto my-4 w-3/4 text-info-content" />
+          <hr className="mx-auto my-4 w-3/4 text-info-content dark:text-white" />
 
           <form>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-5">
               {/* LEFT SIDE */}
               <div className="flex flex-col gap-4">
-                <h1 className="text-info-content font-bold">Informations de connexion</h1>
+                <h1 className="text-info-content font-bold dark:text-white">
+                  Informations de connexion
+                </h1>
 
                 {/* Email */}
                 <label className="input input-bordered flex items-center gap-2">
@@ -49,7 +51,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                   <span className="text-primary font-semibold">Bienvenue 👋</span>
                 </div>
 
-                <p className="text-info-content text-sm">
+                <p className="text-info-content text-sm dark:text-white">
                   Connectez-vous pour accéder à votre espace personnel.
                 </p>
               </div>
@@ -68,7 +70,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
           </form>
 
           {/* Bottom link */}
-          <p className="ml-13 mt-3 text-info-content">
+          <p className="ml-13 mt-3 text-info-content dark:text-white">
             Vous n'avez pas encore un compte ?{' '}
             <span onClick={onClose} className="text-primary cursor-pointer">
               S'inscrire
