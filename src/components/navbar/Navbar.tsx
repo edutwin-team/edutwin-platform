@@ -1,47 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LoginModal } from './login/LoginModal';
 import { Register } from './register/Register';
+
 export default function Navbar() {
+  const version = __APP_VERSION__;
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
-  const showRegisterModal = () => {
-    setIsRegisterOpen(true);
-  };
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
-  const showLoginModal = () => {
-    setIsLoginOpen(true);
-  };
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
-  const hideRegisterModal = () => {
-    setIsRegisterOpen(false);
-  };
-
-  const hideLoginModal = () => {
-    setIsLoginOpen(false);
-  };
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   return (
     <>
       <div className="navbar bg-base-200 px-6 shadow">
         <div className="flex-1">
-          <Link to="/" className="text-xl font-bold">
-            🎓 EduTwin
-          </Link>
-        </div>
-
-        <div className="flex-1">
-          <button onClick={() => showLoginModal()} className="btn btn-outline btn-sm mr-6">
-            Login
-          </button>
-
-          <button onClick={() => showRegisterModal()} className="btn btn-success btn-sm">
-            Register
-          </button>
+          <div className="tooltip tooltip-bottom" data-tip={`Version ${version}`}>
+            <Link to="/" className="text-xl font-bold">
+              🎓 EduTwin
+            </Link>
+          </div>
         </div>
 
         <div className="flex gap-2">
+          <button onClick={toggleTheme} className="btn btn-ghost btn-sm">
+            {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+          </button>
+
           <Link to="/profile" className="btn btn-outline btn-sm">
             Profil
           </Link>
@@ -50,10 +41,20 @@ export default function Navbar() {
             Get Started
           </Link>
         </div>
+
+        <div className="flex-1 flex justify-end">
+          <button onClick={() => setIsLoginOpen(true)} className="btn btn-outline btn-sm mr-6">
+            Login
+          </button>
+
+          <button onClick={() => setIsRegisterOpen(true)} className="btn btn-success btn-sm">
+            Register
+          </button>
+        </div>
       </div>
 
-      <Register isOpen={isRegisterOpen} onClose={() => hideRegisterModal()} />
-      <LoginModal isOpen={isLoginOpen} onClose={() => hideLoginModal()} />
+      <Register isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
+      <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
     </>
   );
 }
