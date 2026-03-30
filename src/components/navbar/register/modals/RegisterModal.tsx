@@ -29,7 +29,7 @@ export const RegisterModal = ({ isOpen, onClose, step, setStep }: RegisterModalP
 
           {/* Progress */}
           <div className="text-center mb-6">
-            <div className="text-sm text-gray-500">Étape {step} sur 2</div>
+            <div className="text-sm text-gray-500 dark:text-white">Étape {step} sur 2</div>
             <progress className="progress progress-primary w-full mt-2" value={step} max={2} />
           </div>
 
@@ -39,7 +39,9 @@ export const RegisterModal = ({ isOpen, onClose, step, setStep }: RegisterModalP
               {step === 1 && (
                 <>
                   <div className="flex flex-col gap-4">
-                    <h1 className="font-bold text-info-content">Données personnelles</h1>
+                    <h1 className="font-bold text-info-content dark:text-white">
+                      Données personnelles
+                    </h1>
 
                     <label className="input input-bordered flex items-center gap-2">
                       <HiOutlineUser className="h-4 w-4 opacity-70" />
@@ -84,7 +86,9 @@ export const RegisterModal = ({ isOpen, onClose, step, setStep }: RegisterModalP
               {step === 2 && (
                 <>
                   <div className="flex flex-col gap-4">
-                    <h1 className="font-bold text-info-content">Informations professionnelles</h1>
+                    <h1 className="font-bold text-info-content dark:text-white">
+                      Informations professionnelles
+                    </h1>
 
                     <label className="input input-bordered flex items-center gap-2">
                       <HiOutlineOfficeBuilding className="h-4 w-4 opacity-70" />
