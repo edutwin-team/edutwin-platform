@@ -24,7 +24,7 @@ const DigitalTwinCard: React.FC<Props> = ({ twin }) => {
           <div className="flex items-center gap-2">
             <div className="tooltip tooltip-bottom" data-tip="Simulation active">
               <span
-                className="inline-block h-2.5 w-2.5 rounded-full bg-green-500 shadow-[0_0_0_3px_rgba(34,197,94,0.2)]"
+                className="status-active-dot inline-block h-2.5 w-2.5 rounded-full bg-green-500"
                 aria-label="Simulation active"
               />
             </div>

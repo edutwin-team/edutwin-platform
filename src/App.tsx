@@ -33,7 +33,7 @@ const Layout: React.FC = () => {
         <div
           className={`flex-1 flex flex-col ${
             isHome
-              ? 'bg-gradient-to-b from-[#0b1020] via-[#0c1226] to-[#0b1020]'
+              ? 'home-layout-bg'
               : 'bg-gradient-to-br from-base-200/60 via-base-100 to-base-200/30 p-4 md:p-6'
           }`}
         >
