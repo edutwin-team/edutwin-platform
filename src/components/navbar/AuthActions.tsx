@@ -10,7 +10,7 @@ export function AuthActions({ onLoginClick, onRegisterClick }: AuthActionsProps)
         Connexion
       </button>
 
-      <button onClick={onRegisterClick} className="btn btn-success btn-sm rounded-2xl normal-case">
+      <button onClick={onRegisterClick} className="btn btn-primary btn-sm rounded-2xl normal-case">
         S'inscrire
       </button>
     </>
