@@ -5,6 +5,10 @@
     dark --prefersdark;
 }
 
+[data-theme='light'] .layout-app {
+  background-color: #f5f6fa;
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
@@ -34,6 +38,10 @@
   --auth-modal-border: rgb(148 163 184 / 0.28);
   --auth-right-surface-top: rgb(255 255 255 / 0.96);
   --auth-right-surface-bottom: rgb(248 250 252 / 0.96);
+}
+
+[data-theme='light'] .right-panel-bg {
+  background-color: #f5f6fa;
 }
 
 .home-shell {

@@ -32,13 +32,7 @@ const Layout: React.FC = () => {
         {!hideSidebar && <Sidebar />}
 
         {/* Content wrapper */}
-        <div
-          className={`flex-1 flex flex-col bg-slate-50${
-            isHome
-              ? 'home-layout-bg'
-              : 'bg-gradient-to-br from-base-200/60 via-base-100 to-base-200/30 p-4 md:p-6'
-          }`}
-        >
+        <div className={`flex-1 flex flex-col ${isHome ? 'home-layout-bg' : 'right-panel-bg'}`}>
           <div className="flex-1 overflow-y-auto">
             <Routes>
               <Route path="/" element={<Home />} />
