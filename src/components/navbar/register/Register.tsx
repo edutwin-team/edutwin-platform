@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { RegisterModal } from './modals/RegisterModal';
 
 type RegisterProps = {
@@ -7,12 +6,5 @@ type RegisterProps = {
 };
 
 export const Register = ({ isOpen, onClose }: RegisterProps) => {
-  const [step, setStep] = useState(1);
-
-  const handleClose = () => {
-    setStep(1); // reset step quand on ferme
-    onClose();
-  };
-
-  return <RegisterModal isOpen={isOpen} onClose={handleClose} step={step} setStep={setStep} />;
+  return <RegisterModal isOpen={isOpen} onClose={onClose} />;
 };

@@ -9,13 +9,15 @@ const Sidebar: React.FC = () => {
   return (
     <>
       {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between p-4 bg-[#1e1b4b] text-white">
-        <span className="font-bold">🎓 Digital Twin</span>
-        <button onClick={() => setOpen(!open)}>☰</button>
+      <div className="sidebar-mobile-header md:hidden flex items-center justify-between px-4 py-3 text-slate-100">
+        <span className="text-sm font-semibold tracking-wide">EduTwin</span>
+        <button onClick={() => setOpen(!open)} className="btn btn-ghost btn-sm rounded-xl">
+          ☰
+        </button>
       </div>
 
       {/* Desktop */}
-      <aside className="hidden md:flex flex-col w-64 h-screen bg-[#1e1b4b] text-white border-r border-indigo-900/50 p-6">
+      <aside className="sidebar-surface hidden h-[calc(100vh-4.6rem)] w-72 flex-col border-r border-indigo-900/40 px-5 py-6 text-slate-100 shadow-2xl shadow-indigo-950/30 md:sticky md:top-[4.6rem] md:flex">
         <SidebarContent pathname={pathname} />
       </aside>
 
@@ -26,7 +28,7 @@ const Sidebar: React.FC = () => {
             className="fixed inset-0 bg-black/40 z-40"
             onClick={() => setOpen(false)}
           />
-          <aside className="fixed left-0 top-0 w-64 h-full bg-[#1e1b4b] text-white z-50 p-6">
+          <aside className="sidebar-surface fixed left-0 top-0 z-50 h-full w-72 px-5 py-6 text-slate-100 shadow-2xl">
             <SidebarContent
               pathname={pathname}
               close={() => setOpen(false)}

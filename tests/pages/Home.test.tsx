@@ -12,24 +12,9 @@ describe("Home Page", () => {
       </BrowserRouter>
     );
 
-
-    expect(
-      screen.getByText(/NEXT-GEN EDUCATIONAL TECH/i)
-    ).toBeInTheDocument();
-
-
-    expect(
-      screen.getByText(/Simulate Students to/i)
-    ).toBeInTheDocument();
-
-
-    expect(screen.getByText(/Teacher Dashboard/i)).toBeInTheDocument();
-
-    
-    expect(screen.getByText(/Create Digital Twin/i)).toBeInTheDocument();
-
-    expect(screen.getByText(/Digital Twin Concept/i)).toBeInTheDocument();
-    expect(screen.getByText(/AI Pedagogical Content/i)).toBeInTheDocument();
-    expect(screen.getByText(/Inclusive Design/i)).toBeInTheDocument();
+    expect(screen.getByText(/What do you want to validate first in your lesson/i)).toBeInTheDocument();
+    expect(screen.getByText(/Maintain student attention/i)).toBeInTheDocument();
+    expect(screen.getByText(/Check concept understanding/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ensure inclusive accessibility/i)).toBeInTheDocument();
   });
 });
