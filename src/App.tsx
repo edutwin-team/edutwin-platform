@@ -14,6 +14,8 @@ import Teacher from './pages/teacher/Teacher';
 import About from './pages/about/About';
 import Settings from './pages/settings/Settings';
 import NotFound from './pages/static/NotFound';
+import Simulation from './pages/simulation/Simulation';
+import Twins from './pages/twins/Twins';
 
 const Layout: React.FC = () => {
   const location = useLocation();
@@ -31,7 +33,7 @@ const Layout: React.FC = () => {
 
         {/* Content wrapper */}
         <div
-          className={`flex-1 flex flex-col ${
+          className={`flex-1 flex flex-col bg-slate-50${
             isHome
               ? 'home-layout-bg'
               : 'bg-gradient-to-br from-base-200/60 via-base-100 to-base-200/30 p-4 md:p-6'
@@ -41,6 +43,7 @@ const Layout: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/twins" element={<Twins />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/question" element={<Question />} />
@@ -48,12 +51,13 @@ const Layout: React.FC = () => {
               <Route path="/teacher" element={<Teacher />} />
               <Route path="/about" element={<About />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/simulation" element={<Simulation />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
-          </div>
         </div>
       </div>
+    </div>
   );
 };
 
