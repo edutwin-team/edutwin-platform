@@ -1,12 +1,5 @@
-import {
-  HiChartBar,
-  HiCog,
-  HiDocumentText,
-  HiHome,
-  HiPlay,
-  HiUser,
-} from "react-icons/hi";
-import type { IconType } from "react-icons";
+import { HiChartBar, HiCog, HiDocumentText, HiHome, HiPlay, HiUser, HiUsers } from 'react-icons/hi';
+import type { IconType } from 'react-icons';
 
 export interface NavigationLink {
   name: string;
@@ -15,11 +8,12 @@ export interface NavigationLink {
 }
 
 export const sidebarLinks: NavigationLink[] = [
-  { name: "Tableau de bord", path: "/dashboard", icon: HiHome },
-  { name: "Profil", path: "/profile", icon: HiUser },
-  { name: "Générateur de QCM", path: "/quiz", icon: HiDocumentText },
-  { name: "Simulation", path: "/question", icon: HiPlay },
-  { name: "Résultats", path: "/results", icon: HiChartBar },
-  { name: "Espace enseignant", path: "/teacher", icon: HiUser },
-  { name: "Paramètres", path: "/settings", icon: HiCog },
+  { name: 'Tableau de bord', path: '/dashboard', icon: HiHome },
+  { name: 'Jumeau numérique', path: '/twins', icon: HiUsers },
+  { name: 'Profil', path: '/profile', icon: HiUser },
+  { name: 'Générateur de QCM', path: '/quiz', icon: HiDocumentText },
+  { name: 'Simulation', path: '/question', icon: HiPlay },
+  { name: 'Résultats', path: '/results', icon: HiChartBar },
+  { name: 'Espace enseignant', path: '/teacher', icon: HiUser },
+  { name: 'Paramètres', path: '/settings', icon: HiCog },
 ];

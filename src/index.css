@@ -5,6 +5,10 @@
     dark --prefersdark;
 }
 
+[data-theme='light'] .layout-app {
+  background-color: #f5f6fa;
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
@@ -36,17 +40,29 @@
   --auth-right-surface-bottom: rgb(248 250 252 / 0.96);
 }
 
+[data-theme='light'] .right-panel-bg {
+  background-color: #f5f6fa;
+}
+
 .home-shell {
   background:
     radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.22), transparent 30%),
     radial-gradient(circle at 85% 12%, rgba(236, 72, 153, 0.14), transparent 26%),
     linear-gradient(130deg, var(--home-bg-start), var(--home-bg-mid), var(--home-bg-start));
-  background-size: 140% 140%, 160% 160%, 180% 180%;
+  background-size:
+    140% 140%,
+    160% 160%,
+    180% 180%;
   animation: home-gradient-shift 16s ease-in-out infinite;
 }
 
 .home-layout-bg {
-  background: linear-gradient(to bottom, var(--home-bg-start), var(--home-bg-mid), var(--home-bg-start));
+  background: linear-gradient(
+    to bottom,
+    var(--home-bg-start),
+    var(--home-bg-mid),
+    var(--home-bg-start)
+  );
 }
 
 .home-feature-card {
@@ -63,7 +79,12 @@
 }
 
 .sidebar-surface {
-  background: linear-gradient(to bottom, var(--sidebar-start), var(--sidebar-mid), var(--sidebar-end));
+  background: linear-gradient(
+    to bottom,
+    var(--sidebar-start),
+    var(--sidebar-mid),
+    var(--sidebar-end)
+  );
 }
 
 .status-active-dot {
@@ -100,17 +121,31 @@
 .auth-modal-side-login {
   background:
     radial-gradient(circle at 8% 10%, rgb(255 255 255 / 0.14), transparent 28%),
-    linear-gradient(to bottom right, var(--auth-side-login-from), var(--auth-side-login-via), var(--auth-side-login-to));
+    linear-gradient(
+      to bottom right,
+      var(--auth-side-login-from),
+      var(--auth-side-login-via),
+      var(--auth-side-login-to)
+    );
 }
 
 .auth-modal-side-register {
   background:
     radial-gradient(circle at 8% 10%, rgb(255 255 255 / 0.14), transparent 28%),
-    linear-gradient(to bottom right, var(--auth-side-register-from), var(--auth-side-register-via), var(--auth-side-register-to));
+    linear-gradient(
+      to bottom right,
+      var(--auth-side-register-from),
+      var(--auth-side-register-via),
+      var(--auth-side-register-to)
+    );
 }
 
 .auth-modal-right {
-  background: linear-gradient(to bottom, var(--auth-right-surface-top), var(--auth-right-surface-bottom));
+  background: linear-gradient(
+    to bottom,
+    var(--auth-right-surface-top),
+    var(--auth-right-surface-bottom)
+  );
 }
 
 .auth-header-badge {
@@ -127,7 +162,6 @@
 }
 
 .auth-title {
-  color: rgb(15 23 42);
   font-size: 2rem;
   line-height: 1.15;
   font-weight: 800;
@@ -304,13 +338,22 @@
 
 @keyframes home-gradient-shift {
   0% {
-    background-position: 0% 0%, 100% 0%, 50% 0%;
+    background-position:
+      0% 0%,
+      100% 0%,
+      50% 0%;
   }
   50% {
-    background-position: 18% 14%, 82% 22%, 50% 100%;
+    background-position:
+      18% 14%,
+      82% 22%,
+      50% 100%;
   }
   100% {
-    background-position: 0% 0%, 100% 0%, 50% 0%;
+    background-position:
+      0% 0%,
+      100% 0%,
+      50% 0%;
   }
 }
 
