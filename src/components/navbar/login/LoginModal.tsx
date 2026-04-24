@@ -1,83 +1,102 @@
-import { HiOutlineMail, HiOutlineLockClosed } from 'react-icons/hi';
-import { IoCloseSharp } from 'react-icons/io5';
+import { useState } from 'react';
+import { HiOutlineLockClosed, HiOutlineMail } from 'react-icons/hi';
+import { AuthModalShell } from '../auth/AuthModalShell';
+
 type LoginModalProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
 export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
-  if (!isOpen) return null;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
-    <div className="modal modal-open">
-      <div className="modal-box max-w-3xl p-0 sm:p-4 relative">
-        {/* Close Icon */}
-        <IoCloseSharp className="absolute top-4 right-4 w-5 h-5 cursor-pointer" onClick={onClose} />
-        <div className="max-h-[80vh] overflow-y-scroll p-4">
-          <h3 className="font-bold mb-4 text-5xl text-center">Connexion</h3>
-
-          <p className="text-info-content text-center dark:text-white">
-            Veuillez entrer vos informations pour accéder à votre compte.
-          </p>
-
-          <hr className="mx-auto my-4 w-3/4 text-info-content dark:text-white" />
-
-          <form>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-5">
-              {/* LEFT SIDE */}
-              <div className="flex flex-col gap-4">
-                <h1 className="text-info-content font-bold dark:text-white">
-                  Informations de connexion
-                </h1>
-
-                {/* Email */}
-                <label className="input input-bordered flex items-center gap-2">
-                  <HiOutlineMail className="h-4 w-4 opacity-70" />
-                  <input type="email" className="grow" placeholder="Email" />
-                </label>
-
-                {/* Password */}
-                <label className="input input-bordered flex items-center gap-2">
-                  <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
-                  <input type="password" className="grow" placeholder="Mot de passe" />
-                </label>
-
-                <p className="text-sm text-primary cursor-pointer">Mot de passe oublié ?</p>
-              </div>
-
-              {/* RIGHT SIDE */}
-              <div className="flex flex-col items-center justify-center text-center gap-4">
-                <div className="w-40 h-32 bg-indigo-50 flex items-center justify-center rounded-lg">
-                  <span className="text-primary font-semibold">Bienvenue 👋</span>
-                </div>
-
-                <p className="text-info-content text-sm dark:text-white">
-                  Connectez-vous pour accéder à votre espace personnel.
-                </p>
-              </div>
+    <AuthModalShell
+      isOpen={isOpen}
+      onClose={onClose}
+      closeLabel="Fermer la connexion"
+      maxWidthClass="max-w-4xl"
+      minHeightClass="min-h-[420px]"
+      leftPanelClassName="auth-modal-side-login hidden lg:flex flex-col justify-between gap-6 p-8 text-white"
+      leftContent={
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <p className="text-sm font-semibold uppercase tracking-wide text-white/80">EduTwin Platform</p>
+            <h3 className="text-4xl font-bold leading-tight">Connexion</h3>
+            <p className="max-w-xs text-sm text-white/85">
+              Reprenez vos activites pedagogiques avec une experience fluide et centralisee.
+            </p>
+          </div>
+          <div className="auth-side-glass-card rounded-2xl p-4">
+            <p className="text-sm font-semibold text-white">Ce que vous retrouvez</p>
+            <ul className="mt-3 space-y-2 text-sm text-white/85">
+              <li>Tableau de bord et progression</li>
+              <li>Sessions de simulation en cours</li>
+              <li>Historique de resultats et indicateurs</li>
+            </ul>
+          </div>
+        </div>
+      }
+      rightContent={
+        <section className="auth-modal-right p-8 md:p-10 lg:p-12">
+          <form className="auth-form-wrap space-y-5">
+            <div className="space-y-3">
+              <span className="auth-header-badge">Espace personnel</span>
+              <h4 className="auth-title">Connexion</h4>
+              <p className="auth-subtitle">Renseignez vos identifiants pour vous connecter.</p>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="login-email" className="auth-field-label">
+                Email
+              </label>
+              <label className="auth-input-login input input-bordered focus-within:outline focus-within:outline-2 focus-within:outline-primary/40">
+                <HiOutlineMail className="h-4 w-4 opacity-70" />
+                <input
+                  id="login-email"
+                  type="email"
+                  className="grow"
+                  placeholder="nom@ecole.fr"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </label>
             </div>
 
-            {/* Buttons */}
-            <div className="mt-10 flex flex-wrap ml-10 gap-4">
-              <button type="button" onClick={onClose} className="btn">
+            <div className="space-y-2">
+              <label htmlFor="login-password" className="auth-field-label">
+                Mot de passe
+              </label>
+              <label className="auth-input-login input input-bordered focus-within:outline focus-within:outline-2 focus-within:outline-primary/40">
+                <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
+                <input
+                  id="login-password"
+                  type="password"
+                  className="grow"
+                  placeholder="Votre mot de passe"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+            </div>
+
+            <div className="auth-action-row">
+              <button type="button" onClick={onClose} className="auth-btn-rounded btn btn-ghost">
                 Fermer
               </button>
-
-              <button type="button" className="btn btn-primary">
+              <button type="button" className="auth-btn-rounded btn btn-primary px-7">
                 Se connecter
               </button>
             </div>
           </form>
-
-          {/* Bottom link */}
-          <p className="ml-13 mt-3 text-info-content dark:text-white">
-            Vous n'avez pas encore un compte ?{' '}
-            <span onClick={onClose} className="text-primary cursor-pointer">
-              S'inscrire
-            </span>
+          <p className="mt-6 border-t border-base-300/60 pt-4 text-sm text-base-content/70">
+            Vous n&apos;avez pas encore un compte ?{' '}
+            <button type="button" onClick={onClose} className="font-medium text-primary hover:underline">
+              S&apos;inscrire
+            </button>
           </p>
-        </div>
-      </div>
-    </div>
+        </section>
+      }
+    />
   );
 };
