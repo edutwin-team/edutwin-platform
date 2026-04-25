@@ -1,4 +1,4 @@
-import type { RecommendationGroup } from "../../components/recommendations/RecommendationPanel";
+import type { RecommendationGroup } from '../../components/recommendations/RecommendationPanel';
 
 export type TeacherKpi = {
   title: string;

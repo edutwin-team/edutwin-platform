@@ -3,14 +3,9 @@ export default function Quiz() {
     <div className="p-8 space-y-4">
       <h1 className="text-3xl font-bold">Quiz adaptatif</h1>
 
-      <p>
-        Le quiz est généré dynamiquement en fonction du profil
-        du jumeau numérique de l’élève.
-      </p>
+      <p>Le quiz est généré dynamiquement en fonction du profil du jumeau numérique de l’élève.</p>
 
-      <p>
-        L’IA ajuste :
-      </p>
+      <p>L’IA ajuste :</p>
 
       <ul className="list-disc pl-6">
         <li>La difficulté des questions</li>
@@ -18,5 +13,5 @@ export default function Quiz() {
         <li>Le niveau de feedback</li>
       </ul>
     </div>
-  )
+  );
 }

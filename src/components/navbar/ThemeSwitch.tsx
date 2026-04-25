@@ -1,4 +1,4 @@
-import { HiMoon, HiSun } from "react-icons/hi";
+import { HiMoon, HiSun } from 'react-icons/hi';
 
 interface ThemeSwitchProps {
   isDark: boolean;
@@ -6,20 +6,20 @@ interface ThemeSwitchProps {
 }
 
 export function ThemeSwitch({ isDark, onToggle }: ThemeSwitchProps) {
-  const trackClass = isDark ? "theme-switch-track-on" : "theme-switch-track-off";
+  const trackClass = isDark ? 'theme-switch-track-on' : 'theme-switch-track-off';
 
   return (
     <label className="relative mr-2 flex h-8 w-14 cursor-pointer items-center">
       <span
         className={`pointer-events-none absolute left-2 z-10 transition-opacity ${
-          isDark ? "opacity-45" : "opacity-100"
+          isDark ? 'opacity-45' : 'opacity-100'
         }`}
       >
         <HiSun className="theme-switch-sun h-3.5 w-3.5" />
       </span>
       <span
         className={`pointer-events-none absolute right-2 z-10 transition-opacity ${
-          isDark ? "opacity-100" : "opacity-45"
+          isDark ? 'opacity-100' : 'opacity-45'
         }`}
       >
         <HiMoon className="theme-switch-moon h-3.5 w-3.5" />
@@ -31,7 +31,7 @@ export function ThemeSwitch({ isDark, onToggle }: ThemeSwitchProps) {
       <span
         aria-hidden="true"
         className={`theme-switch-thumb absolute top-[2px] z-20 h-7 w-7 rounded-full transition-transform duration-200 ease-out ${
-          isDark ? "translate-x-[26px]" : "translate-x-0.5"
+          isDark ? 'translate-x-[26px]' : 'translate-x-0.5'
         }`}
       />
       <input
