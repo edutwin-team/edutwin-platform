@@ -1,6 +1,6 @@
-import type { CSSProperties } from "react";
-import type { DigitalTwin } from "../../types/types";
-import { HiPlay } from "react-icons/hi";
+import type { CSSProperties } from 'react';
+import type { DigitalTwin } from '../../types/types';
+import { HiPlay } from 'react-icons/hi';
 
 interface Props {
   twin: DigitalTwin;
@@ -8,14 +8,15 @@ interface Props {
 
 const DigitalTwinCard: React.FC<Props> = ({ twin }) => {
   const attentionTone =
-    twin.attention >= 75 ? "text-success" : twin.attention >= 50 ? "text-warning" : "text-error";
-  const absenceTone = twin.absence <= 20 ? "text-success" : twin.absence <= 50 ? "text-warning" : "text-error";
+    twin.attention >= 75 ? 'text-success' : twin.attention >= 50 ? 'text-warning' : 'text-error';
+  const absenceTone =
+    twin.absence <= 20 ? 'text-success' : twin.absence <= 50 ? 'text-warning' : 'text-error';
   const status =
     twin.attention >= 75 && twin.absence <= 25
-      ? "Stable"
+      ? 'Stable'
       : twin.attention < 50 || twin.absence > 50
-        ? "À surveiller"
-        : "Intermédiaire";
+        ? 'À surveiller'
+        : 'Intermédiaire';
 
   return (
     <div className="card rounded-2xl border border-base-300/70 bg-base-100 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
@@ -51,13 +52,15 @@ const DigitalTwinCard: React.FC<Props> = ({ twin }) => {
       <div className="grid grid-cols-2 gap-4">
         <div className="rounded-xl border border-base-300/70 bg-base-200/25 p-3">
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-wide text-base-content/60">Attention</p>
+            <p className="text-xs font-medium uppercase tracking-wide text-base-content/60">
+              Attention
+            </p>
             <p className="text-xs font-semibold">{twin.attention}%</p>
           </div>
           <div className="flex justify-center">
             <div
               className={`radial-progress h-16 w-16 border-0 bg-base-100 text-xs font-semibold ${attentionTone}`}
-              style={{ "--value": twin.attention } as CSSProperties}
+              style={{ '--value': twin.attention } as CSSProperties}
               role="progressbar"
               aria-valuenow={twin.attention}
               aria-valuemin={0}
@@ -71,13 +74,15 @@ const DigitalTwinCard: React.FC<Props> = ({ twin }) => {
 
         <div className="rounded-xl border border-base-300/70 bg-base-200/25 p-3">
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-wide text-base-content/60">Absence</p>
+            <p className="text-xs font-medium uppercase tracking-wide text-base-content/60">
+              Absence
+            </p>
             <p className="text-xs font-semibold">{twin.absence}%</p>
           </div>
           <div className="flex justify-center">
             <div
               className={`radial-progress h-16 w-16 border-0 bg-base-100 text-xs font-semibold ${absenceTone}`}
-              style={{ "--value": twin.absence } as CSSProperties}
+              style={{ '--value': twin.absence } as CSSProperties}
               role="progressbar"
               aria-valuenow={twin.absence}
               aria-valuemin={0}

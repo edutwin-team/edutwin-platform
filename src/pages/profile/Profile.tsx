@@ -1,4 +1,4 @@
-import { profilePageData } from "../../features/profile/data/profileData";
+import { profilePageData } from '../../features/profile/data/profileData';
 
 export default function Profile() {
   return (
@@ -16,7 +16,9 @@ export default function Profile() {
             <p className="mt-1 text-xs text-base-content/65">{profilePageData.academic.subtitle}</p>
             <div className="mt-4 space-y-2 text-sm text-base-content/75">
               {profilePageData.academic.scores.map((score) => (
-                <p key={score.label}>{score.label} : {score.value}</p>
+                <p key={score.label}>
+                  {score.label} : {score.value}
+                </p>
               ))}
             </div>
           </article>
@@ -26,10 +28,14 @@ export default function Profile() {
             <h2 className="mt-3 text-2xl font-bold">{profilePageData.preferences.profileLabel}</h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {profilePageData.preferences.tags.map((tag) => (
-                <span key={tag.label} className="badge badge-outline">{tag.label}</span>
+                <span key={tag.label} className="badge badge-outline">
+                  {tag.label}
+                </span>
               ))}
             </div>
-            <p className="mt-4 text-sm text-base-content/75">{profilePageData.preferences.description}</p>
+            <p className="mt-4 text-sm text-base-content/75">
+              {profilePageData.preferences.description}
+            </p>
           </article>
         </section>
 
@@ -41,7 +47,9 @@ export default function Profile() {
                 <div
                   key={difficulty.title}
                   className={`rounded-xl p-3 ${
-                    difficulty.tone === "error" ? "border border-error/35 bg-error/10" : "border border-warning/35 bg-warning/10"
+                    difficulty.tone === 'error'
+                      ? 'border border-error/35 bg-error/10'
+                      : 'border border-warning/35 bg-warning/10'
                   }`}
                 >
                   <p className="font-semibold">{difficulty.title}</p>
@@ -69,7 +77,11 @@ export default function Profile() {
                       <td>{item.title}</td>
                       <td>{item.date}</td>
                       <td>{item.score}</td>
-                      <td className={item.trendTone === "success" ? "text-success" : "text-warning"}>{item.trend}</td>
+                      <td
+                        className={item.trendTone === 'success' ? 'text-success' : 'text-warning'}
+                      >
+                        {item.trend}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

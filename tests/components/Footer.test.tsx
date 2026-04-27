@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import Footer from "../../src/components/footer/Footer";
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import Footer from '../../src/components/footer/Footer';
 
-describe("Footer", () => {
+describe('Footer', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
@@ -11,38 +11,38 @@ describe("Footer", () => {
     );
   });
 
-  it("affiche le titre du site", () => {
-    const title = screen.getByRole("heading", { level: 2, name: /Digital Twin EDU/i });
+  it('affiche le titre du site', () => {
+    const title = screen.getByRole('heading', { level: 2, name: /Digital Twin EDU/i });
     expect(title).toBeInTheDocument();
   });
 
-  it("affiche les sections principales", () => {
+  it('affiche les sections principales', () => {
     expect(screen.getByText(/Navigation/i)).toBeInTheDocument();
     expect(screen.getByText(/Resources/i)).toBeInTheDocument();
     expect(screen.getByText(/Follow Us/i)).toBeInTheDocument();
   });
 
-  it("affiche les liens de navigation", () => {
+  it('affiche les liens de navigation', () => {
     expect(screen.getByText(/Home/i)).toBeInTheDocument();
     expect(screen.getByText(/Dashboard/i)).toBeInTheDocument();
     expect(screen.getByText(/Digital Twins/i)).toBeInTheDocument();
     expect(screen.getByText(/Contact/i)).toBeInTheDocument();
   });
 
-  it("affiche les liens Resources", () => {
+  it('affiche les liens Resources', () => {
     expect(screen.getByText(/Documentation/i)).toBeInTheDocument();
     expect(screen.getByText(/API Guide/i)).toBeInTheDocument();
     expect(screen.getByText(/Support/i)).toBeInTheDocument();
     expect(screen.getByText(/FAQ/i)).toBeInTheDocument();
   });
 
-  it("affiche les icônes sociales", () => {
+  it('affiche les icônes sociales', () => {
     const socialIcons = [
-      "icon-facebook",
-      "icon-twitter",
-      "icon-tiktok",
-      "icon-instagram",
-      "icon-linkedin",
+      'icon-facebook',
+      'icon-twitter',
+      'icon-tiktok',
+      'icon-instagram',
+      'icon-linkedin',
     ];
 
     socialIcons.forEach((testId) => {
@@ -50,7 +50,7 @@ describe("Footer", () => {
     });
   });
 
-  it("affiche le texte copyright", () => {
+  it('affiche le texte copyright', () => {
     const copyright = screen.getByText(/©\s*2026\s*Digital Twin EDU/i);
     expect(copyright).toBeInTheDocument();
   });

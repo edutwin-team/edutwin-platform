@@ -21,6 +21,8 @@ const Layout: React.FC = () => {
   const location = useLocation();
   const hideSidebar = location.pathname === '/';
   const isHome = location.pathname === '/';
+  const API_KEY = import.meta.env.VITE_API_URL;
+  console.log(API_KEY);
 
   return (
     <div className="flex flex-col min-h-screen">

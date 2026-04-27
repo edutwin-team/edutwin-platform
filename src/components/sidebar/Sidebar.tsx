@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { SidebarContent } from "./SidebarContent";
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { SidebarContent } from './SidebarContent';
 
 const Sidebar: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -24,15 +24,9 @@ const Sidebar: React.FC = () => {
       {/* Mobile Drawer */}
       {open && (
         <>
-          <div
-            className="fixed inset-0 bg-black/40 z-40"
-            onClick={() => setOpen(false)}
-          />
+          <div className="fixed inset-0 bg-black/40 z-40" onClick={() => setOpen(false)} />
           <aside className="sidebar-surface fixed left-0 top-0 z-50 h-full w-72 px-5 py-6 text-slate-100 shadow-2xl">
-            <SidebarContent
-              pathname={pathname}
-              close={() => setOpen(false)}
-            />
+            <SidebarContent pathname={pathname} close={() => setOpen(false)} />
           </aside>
         </>
       )}
