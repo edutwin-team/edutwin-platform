@@ -10,7 +10,7 @@ export type LearningPreference = {
 export type DifficultyItem = {
   title: string;
   description: string;
-  tone: "error" | "warning";
+  tone: 'error' | 'warning';
 };
 
 export type EvaluationHistoryRow = {
@@ -18,7 +18,7 @@ export type EvaluationHistoryRow = {
   date: string;
   score: string;
   trend: string;
-  trendTone: "success" | "warning";
+  trendTone: 'success' | 'warning';
 };
 
 export type ProfilePageData = {

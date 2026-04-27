@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Settings() {
   const [reduceMotion, setReduceMotion] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
-  const [fontScale, setFontScale] = useState("normal");
+  const [fontScale, setFontScale] = useState('normal');
 
-  const [difficulty, setDifficulty] = useState("adaptatif");
-  const [feedbackMode, setFeedbackMode] = useState("immediat");
-  const [sessionDuration, setSessionDuration] = useState("45");
+  const [difficulty, setDifficulty] = useState('adaptatif');
+  const [feedbackMode, setFeedbackMode] = useState('immediat');
+  const [sessionDuration, setSessionDuration] = useState('45');
 
   const [analyticsConsent, setAnalyticsConsent] = useState(true);
   const [shareProgress, setShareProgress] = useState(false);
@@ -19,7 +19,8 @@ export default function Settings() {
         <header className="rounded-2xl border border-base-300/70 bg-base-100 p-5 shadow-sm">
           <h1 className="text-3xl font-bold">Paramètres</h1>
           <p className="mt-2 text-sm text-base-content/70">
-            Personnalisez votre expérience selon vos besoins pédagogiques, d’accessibilité et de confidentialité.
+            Personnalisez votre expérience selon vos besoins pédagogiques, d’accessibilité et de
+            confidentialité.
           </p>
         </header>
 
@@ -131,7 +132,9 @@ export default function Settings() {
             <label className="flex items-center justify-between rounded-xl border border-base-300/70 bg-base-200/20 px-4 py-3">
               <div>
                 <p className="text-sm font-medium">Consentement analytics</p>
-                <p className="text-xs text-base-content/65">Autoriser les statistiques d’usage anonymes.</p>
+                <p className="text-xs text-base-content/65">
+                  Autoriser les statistiques d’usage anonymes.
+                </p>
               </div>
               <input
                 type="checkbox"
@@ -144,7 +147,9 @@ export default function Settings() {
             <label className="flex items-center justify-between rounded-xl border border-base-300/70 bg-base-200/20 px-4 py-3">
               <div>
                 <p className="text-sm font-medium">Partager la progression</p>
-                <p className="text-xs text-base-content/65">Visible pour les enseignants référents.</p>
+                <p className="text-xs text-base-content/65">
+                  Visible pour les enseignants référents.
+                </p>
               </div>
               <input
                 type="checkbox"
@@ -157,7 +162,9 @@ export default function Settings() {
             <label className="flex items-center justify-between rounded-xl border border-base-300/70 bg-base-200/20 px-4 py-3">
               <div>
                 <p className="text-sm font-medium">Anonymiser les exports</p>
-                <p className="text-xs text-base-content/65">Retirer les données nominatives des rapports.</p>
+                <p className="text-xs text-base-content/65">
+                  Retirer les données nominatives des rapports.
+                </p>
               </div>
               <input
                 type="checkbox"

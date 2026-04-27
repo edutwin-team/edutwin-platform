@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import type { NavigationLink } from "../../config/navigation";
+import { Link } from 'react-router-dom';
+import type { NavigationLink } from '../../config/navigation';
 
 interface SidebarNavListProps {
   links: NavigationLink[];
@@ -21,16 +21,16 @@ export function SidebarNavList({ links, pathname, close }: SidebarNavListProps) 
             onClick={close}
             className={`group relative flex items-center gap-3 rounded-2xl px-3.5 py-2.5 transition-all ${
               active
-                ? "bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-950/40"
-                : "text-indigo-100/90 hover:bg-indigo-700/35 hover:text-white"
+                ? 'bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-950/40'
+                : 'text-indigo-100/90 hover:bg-indigo-700/35 hover:text-white'
             }`}
           >
             <span
               className={`grid h-8 w-8 place-content-center rounded-lg ${
-                active ? "bg-white/20" : "bg-indigo-900/40 group-hover:bg-indigo-800/60"
+                active ? 'bg-white/20' : 'bg-indigo-900/40 group-hover:bg-indigo-800/60'
               }`}
             >
-              <Icon size={18} className={active ? "" : "opacity-85 group-hover:opacity-100"} />
+              <Icon size={18} className={active ? '' : 'opacity-85 group-hover:opacity-100'} />
             </span>
             <span className="text-sm font-medium">{link.name}</span>
 

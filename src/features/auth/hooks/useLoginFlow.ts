@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const TOTAL_STEPS = 3;
 
 export function useLoginFlow() {
   const [step, setStep] = useState(1);
-  const [profile, setProfile] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [profile, setProfile] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const canContinueStep1 = profile.length > 0;
   const canContinueStep2 = email.trim().length > 0 && password.trim().length > 0;

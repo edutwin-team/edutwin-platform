@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const TOTAL_STEPS = 3;
 
 export function useRegisterFlow() {
   const [step, setStep] = useState(1);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const progress = Math.round((step / TOTAL_STEPS) * 100);
 
@@ -16,10 +16,10 @@ export function useRegisterFlow() {
   const goBack = () => setStep((prev) => Math.max(prev - 1, 1));
   const reset = () => {
     setStep(1);
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
   };
 
   return {
