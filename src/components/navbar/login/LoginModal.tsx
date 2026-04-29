@@ -24,7 +24,6 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         body: JSON.stringify({ email, password }),
       });
       if (!res.ok) throw new Error();
-      const data = await res.json();
       onClose();
       window.location.href = '/dashboard';
     } catch {
