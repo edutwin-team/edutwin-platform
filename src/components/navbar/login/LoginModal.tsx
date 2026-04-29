@@ -10,6 +10,32 @@ type LoginModalProps = {
 export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/token/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      //LOCALE STORAGE IS TO BE SWITCH TO SECURED LOCAL STORAGE BEFORE PRODUCTION !!!!!!!!!
+      localStorage.setItem('access_token', data.access);
+      localStorage.setItem('refresh_token', data.refresh);
+      onClose();
+      window.location.href = '/dashboard';
+    } catch {
+      setError('Email ou mot de passe incorrect');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <AuthModalShell
@@ -42,7 +68,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
       }
       rightContent={
         <section className=" p-8 md:p-10 lg:p-12">
-          <form className="auth-form-wrap space-y-5">
+          <form className="auth-form-wrap space-y-5" onSubmit={handleSubmit}>
             <div className="space-y-3">
               <span className="auth-header-badge">Espace personnel</span>
               <h1 className="auth-title dark:text-white">Connexion</h1>
@@ -86,7 +112,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
               <button type="button" onClick={onClose} className="auth-btn-rounded btn btn-ghost">
                 Fermer
               </button>
-              <button type="button" className="auth-btn-rounded btn btn-primary px-7">
+              <button type="submit" className="auth-btn-rounded btn btn-primary px-7">
                 Se connecter
               </button>
             </div>
