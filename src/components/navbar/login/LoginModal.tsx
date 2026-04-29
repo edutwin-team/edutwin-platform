@@ -11,23 +11,20 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/token/`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth2/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
       if (!res.ok) throw new Error();
       const data = await res.json();
-      //LOCALE STORAGE IS TO BE SWITCH TO SECURED LOCAL STORAGE BEFORE PRODUCTION !!!!!!!!!
-      localStorage.setItem('access_token', data.access);
-      localStorage.setItem('refresh_token', data.refresh);
       onClose();
       window.location.href = '/dashboard';
     } catch {

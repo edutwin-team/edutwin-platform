@@ -6,9 +6,9 @@ export type DigitalTwin = {
   absence: number;
 };
 
-export type QCMQuestion = {
-  question: string;
-  answer: string;
+export type QuizService = {
+  getAll: () => Promise<Quiz[]>;
+  getById: (id: number) => Promise<Quiz>;
 };
 
 export type Content = {

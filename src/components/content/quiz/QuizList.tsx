@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { type Quiz } from '../../../types/types';
+import { quizService } from '../../../api/quizService';
+import { Link } from 'react-router-dom';
 
 export function QuizList() {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
@@ -9,26 +11,19 @@ export function QuizList() {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/content/quizzes/`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        });
-        if (!res.ok) throw new Error();
-        const data = await res.json();
+        const data = await quizService.getAll();
         setQuizzes(data);
       } catch {
-        setError('Impossible de charger les quizzes');
+        setError('Erreur lors de la récupération des données');
       } finally {
         setLoading(false);
       }
     };
-
     fetchQuizzes();
   }, []);
 
   if (loading) return <span className="loading loading-spinner loading-lg" />;
-  if (error) return <p className="text-error">{error}</p>;
+  if (error) return <span className="text-error">{error}</span>;
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -51,9 +46,12 @@ export function QuizList() {
                 {quiz.questions?.length ?? 0} questions
               </span>
             </div>
-            <div className="card-actions justify-end mt-2">
-              <button className="btn btn-sm btn-outline">Voir</button>
-            </div>
+            <Link to={`/quiz/${quiz.id}`} className="btn btn-sm btn-outline">
+              Voir
+            </Link>
+            <Link to="/quiz" className="group btn btn-sm btn-ghost bg-orange-600">
+              ← Retour
+            </Link>
           </div>
         </div>
       ))}
