@@ -1,3 +1,16 @@
+export type DigitalTwin = {
+  id: number;
+  name: string;
+  behavior: string;
+  attention: number;
+  absence: number;
+};
+
+export type QCMQuestion = {
+  question: string;
+  answer: string;
+};
+
 export type Content = {
   id: number;
   title: string;
