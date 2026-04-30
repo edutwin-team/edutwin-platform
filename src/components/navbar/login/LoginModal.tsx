@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { HiOutlineLockClosed, HiOutlineMail, HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
 import { AuthModalShell } from '../auth/AuthModalShell';
 import { useLogin } from '../../../hooks/user/useLogin';
+import { useQueryClient } from '@tanstack/react-query';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -9,6 +10,7 @@ type LoginModalProps = {
 };
 
 export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
+  const queryClient = useQueryClient();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -43,6 +45,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     setShowPassword(!showPassword);
   };
 
+  // Use the useLogin hook to get the mutate function and loading state
   const { mutate: loginUser, isPending } = useLogin();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -54,6 +57,8 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
       { email, password },
       {
         onSuccess: () => {
+          // Invalidate the 'me' query to refetch user data
+          queryClient.invalidateQueries({ queryKey: ['me'] });
           onClose();
           window.location.href = '/dashboard';
         },
