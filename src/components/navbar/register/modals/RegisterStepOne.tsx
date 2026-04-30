@@ -24,6 +24,8 @@ export const RegisterStepOne = ({
   setEmail,
   password,
   setPassword,
+  confirmPassword,
+  setConfirmPassword,
 }: StepOneProps) => {
   return (
     <div className="space-y-5">
@@ -63,6 +65,7 @@ export const RegisterStepOne = ({
         <input
           type="email"
           className="grow"
+          required
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -85,8 +88,8 @@ export const RegisterStepOne = ({
           type="password"
           className="grow"
           placeholder="Confirmer votre mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </label>
     </div>

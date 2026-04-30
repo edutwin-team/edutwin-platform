@@ -19,38 +19,65 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   // Step 2
-  const [degree, setDegree] = useState('');
-  const [university, setUniversity] = useState('');
-  const [document, setDocument] = useState<File | null>(null);
+  const [diploma, setDiploma] = useState('');
+  const [school, setSchool] = useState('');
+  const [institutionType, setInstitutionType] = useState('');
+  const [educationLevel, setEducationLevel] = useState('');
+  const [experienceYears, setExperienceYears] = useState('');
+
+  const [error, setError] = useState('');
 
   const handleClose = () => {
+    setError('');
     setStep(1);
+
     setFirstName('');
     setLastName('');
     setEmail('');
     setPassword('');
     setConfirmPassword('');
-    setDegree('');
-    setUniversity('');
-    setDocument(null);
+
+    setDiploma('');
+    setSchool('');
+    setInstitutionType('');
+
+    setEducationLevel('');
+    setExperienceYears('');
+
     onClose();
   };
 
-  const handleSubmit = () => {
-    if (password !== confirmPassword) {
-      alert('Les mots de passe ne correspondent pas');
+  // STEP 1
+  const handleNext = () => {
+    setError('');
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      setError('Veuillez remplir tous les champs');
       return;
     }
 
-    console.log({
-      firstName,
-      lastName,
-      email,
-      password,
-      degree,
-      university,
-      document,
-    });
+    if (password.length < 6) {
+      setError('Le mot de passe doit contenir au moins 6 caractères');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Les mots de passe ne correspondent pas');
+      return;
+    }
+
+    setStep(2);
+  };
+
+  // STEP 2
+  const handleSubmit = () => {
+    setError('');
+
+    if (!diploma || !school || !institutionType || !educationLevel || !experienceYears) {
+      setError('Veuillez remplir tous les champs');
+      return;
+    }
+    //call api
   };
 
   return (
@@ -63,7 +90,6 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
       leftPanelClassName="hidden lg:flex flex-col justify-between p-10 text-white bg-gradient-to-br from-primary to-secondary"
       leftContent={
         <div className="space-y-8">
-          {/* HEADER */}
           <div className="space-y-4">
             <h3 className="text-3xl font-bold">Inscription</h3>
             <p className="text-sm opacity-90">
@@ -71,7 +97,6 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
             </p>
           </div>
 
-          {/* FEATURES */}
           <div className="bg-white/10 backdrop-blur rounded-xl p-4 space-y-3">
             <p className="font-semibold">Inclus dès le départ</p>
             <ul className="text-sm space-y-2 opacity-90">
@@ -81,7 +106,6 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
             </ul>
           </div>
 
-          {/* PROGRESS */}
           <div>
             <p className="text-sm mb-2">Étape {step} / 2</p>
             <div className="w-full bg-white/20 h-2 rounded">
@@ -106,27 +130,67 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
             {step === 1 && (
               <RegisterStepOne
                 firstName={firstName}
-                setFirstName={setFirstName}
+                setFirstName={(v) => {
+                  setFirstName(v);
+                  setError('');
+                }}
                 lastName={lastName}
-                setLastName={setLastName}
+                setLastName={(v) => {
+                  setLastName(v);
+                  setError('');
+                }}
                 email={email}
-                setEmail={setEmail}
+                setEmail={(v) => {
+                  setEmail(v);
+                  setError('');
+                }}
                 password={password}
-                setPassword={setPassword}
+                setPassword={(v) => {
+                  setPassword(v);
+                  setError('');
+                }}
                 confirmPassword={confirmPassword}
-                setConfirmPassword={setConfirmPassword}
+                setConfirmPassword={(v) => {
+                  setConfirmPassword(v);
+                  setError('');
+                }}
               />
             )}
 
             {/* STEP 2 */}
             {step === 2 && (
               <RegisterStepTwo
-                degree={degree}
-                setDegree={setDegree}
-                university={university}
-                setUniversity={setUniversity}
-                setDocument={setDocument}
+                diploma={diploma}
+                setDiploma={(v) => {
+                  setDiploma(v);
+                  setError('');
+                }}
+                school={school}
+                setSchool={(v) => {
+                  setSchool(v);
+                  setError('');
+                }}
+                institutionType={institutionType}
+                setInstitutionType={(v) => {
+                  setInstitutionType(v);
+                  setError('');
+                }}
+                educationLevel={educationLevel}
+                setEducationLevel={(v) => {
+                  setEducationLevel(v);
+                  setError('');
+                }}
+                experienceYears={experienceYears}
+                setExperienceYears={(v) => {
+                  setExperienceYears(v);
+                  setError('');
+                }}
               />
+            )}
+
+            {/* error msg */}
+            {error && (
+              <div className="text-red-500 text-sm text-center bg-red-50 p-2 rounded">{error}</div>
             )}
 
             {/* BUTTONS */}
@@ -143,7 +207,7 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
                 )}
 
                 {step === 1 ? (
-                  <button type="button" onClick={() => setStep(2)} className="btn btn-primary">
+                  <button type="button" onClick={handleNext} className="btn btn-primary">
                     Suivant
                   </button>
                 ) : (
