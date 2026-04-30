@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { RegisterStepOne } from './RegisterStepOne';
 import { RegisterStepTwo } from './RegisterStepTwo';
 import { AuthModalShell } from '../../auth/AuthModalShell';
+import { useRegister } from '../../../../hooks/user/useRegister';
 
 type RegisterModalProps = {
   isOpen: boolean;
@@ -26,10 +27,19 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
   const [experienceYears, setExperienceYears] = useState('');
 
   const [error, setError] = useState('');
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const { mutate: registerUser, isPending } = useRegister();
+
+  const goToStep = (newStep: number) => {
+    setStep(newStep);
+    setError('');
+  };
 
   const handleClose = () => {
-    setError('');
-    setStep(1);
+    goToStep(1);
 
     setFirstName('');
     setLastName('');
@@ -49,10 +59,13 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
 
   // STEP 1
   const handleNext = () => {
-    setError('');
-
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
       setError('Veuillez remplir tous les champs');
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError('Email invalide');
       return;
     }
 
@@ -65,19 +78,52 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
       setError('Les mots de passe ne correspondent pas');
       return;
     }
-
-    setStep(2);
+    goToStep(2);
   };
 
   // STEP 2
   const handleSubmit = () => {
-    setError('');
-
     if (!diploma || !school || !institutionType || !educationLevel || !experienceYears) {
       setError('Veuillez remplir tous les champs');
       return;
     }
-    //call api
+    setError('');
+
+    registerUser(
+      {
+        email,
+        password,
+        first_name: firstName,
+        last_name: lastName,
+        educational_profile: {
+          school,
+          diploma,
+          institution_type: institutionType,
+          education_level: educationLevel,
+          experience_years: Number(experienceYears),
+        },
+      },
+      {
+        onSuccess: () => {
+          handleClose();
+        },
+        onError: (err) => {
+          setError("Erreur lors de l'inscription");
+          console.log(err);
+        },
+      }
+    );
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (step === 1) {
+      handleNext();
+      return;
+    }
+
+    handleSubmit();
   };
 
   return (
@@ -122,7 +168,7 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              handleSubmit();
+              handleFormSubmit(e);
             }}
             className="space-y-6"
           >
@@ -201,13 +247,13 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
 
               <div className="flex gap-2">
                 {step === 2 && (
-                  <button type="button" onClick={() => setStep(1)} className="btn btn-outline">
+                  <button type="button" onClick={() => goToStep(1)} className="btn btn-outline">
                     Retour
                   </button>
                 )}
 
                 {step === 1 ? (
-                  <button type="button" onClick={handleNext} className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary">
                     Suivant
                   </button>
                 ) : (
@@ -217,6 +263,11 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
                 )}
               </div>
             </div>
+            {isPending && (
+              <div className="flex items-center justify-center">
+                <span className="loading loading-xl loading-bars text-primary"></span>
+              </div>
+            )}
           </form>
         </section>
       }

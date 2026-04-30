@@ -13,7 +13,7 @@ type StepOneProps = {
   setConfirmPassword: (v: string) => void;
 };
 
-const SUCCESS_FEEDBACK_CLASS = 'text-sm font-medium text-success';
+// const SUCCESS_FEEDBACK_CLASS = 'text-sm font-medium text-success';
 
 export const RegisterStepOne = ({
   firstName,
@@ -56,9 +56,9 @@ export const RegisterStepOne = ({
         </label>
       </div>
 
-      {firstName.trim() && lastName.trim() && (
+      {/* {firstName.trim() && lastName.trim() && (
         <p className={SUCCESS_FEEDBACK_CLASS}>Identité renseignée</p>
-      )}
+      )} */}
 
       <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
         <HiOutlineMail className="h-4 w-4 opacity-70" />

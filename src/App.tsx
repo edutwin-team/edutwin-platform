@@ -17,13 +17,14 @@ import Settings from './pages/settings/Settings';
 import NotFound from './pages/static/NotFound';
 import Simulation from './pages/simulation/Simulation';
 import Twins from './pages/twins/Twins';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const Layout: React.FC = () => {
   const location = useLocation();
   const hideSidebar = location.pathname === '/';
   const isHome = location.pathname === '/';
-  const API_KEY = import.meta.env.VITE_API_URL;
-  console.log(API_KEY);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -61,9 +62,11 @@ const Layout: React.FC = () => {
 };
 
 const App: React.FC = () => (
-  <BrowserRouter>
-    <Layout />
-  </BrowserRouter>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  </QueryClientProvider>
 );
 
 export default App;
