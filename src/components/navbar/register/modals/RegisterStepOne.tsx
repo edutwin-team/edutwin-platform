@@ -1,4 +1,11 @@
-import { HiOutlineUser, HiOutlineLockClosed, HiOutlineMail } from 'react-icons/hi';
+import { useState } from 'react';
+import {
+  HiOutlineUser,
+  HiOutlineLockClosed,
+  HiOutlineMail,
+  HiOutlineEye,
+  HiOutlineEyeOff,
+} from 'react-icons/hi';
 
 type StepOneProps = {
   firstName: string;
@@ -27,6 +34,16 @@ export const RegisterStepOne = ({
   confirmPassword,
   setConfirmPassword,
 }: StepOneProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handlePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   return (
     <div className="space-y-5">
       <span className="auth-header-badge">Nouveau compte</span>
@@ -75,22 +92,44 @@ export const RegisterStepOne = ({
       <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
         <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
         <input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           className="grow"
           placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {showPassword ? (
+          <HiOutlineEye
+            onClick={handlePasswordVisibility}
+            className="h-5 w-5 opacity-70 cursor-pointer"
+          />
+        ) : (
+          <HiOutlineEyeOff
+            onClick={handlePasswordVisibility}
+            className="h-5 w-5 opacity-70 cursor-pointer"
+          />
+        )}
       </label>
       <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
         <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
         <input
-          type="password"
+          type={showConfirmPassword ? 'text' : 'password'}
           className="grow"
           placeholder="Confirmer votre mot de passe"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+        {showConfirmPassword ? (
+          <HiOutlineEye
+            onClick={handleConfirmPasswordVisibility}
+            className="h-5 w-5 opacity-70 cursor-pointer"
+          />
+        ) : (
+          <HiOutlineEyeOff
+            onClick={handleConfirmPasswordVisibility}
+            className="h-5 w-5 opacity-70 cursor-pointer"
+          />
+        )}
       </label>
     </div>
   );
