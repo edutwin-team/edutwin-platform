@@ -18,6 +18,7 @@ import NotFound from './pages/static/NotFound';
 import Simulation from './pages/simulation/Simulation';
 import Twins from './pages/twins/Twins';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthProvider } from './context/AuthProvider';
 
 const queryClient = new QueryClient();
 
@@ -63,9 +64,11 @@ const Layout: React.FC = () => {
 
 const App: React.FC = () => (
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

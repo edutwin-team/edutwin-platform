@@ -7,6 +7,8 @@ import { NavbarContext } from './NavbarContext';
 import { ThemeSwitch } from './ThemeSwitch';
 import { AuthActions } from './AuthActions';
 import { PAGE_META, DEFAULT_PAGE_META } from '../../config/pageMeta';
+import { useAuth } from '../../context/useAuth';
+import { UserDropdown } from './UserDropdown';
 
 export default function Navbar() {
   const version = __APP_VERSION__;
@@ -15,6 +17,7 @@ export default function Navbar() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const { user } = useAuth();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -37,10 +40,15 @@ export default function Navbar() {
 
         <div className="navbar-end gap-3">
           <ThemeSwitch isDark={theme === 'dark'} onToggle={toggleTheme} />
-          <AuthActions
-            onLoginClick={() => setIsLoginOpen(true)}
-            onRegisterClick={() => setIsRegisterOpen(true)}
-          />
+
+          {user ? (
+            <UserDropdown />
+          ) : (
+            <AuthActions
+              onLoginClick={() => setIsLoginOpen(true)}
+              onRegisterClick={() => setIsRegisterOpen(true)}
+            />
+          )}
 
           <Link to="/dashboard" className="btn btn-primary btn-sm rounded-xl normal-case md:hidden">
             Aller
