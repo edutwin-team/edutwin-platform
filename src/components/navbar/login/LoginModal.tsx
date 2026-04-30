@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HiOutlineLockClosed, HiOutlineMail } from 'react-icons/hi';
+import { HiOutlineLockClosed, HiOutlineMail, HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
 import { AuthModalShell } from '../auth/AuthModalShell';
 
 type LoginModalProps = {
@@ -10,32 +10,60 @@ type LoginModalProps = {
 export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [errors, setErrors] = useState<{
+    email?: string;
+    password?: string;
+  }>({});
+  const newErrors: { email?: string; password?: string } = {};
+  const validate = () => {
+    // Email
+    if (!email) {
+      newErrors.email = 'Email requis';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email invalide';
+    }
+
+    // Password min 6 letters
+    if (!password) {
+      newErrors.password = 'Mot de passe requis';
+    } else if (password.length < 6) {
+      newErrors.password = 'Minimum 6 caractères';
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handlePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth2/login/`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      if (!res.ok) throw new Error();
-      onClose();
-      window.location.href = '/dashboard';
-    } catch {
-      setError('Email ou mot de passe incorrect');
-    } finally {
-      setLoading(false);
+
+    if (validate()) {
+      setLoading(true);
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth2/login/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        if (!res.ok) throw new Error();
+        onClose();
+        window.location.href = '/dashboard';
+      } catch {
+        setErrors({ ...errors, password: 'Email ou mot de passe incorrect' });
+      } finally {
+        setLoading(false);
+      }
     }
   };
-
-  //Pour satisfaire le linter
-  if (loading) return <span className="loading loading-spinner loading-lg" />;
-  if (error) return <p className="text-error">{error}</p>;
 
   return (
     <AuthModalShell
@@ -67,55 +95,79 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         </div>
       }
       rightContent={
-        <section className=" p-8 md:p-10 lg:p-12">
-          <form className="auth-form-wrap space-y-5" onSubmit={handleSubmit}>
+        <section className="p-8 md:p-10 lg:p-12">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-3">
               <span className="auth-header-badge">Espace personnel</span>
               <h1 className="auth-title dark:text-white">Connexion</h1>
               <p className="auth-subtitle">Renseignez vos identifiants pour vous connecter.</p>
             </div>
+
+            {/* EMAIL */}
             <div className="space-y-2">
-              <label htmlFor="login-email" className="auth-field-label">
-                Email
-              </label>
+              <label className="auth-field-label">Email</label>
               <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
                 <HiOutlineMail className="h-4 w-4 opacity-70" />
                 <input
-                  id="login-email"
                   type="email"
                   className="grow"
                   placeholder="nom@ecole.fr"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setErrors({});
+                  }}
                 />
               </label>
+              {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
             </div>
 
+            {/* PASSWORD */}
             <div className="space-y-2">
-              <label htmlFor="login-password" className="auth-field-label">
-                Mot de passe
-              </label>
+              <label className="auth-field-label">Mot de passe</label>
               <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
                 <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
                 <input
-                  id="login-password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   className="grow"
                   placeholder="Votre mot de passe"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setErrors({});
+                  }}
                 />
+                {showPassword ? (
+                  <HiOutlineEye
+                    onClick={handlePasswordVisibility}
+                    className="h-5 w-5 opacity-70 cursor-pointer"
+                  />
+                ) : (
+                  <HiOutlineEyeOff
+                    onClick={handlePasswordVisibility}
+                    className="h-5 w-5 opacity-70 cursor-pointer"
+                  />
+                )}
               </label>
+              {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
             </div>
 
             <div className="auth-action-row">
-              <button type="button" onClick={onClose} className="auth-btn-rounded btn btn-ghost">
+              <button
+                type="button"
+                onClick={() => {
+                  setErrors({});
+                  onClose();
+                }}
+                className="auth-btn-rounded btn btn-ghost"
+              >
                 Fermer
               </button>
               <button type="submit" className="auth-btn-rounded btn btn-primary px-7">
                 Se connecter
               </button>
             </div>
+            {loading && <span className="loading loading-spinner loading-sm" />}
           </form>
           <p className="mt-6 border-t border-base-300/60 pt-4 text-sm text-base-content/70">
             Vous n&apos;avez pas encore un compte ?{' '}
@@ -126,7 +178,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             >
               S&apos;inscrire
             </button>
-          </p>
+          </p>{' '}
         </section>
       }
     />
