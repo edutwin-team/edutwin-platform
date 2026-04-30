@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { HiOutlineLockClosed, HiOutlineMail, HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
 import { AuthModalShell } from '../auth/AuthModalShell';
+import { useLogin } from '../../../hooks/user/useLogin';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -16,8 +17,9 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     email?: string;
     password?: string;
   }>({});
-  const newErrors: { email?: string; password?: string } = {};
+
   const validate = () => {
+    const newErrors: { email?: string; password?: string } = {};
     // Email
     if (!email) {
       newErrors.email = 'Email requis';
@@ -41,28 +43,27 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     setShowPassword(!showPassword);
   };
 
-  const [loading, setLoading] = useState(false);
+  const { mutate: loginUser, isPending } = useLogin();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (validate()) {
-      setLoading(true);
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth2/login/`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        });
-        if (!res.ok) throw new Error();
-        onClose();
-        window.location.href = '/dashboard';
-      } catch {
-        setErrors({ ...errors, password: 'Email ou mot de passe incorrect' });
-      } finally {
-        setLoading(false);
+    if (!validate()) return;
+
+    loginUser(
+      { email, password },
+      {
+        onSuccess: () => {
+          onClose();
+          window.location.href = '/dashboard';
+        },
+        onError: () => {
+          setErrors({
+            password: 'Email ou mot de passe incorrect',
+          });
+        },
       }
-    }
+    );
   };
 
   return (
@@ -96,7 +97,12 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
       }
       rightContent={
         <section className="p-8 md:p-10 lg:p-12">
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+            className="space-y-5"
+          >
             <div className="space-y-3">
               <span className="auth-header-badge">Espace personnel</span>
               <h1 className="auth-title dark:text-white">Connexion</h1>
@@ -167,14 +173,18 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
                 Se connecter
               </button>
             </div>
-            {loading && <span className="loading loading-spinner loading-sm" />}
+            {isPending && (
+              <div className="flex items-center justify-center">
+                <span className="loading loading-xl loading-bars text-primary"></span>
+              </div>
+            )}
           </form>
           <p className="mt-6 border-t border-base-300/60 pt-4 text-sm text-base-content/70">
             Vous n&apos;avez pas encore un compte ?{' '}
             <button
               type="button"
               onClick={onClose}
-              className="font-medium text-primary hover:underline"
+              className="font-medium text-primary hover:underline cursor-pointer"
             >
               S&apos;inscrire
             </button>
