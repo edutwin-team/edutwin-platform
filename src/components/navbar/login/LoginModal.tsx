@@ -16,10 +16,8 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     email?: string;
     password?: string;
   }>({});
-
+  const newErrors: { email?: string; password?: string } = {};
   const validate = () => {
-    const newErrors: { email?: string; password?: string } = {};
-
     // Email
     if (!email) {
       newErrors.email = 'Email requis';
@@ -39,16 +37,32 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handlePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (validate()) {
-      //call api
+      setLoading(true);
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/auth2/login/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        if (!res.ok) throw new Error();
+        onClose();
+        window.location.href = '/dashboard';
+      } catch {
+        setErrors({ ...errors, password: 'Email ou mot de passe incorrect' });
+      } finally {
+        setLoading(false);
+      }
     }
-  };
-
-  const handlePasswordVisibility = () => {
-    setShowPassword(!showPassword);
   };
 
   return (
@@ -139,14 +153,21 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             </div>
 
             <div className="auth-action-row">
-              <button type="button" onClick={onClose} className="auth-btn-rounded btn btn-ghost">
+              <button
+                type="button"
+                onClick={() => {
+                  setErrors({});
+                  onClose();
+                }}
+                className="auth-btn-rounded btn btn-ghost"
+              >
                 Fermer
               </button>
-
               <button type="submit" className="auth-btn-rounded btn btn-primary px-7">
                 Se connecter
               </button>
             </div>
+            {loading && <span className="loading loading-spinner loading-sm" />}
           </form>
           <p className="mt-6 border-t border-base-300/60 pt-4 text-sm text-base-content/70">
             Vous n&apos;avez pas encore un compte ?{' '}

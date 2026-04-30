@@ -22,6 +22,7 @@ export const sidebarLinks: NavigationLink[] = [
   { name: 'Jumeau numérique', path: '/twins', icon: HiUsers },
   { name: 'Profil', path: '/profile', icon: HiUser },
   { name: 'Contenu pédagogique', path: '/content', icon: HiDocumentText },
+  { name: 'Consulter les QCM', path: '/quiz', icon: HiDocumentText },
   { name: 'Simulation', path: '/question', icon: HiPlay },
   { name: 'Résultats', path: '/results', icon: HiChartBar },
   { name: 'Espace enseignant', path: '/teacher', icon: HiUser },
