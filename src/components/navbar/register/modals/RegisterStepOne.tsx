@@ -47,7 +47,8 @@ export const RegisterStepOne = ({
   return (
     <div className="space-y-5">
       <span className="auth-header-badge">Nouveau compte</span>
-      <h1 className="auth-title">Inscription</h1>
+      <h1 className="auth-title">Créer un compte</h1>
+      <p className="auth-subtitle">Explorez une nouvelle façon d’apprendre.</p>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
