@@ -164,7 +164,7 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
         </div>
       }
       rightContent={
-        <section className="p-8 md:p-10 w-full">
+        <section className="p-8 md:p-10 w-full right-panel-bg">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -269,6 +269,16 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
               </div>
             )}
           </form>
+          <p className="mt-6 border-t border-base-300/60 pt-4 text-sm text-base-content/70 text-center">
+            Déjà un compte ?{' '}
+            <button
+              type="button"
+              onClick={onClose}
+              className="font-medium text-primary hover:underline cursor-pointer"
+            >
+              Se connecter
+            </button>
+          </p>{' '}
         </section>
       }
     />

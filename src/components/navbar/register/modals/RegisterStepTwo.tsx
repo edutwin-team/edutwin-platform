@@ -32,6 +32,7 @@ export const RegisterStepTwo = ({
     <div className="space-y-5">
       <span className="auth-header-badge">Profil enseignant</span>
       <h1 className="auth-title">Informations pédagogiques</h1>
+      <p className="auth-subtitle">Explorez une nouvelle façon d’apprendre.</p>
 
       <input
         type="text"
