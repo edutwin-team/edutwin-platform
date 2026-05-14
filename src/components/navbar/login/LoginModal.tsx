@@ -101,7 +101,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         </div>
       }
       rightContent={
-        <section className="p-8 md:p-10 lg:p-12">
+        <section className="p-8 md:p-10 lg:p-12  right-panel-bg">
           <form
             onSubmit={(e) => {
               handleSubmit(e);
