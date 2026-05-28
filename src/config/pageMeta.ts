@@ -21,7 +21,7 @@ export const PAGE_META: Record<string, PageMeta> = {
     context: 'Créez et gérez vos contenus pédagogiques',
   },
 
-  '/context': {
+  '/contexts': {
     title: 'Contexte pédagogique',
     context: 'Définissez les groupes et environnements de simulation',
   },

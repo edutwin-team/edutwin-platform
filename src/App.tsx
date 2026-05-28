@@ -19,6 +19,7 @@ import Simulation from './pages/simulation/Simulation';
 import Twins from './pages/twins/Twins';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthProvider';
+import { ContextPage } from './pages/contexts/ContextPage';
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const Layout: React.FC = () => {
               <Route path="/about" element={<About />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/simulation" element={<Simulation />} />
+              <Route path="/contexts" element={<ContextPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
