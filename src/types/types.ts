@@ -64,7 +64,7 @@ export type ContentType = (typeof ContentType)[keyof typeof ContentType];
 
 export type Objective = {
   id: number;
-  text: string;
+  label: string;
 };
 
 export type Context = {
@@ -75,6 +75,7 @@ export type Context = {
   country: string;
   level: string;
   subject: string;
+  academic_year: string;
+  objectives: Objective[];
   students: number;
-  objectives: number;
 };

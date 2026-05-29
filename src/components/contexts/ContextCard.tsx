@@ -54,7 +54,7 @@ export const ContextCard = ({ context }: ContextProps) => {
 
           <span className="flex items-center gap-1">
             <Target className="text-indigo-500 dark:text-indigo-400" size={14} />
-            {context.objectives} objectifs
+            {context.objectives.length} objectifs
           </span>
         </div>
 
