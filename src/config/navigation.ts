@@ -18,7 +18,7 @@ export interface NavigationLink {
 
 export const sidebarLinks: NavigationLink[] = [
   { name: 'Tableau de bord', path: '/dashboard', icon: HiHome },
-  { name: 'Contexte pédagogique', path: '/context', icon: HiCollection },
+  { name: 'Contexte pédagogique', path: '/contexts', icon: HiCollection },
   { name: 'Jumeau numérique', path: '/twins', icon: HiUsers },
   { name: 'Profil', path: '/profile', icon: HiUser },
   { name: 'Contenu pédagogique', path: '/content', icon: HiDocumentText },

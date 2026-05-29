@@ -1,76 +1,23 @@
-## 🚀 Description
-
-Décris clairement ce que fait cette PR :
-
-- Qu’est-ce qui a été ajouté / modifié ?
-- Pourquoi ce changement est nécessaire ?
-
----
-
 ## 🎯 Type de changement
 
-Coche ce qui correspond :
-
 - [ ] 🐛 Bug fix
-- [ ] ✨ Nouvelle fonctionnalité
+- [ ] ✨ Feature
 - [ ] ♻️ Refactor
+- [ ] ⚡ Performance improvement
+- [ ] 🔧 Config / build / tooling
 - [ ] 📚 Documentation
-- [ ] ⚡ Performance
-- [ ] 🔧 Configuration / build
 
 ---
 
-## 🧪 Comment tester
+## ✅ PR Checklist
 
-Explique comment vérifier ton code :
-
-1. Aller sur la page ...
-2. Cliquer sur ...
-3. Vérifier que ...
-
----
-
-## ✅ Checklist
-
-Avant de demander une review :
-
-- [ ] Le code compile sans erreur
-- [ ] J’ai testé manuellement la fonctionnalité
-- [ ] Aucun warning dans la console
-- [ ] Le code respecte les conventions du projet
-- [ ] Les fonctionnalités existantes ne sont pas cassées
-- [ ] J’ai relu mon code
-
----
-
-## 📱 UI / UX (si applicable)
-
-- [ ] Responsive OK (mobile / desktop)
-- [ ] Interface propre et cohérente
-- [ ] Pas de bugs visuels
-
----
-
-## 📸 Screenshots (optionnel)
-
-Ajoute des images si c’est du front-end :
-
-Avant :
-(ajoute image)
-
-Après :
-(ajoute image)
-
----
-
-## 🔗 Liens utiles
-
-- Issue liée : #
-- Documentation : #
-- Ticket : #
-
----
-
-## 📝 Notes supplémentaires
-
-Ajoute ici tout contexte important pour le reviewer.
+- [ ] Le code est fonctionnel et testé localement
+- [ ] Aucun régression introduite
+- [ ] Le code est propre, lisible et maintenable
+- [ ] Respect des conventions du projet (lint / format)
+- [ ] Aucun code inutile (console logs, debug, dead code)
+- [ ] Gestion des erreurs correctement implémentée
+- [ ] Tous les cas critiques ont été testés
+- [ ] Tests ajoutés ou mis à jour si nécessaire
+- [ ] La PR est limitée à un seul sujet (single responsibility)
+- [ ] La PR est facile à reviewer (taille raisonnable)
