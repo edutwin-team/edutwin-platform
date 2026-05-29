@@ -17,7 +17,7 @@ export const ObjectiveInput = ({ objectives, setObjectives }: ObjectiveInputProp
       ...objectives,
       {
         id: Date.now(),
-        text: value.trim(),
+        label: value.trim(),
       },
     ]);
 
@@ -51,7 +51,7 @@ export const ObjectiveInput = ({ objectives, setObjectives }: ObjectiveInputProp
             key={obj.id}
             className="flex items-center justify-between bg-base-200 border border-base-300 px-3 py-2 rounded-xl hover:bg-base-300 transition"
           >
-            <span className="text-sm text-base-content">{obj.text}</span>
+            <span className="text-sm text-base-content">{obj.label}</span>
 
             <button
               onClick={() => removeObjective(obj.id)}

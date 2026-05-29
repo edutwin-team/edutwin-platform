@@ -1,15 +1,31 @@
 import { GraduationCap, Globe, BookOpen, Target, Brain, Trash2 } from 'lucide-react';
 import type { Context } from '../../types/types';
+import { useDeleteContext } from '../../hooks/twins/useDeleteContext';
+import { useState } from 'react';
+import { GenericModal } from '../modals/GenericModal';
 
 type ContextProps = {
   context: Context;
 };
 
 export const ContextCard = ({ context }: ContextProps) => {
+  const { mutate: deleteContext, isPending } = useDeleteContext();
+  const [openDelete, setOpenDelete] = useState(false);
+
+  const handleDelete = () => {
+    deleteContext(context.id, {
+      onSuccess: () => {
+        setOpenDelete(false);
+      },
+    });
+  };
   return (
     <div className="relative rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-base-200 shadow-sm hover:shadow-md transition p-5">
       {/* Delete button */}
-      <button className="absolute top-4 right-4 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition">
+      <button
+        onClick={() => setOpenDelete(true)}
+        className="absolute top-4 right-4 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition"
+      >
         <Trash2 className="cursor-pointer" size={18} />
       </button>
 
@@ -64,6 +80,20 @@ export const ContextCard = ({ context }: ContextProps) => {
           Appliquer
         </button>
       </div>
+      <GenericModal
+        isOpen={openDelete}
+        onClose={() => setOpenDelete(false)}
+        title="Supprimer le contexte"
+        confirmText="Supprimer"
+        confirmColor="error"
+        loading={isPending}
+        onConfirm={handleDelete}
+      >
+        <p>
+          Voulez-vous vraiment supprimer
+          <span className="font-semibold"> {context.name}</span>?
+        </p>
+      </GenericModal>
     </div>
   );
 };
