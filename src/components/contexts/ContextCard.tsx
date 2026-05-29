@@ -1,4 +1,4 @@
-import { GraduationCap, Globe, BookOpen, Target, Brain, Trash2 } from 'lucide-react';
+import { GraduationCap, Globe, BookOpen, Target, Brain, Trash2, Edit2 } from 'lucide-react';
 import type { Context } from '../../types/types';
 import { useDeleteContext } from '../../hooks/twins/useDeleteContext';
 import { useState } from 'react';
@@ -6,9 +6,10 @@ import { GenericModal } from '../modals/GenericModal';
 
 type ContextProps = {
   context: Context;
+  onEdit: (context: Context) => void;
 };
 
-export const ContextCard = ({ context }: ContextProps) => {
+export const ContextCard = ({ context, onEdit }: ContextProps) => {
   const { mutate: deleteContext, isPending } = useDeleteContext();
   const [openDelete, setOpenDelete] = useState(false);
 
@@ -27,6 +28,13 @@ export const ContextCard = ({ context }: ContextProps) => {
         className="absolute top-4 right-4 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition"
       >
         <Trash2 className="cursor-pointer" size={18} />
+      </button>
+
+      <button
+        onClick={() => onEdit(context)}
+        className="absolute top-4 right-12 text-gray-400 hover:text-blue-500 transition"
+      >
+        <Edit2 className="cursor-pointer" size={18} />
       </button>
 
       {/* Title */}
@@ -65,7 +73,7 @@ export const ContextCard = ({ context }: ContextProps) => {
         <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
           <span className="flex items-center gap-1">
             <Brain className="text-blue-500 dark:text-blue-400" size={14} />
-            {context.students} étudiants
+            {context.twins} jumeaux
           </span>
 
           <span className="flex items-center gap-1">

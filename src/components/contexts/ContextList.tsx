@@ -27,7 +27,10 @@ import { ContextCard } from './ContextCard';
 //   },
 // ];
 
-export const ContextList = () => {
+type ContextListProps = {
+  onEdit: (context: Context) => void;
+};
+export const ContextList = ({ onEdit }: ContextListProps) => {
   const { data: contexts, isLoading, isError } = useContexts();
   if (isLoading) {
     return (
@@ -57,13 +60,7 @@ export const ContextList = () => {
   return (
     <div className="space-y-5">
       {contexts.map((context: Context) => (
-        <ContextCard
-          key={context.id}
-          context={{
-            ...context,
-            students: 0,
-          }}
-        />
+        <ContextCard key={context.id} context={context} onEdit={onEdit} />
       ))}
     </div>
   );

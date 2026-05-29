@@ -77,5 +77,5 @@ export type Context = {
   subject: string;
   academic_year: string;
   objectives: Objective[];
-  students: number;
+  twins: number;
 };
