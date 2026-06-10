@@ -1,17 +1,27 @@
-import { sidebarLinks } from '../../config/navigation';
-import { SidebarExitAction } from './SidebarExitAction';
 import { SidebarHeader } from './SidebarHeader';
 import { SidebarNavList } from './SidebarNavList';
+import { SidebarExitAction } from './SidebarExitAction';
 
-interface SidebarContentProps {
+type SidebarContentProps = {
   pathname: string;
-  close?: () => void;
-}
+  onNavigate: () => void;
+};
 
-export const SidebarContent: React.FC<SidebarContentProps> = ({ pathname, close }) => (
-  <div className="flex h-full flex-col">
-    <SidebarHeader />
-    <SidebarNavList links={sidebarLinks} pathname={pathname} close={close} />
-    <SidebarExitAction close={close} />
-  </div>
-);
+export function SidebarContent({
+  pathname,
+  onNavigate,
+}: SidebarContentProps) {
+  return (
+    <div className="sidebar-surface flex h-full w-full flex-col border-r border-white/10 text-white">
+      <SidebarHeader />
+
+      <div className="flex-1 overflow-y-auto overflow-x-hidden px-3 py-4">
+        <SidebarNavList pathname={pathname} onNavigate={onNavigate} />
+      </div>
+
+      <div className="border-t border-white/10 p-3">
+        <SidebarExitAction />
+      </div>
+    </div>
+  );
+}

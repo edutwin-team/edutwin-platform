@@ -367,3 +367,206 @@
     animation: none;
   }
 }
+
+
+/*ajout de la partie responsive*/
+
+/* =========================
+   RESPONSIVE GLOBAL FIX
+   ========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+/* Images, vidéos, tableaux */
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+/* Layout général */
+.layout-app,
+.home-shell,
+.home-layout-bg,
+.right-panel-bg {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Modale auth responsive */
+.auth-modal-shell {
+  width: min(100%, 72rem);
+  max-height: 94vh;
+  overflow: hidden;
+}
+
+.auth-modal-right {
+  min-width: 0;
+  overflow-y: auto;
+}
+
+.auth-form-wrap {
+  width: 100%;
+  max-width: 34rem;
+}
+
+/* Champs */
+.auth-input-login,
+.auth-input-register {
+  width: 100%;
+  min-width: 0;
+}
+
+.auth-input-login input,
+.auth-input-register input {
+  min-width: 0;
+  width: 100%;
+}
+
+/* Boutons */
+.auth-action-row {
+  width: 100%;
+}
+
+.auth-action-row > * {
+  flex: 1 1 12rem;
+}
+
+/* =========================
+   TABLETTE
+   ========================= */
+
+@media (max-width: 1024px) {
+  .auth-modal-shell {
+    width: 96vw;
+    max-height: 92vh;
+  }
+
+  .auth-title {
+    font-size: 1.7rem;
+  }
+
+  .auth-soft-panel {
+    padding: 1.25rem;
+  }
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 768px) {
+  .auth-modal-shell {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    overflow-y: auto;
+  }
+
+  .auth-modal-right {
+    padding: 1.25rem;
+  }
+
+  .auth-title {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .auth-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .auth-info-card,
+  .auth-summary-card,
+  .auth-soft-panel {
+    padding: 1rem;
+    border-radius: 0.85rem;
+  }
+
+  .auth-upload-dropzone {
+    height: 7rem;
+  }
+
+  .auth-action-row {
+    flex-direction: column;
+  }
+
+  .auth-action-row > * {
+    width: 100%;
+    flex: none;
+  }
+}
+
+/* =========================
+   PETITS MOBILES
+   ========================= */
+
+@media (max-width: 480px) {
+  .auth-modal-right {
+    padding: 1rem;
+  }
+
+  .auth-title {
+    font-size: 1.3rem;
+  }
+
+  .auth-header-badge {
+    font-size: 0.65rem;
+    padding: 0.22rem 0.5rem;
+  }
+
+  .auth-input-login {
+    height: 2.75rem;
+  }
+
+  .auth-input-register {
+    height: 3rem;
+  }
+
+  .auth-soft-panel {
+    padding: 0.85rem;
+  }
+}
+
+.navbar,
+.navbar * {
+  min-width: 0;
+}
+
+.navbar-brand,
+.navbar-context {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .navbar .btn {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+}

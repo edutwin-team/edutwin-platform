@@ -29,32 +29,49 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar sticky top-0 z-30 border-b border-base-300/70 bg-base-100/85 px-4 shadow-sm backdrop-blur-xl md:px-6">
-        <div className="navbar-start">
-          <NavbarBrand version={version} />
+      <header className="sticky top-0 z-30 w-full border-b border-base-300/70 bg-base-100/85 shadow-sm backdrop-blur-xl">
+        <div className="mx-auto flex h-16 w-full max-w-screen-2xl items-center justify-between gap-2 px-3 sm:px-4 md:px-6">
+          <div className="flex min-w-0 flex-1 items-center">
+            <NavbarBrand version={version} />
+          </div>
+
+          <div className="hidden min-w-0 flex-[1.4] justify-center px-4 lg:flex">
+            <NavbarContext title={currentPage.title} context={currentPage.context} />
+          </div>
+
+          <div className="flex min-w-0 shrink-0 items-center justify-end gap-1.5 sm:gap-2 md:gap-3">
+            <ThemeSwitch isDark={theme === 'dark'} onToggle={toggleTheme} />
+
+            {user ? (
+              <UserDropdown />
+            ) : (
+              <div className="hidden sm:block">
+                <AuthActions
+                  onLoginClick={() => setIsLoginOpen(true)}
+                  onRegisterClick={() => setIsRegisterOpen(true)}
+                />
+              </div>
+            )}
+
+            {!user && (
+              <button
+                type="button"
+                onClick={() => setIsLoginOpen(true)}
+                className="btn btn-primary btn-sm rounded-xl normal-case sm:hidden"
+              >
+                Connexion
+              </button>
+            )}
+
+            <Link
+              to="/dashboard"
+              className="btn btn-primary btn-sm hidden rounded-xl normal-case md:inline-flex"
+            >
+              Dashboard
+            </Link>
+          </div>
         </div>
-
-        <div className="navbar-center hidden min-w-0 px-4 md:flex">
-          <NavbarContext title={currentPage.title} context={currentPage.context} />
-        </div>
-
-        <div className="navbar-end gap-3">
-          <ThemeSwitch isDark={theme === 'dark'} onToggle={toggleTheme} />
-
-          {user ? (
-            <UserDropdown />
-          ) : (
-            <AuthActions
-              onLoginClick={() => setIsLoginOpen(true)}
-              onRegisterClick={() => setIsRegisterOpen(true)}
-            />
-          )}
-
-          <Link to="/dashboard" className="btn btn-primary btn-sm rounded-xl normal-case md:hidden">
-            Aller
-          </Link>
-        </div>
-      </div>
+      </header>
 
       <Register isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
       <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
