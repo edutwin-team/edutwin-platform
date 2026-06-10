@@ -1,10 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import {
-  LayoutDashboard,
-  Users,
-  GraduationCap,
-  Settings,
-} from 'lucide-react';
+import { LayoutDashboard, Users, GraduationCap, Settings } from 'lucide-react';
 
 type SidebarNavListProps = {
   pathname: string;
@@ -34,9 +29,7 @@ const navItems = [
   },
 ];
 
-export function SidebarNavList({
-  onNavigate,
-}: SidebarNavListProps) {
+export function SidebarNavList({ onNavigate }: SidebarNavListProps) {
   return (
     <nav className="flex flex-col gap-2">
       {navItems.map((item) => {
@@ -51,9 +44,7 @@ export function SidebarNavList({
               [
                 'flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200',
                 'hover:bg-white/10',
-                isActive
-                  ? 'bg-white/15 text-white shadow-lg'
-                  : 'text-white/80',
+                isActive ? 'bg-white/15 text-white shadow-lg' : 'text-white/80',
               ].join(' ')
             }
           >

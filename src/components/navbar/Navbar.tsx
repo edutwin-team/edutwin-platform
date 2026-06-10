@@ -13,10 +13,11 @@ import { UserDropdown } from './UserDropdown';
 export default function Navbar() {
   const version = __APP_VERSION__;
   const location = useLocation();
+
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
   const { user } = useAuth();
 
   useEffect(() => {
@@ -25,7 +26,10 @@ export default function Navbar() {
   }, [theme]);
 
   const currentPage = PAGE_META[location.pathname] ?? DEFAULT_PAGE_META;
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <>
@@ -56,10 +60,11 @@ export default function Navbar() {
             {!user && (
               <button
                 type="button"
+                aria-label="Connexion mobile"
                 onClick={() => setIsLoginOpen(true)}
                 className="btn btn-primary btn-sm rounded-xl normal-case sm:hidden"
               >
-                Connexion
+                Login
               </button>
             )}
 

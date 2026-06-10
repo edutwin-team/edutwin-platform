@@ -7,10 +7,7 @@ type SidebarContentProps = {
   onNavigate: () => void;
 };
 
-export function SidebarContent({
-  pathname,
-  onNavigate,
-}: SidebarContentProps) {
+export function SidebarContent({ pathname, onNavigate }: SidebarContentProps) {
   return (
     <div className="sidebar-surface flex h-full w-full flex-col border-r border-white/10 text-white">
       <SidebarHeader />

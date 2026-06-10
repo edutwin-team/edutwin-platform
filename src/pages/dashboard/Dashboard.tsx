@@ -1,10 +1,5 @@
 import StatCard from '../../components/dashboard/StatCard';
-import {
-  Users,
-  FileText,
-  Brain,
-  TrendingUp,
-} from 'lucide-react';
+import { Users, FileText, Brain, TrendingUp } from 'lucide-react';
 
 import SuccessRatesCard from '../../components/dashboard/SuccessRatesCard';
 import ActiveTwinsCard from '../../components/dashboard/ActiveTwinsCard';
@@ -17,19 +12,14 @@ const Dashboard = () => {
         {/* Header */}
         <div className="flex flex-col gap-4 rounded-2xl border border-base-300/60 bg-base-100 p-5 shadow-sm md:flex-row md:items-center md:justify-between">
           <div className="min-w-0">
-            <h1 className="truncate text-2xl font-bold sm:text-3xl">
-              Teacher Dashboard
-            </h1>
+            <h1 className="truncate text-2xl font-bold sm:text-3xl">Teacher Dashboard</h1>
 
             <p className="mt-1 text-sm text-base-content/60 sm:text-base">
               Welcome back, Professor. Here&apos;s your simulation overview.
             </p>
           </div>
 
-          <Link
-            to="/content"
-            className="btn btn-primary w-full rounded-xl shadow-md md:w-auto"
-          >
+          <Link to="/content" className="btn btn-primary w-full rounded-xl shadow-md md:w-auto">
             + Contenu pédagogique
           </Link>
         </div>

@@ -8,13 +8,9 @@ export function SidebarHeader() {
       </div>
 
       <div className="min-w-0">
-        <h2 className="truncate text-sm font-bold text-white">
-          EduTwin
-        </h2>
+        <h2 className="truncate text-sm font-bold text-white">EduTwin</h2>
 
-        <p className="truncate text-xs text-white/60">
-          Learning Platform
-        </p>
+        <p className="truncate text-xs text-white/60">Learning Platform</p>
       </div>
     </div>
   );
