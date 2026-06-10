@@ -1,57 +1,43 @@
-import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, GraduationCap, Settings } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import type { NavigationLink } from '../../config/navigation';
 
-type SidebarNavListProps = {
+interface SidebarNavListProps {
+  links: NavigationLink[];
   pathname: string;
-  onNavigate: () => void;
-};
+  close?: () => void;
+}
 
-const navItems = [
-  {
-    label: 'Dashboard',
-    href: '/dashboard',
-    icon: LayoutDashboard,
-  },
-  {
-    label: 'Users',
-    href: '/users',
-    icon: Users,
-  },
-  {
-    label: 'Students',
-    href: '/students',
-    icon: GraduationCap,
-  },
-  {
-    label: 'Settings',
-    href: '/settings',
-    icon: Settings,
-  },
-];
-
-export function SidebarNavList({ onNavigate }: SidebarNavListProps) {
+export function SidebarNavList({ links, pathname, close }: SidebarNavListProps) {
   return (
-    <nav className="flex flex-col gap-2">
-      {navItems.map((item) => {
-        const Icon = item.icon;
+    <nav className="min-h-0 flex-1 space-y-2 overflow-y-auto overflow-x-hidden pr-1">
+      {links.map((link) => {
+        const Icon = link.icon;
+        const active = pathname === link.path || pathname.startsWith(`${link.path}/`);
 
         return (
-          <NavLink
-            key={item.href}
-            to={item.href}
-            onClick={onNavigate}
-            className={({ isActive }) =>
-              [
-                'flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200',
-                'hover:bg-white/10',
-                isActive ? 'bg-white/15 text-white shadow-lg' : 'text-white/80',
-              ].join(' ')
-            }
+          <Link
+            key={link.path}
+            to={link.path}
+            onClick={close}
+            title={link.name}
+            className={`group relative flex min-w-0 items-center gap-3 rounded-2xl px-3.5 py-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-300/60 ${
+              active
+                ? 'bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg shadow-indigo-950/40'
+                : 'text-indigo-100/90 hover:bg-indigo-700/35 hover:text-white'
+            }`}
           >
-            <Icon size={20} className="shrink-0" />
+            <span
+              className={`grid h-8 w-8 shrink-0 place-content-center rounded-lg ${
+                active ? 'bg-white/20' : 'bg-indigo-900/40 group-hover:bg-indigo-800/60'
+              }`}
+            >
+              <Icon size={18} className={active ? '' : 'opacity-85 group-hover:opacity-100'} />
+            </span>
 
-            <span className="truncate">{item.label}</span>
-          </NavLink>
+            <span className="min-w-0 flex-1 truncate text-sm font-medium">{link.name}</span>
+
+            {active && <span className="h-6 w-1 shrink-0 rounded-full bg-white/90" />}
+          </Link>
         );
       })}
     </nav>

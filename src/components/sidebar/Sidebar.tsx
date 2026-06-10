@@ -13,7 +13,6 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile menu button */}
       <button
         type="button"
         aria-label="Open sidebar"
@@ -23,7 +22,6 @@ export default function Sidebar() {
         <Menu size={22} />
       </button>
 
-      {/* Overlay */}
       {open && (
         <button
           type="button"
@@ -33,7 +31,6 @@ export default function Sidebar() {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={[
           'fixed left-0 top-0 z-50 h-dvh w-72 max-w-[85vw] transform overflow-hidden transition-transform duration-300',
@@ -41,7 +38,7 @@ export default function Sidebar() {
           open ? 'translate-x-0' : '-translate-x-full',
         ].join(' ')}
       >
-        <SidebarContent pathname={pathname} onNavigate={closeSidebar} />
+        <SidebarContent pathname={pathname} />
       </aside>
     </>
   );
