@@ -26,17 +26,24 @@ const Dashboard = () => {
               </h1>
 
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70 sm:text-base">
-                Suivez les jumeaux numériques, analysez les performances et générez du contenu pédagogique intelligent depuis une interface moderne.
+                Suivez les jumeaux numériques, analysez les performances et générez du contenu
+                pédagogique intelligent depuis une interface moderne.
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-              <Link to="/content" className="btn border-0 bg-white text-slate-950 shadow-xl hover:bg-white/90">
+              <Link
+                to="/content"
+                className="btn border-0 bg-white text-slate-950 shadow-xl hover:bg-white/90"
+              >
                 <Wand2 className="h-4 w-4" />
                 Contenu pédagogique
               </Link>
 
-              <Link to="/simulation" className="btn border-white/20 bg-white/10 text-white backdrop-blur-xl hover:bg-white/15">
+              <Link
+                to="/simulation"
+                className="btn border-white/20 bg-white/10 text-white backdrop-blur-xl hover:bg-white/15"
+              >
                 Lancer une simulation
               </Link>
             </div>
@@ -48,7 +55,10 @@ const Dashboard = () => {
               ['24', 'Simulations lancées'],
               ['3', 'Jumeaux actifs'],
             ].map(([value, label]) => (
-              <div key={label} className="rounded-2xl border border-white/10 bg-white/10 p-4 text-white backdrop-blur-xl">
+              <div
+                key={label}
+                className="rounded-2xl border border-white/10 bg-white/10 p-4 text-white backdrop-blur-xl"
+              >
                 <p className="text-2xl font-black">{value}</p>
                 <p className="mt-1 text-xs text-white/60">{label}</p>
               </div>
