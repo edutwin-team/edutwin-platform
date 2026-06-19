@@ -23,10 +23,9 @@ export const UserDropdown = () => {
 
   return (
     <div className="dropdown dropdown-end">
-      {/* Trigger */}
       <button className="btn btn-ghost hover:bg-base-200 px-2 sm:px-3 rounded-2xl transition-all duration-200">
         <div className="flex items-center gap-3">
-          {/* Infos utilisateur */}
+          {/* user data */}
           <div className="hidden md:flex flex-col items-end leading-tight">
             <p className="text-sm font-semibold text-base-content">
               {user?.first_name} {user?.last_name}

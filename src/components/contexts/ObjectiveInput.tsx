@@ -30,7 +30,7 @@ export const ObjectiveInput = ({ objectives, setObjectives }: ObjectiveInputProp
 
   return (
     <div className="space-y-3 mt-2">
-      {/* Input */}
+      {/* objective Input */}
       <div className="flex gap-2">
         <input
           className="input input-bordered w-full bg-base-200 focus:bg-base-100"
@@ -44,7 +44,7 @@ export const ObjectiveInput = ({ objectives, setObjectives }: ObjectiveInputProp
         </span>
       </div>
 
-      {/* List */}
+      {/* objective List */}
       <div className="flex flex-col gap-2">
         {objectives.map((obj) => (
           <div

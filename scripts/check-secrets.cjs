@@ -1,19 +1,20 @@
 const { execSync } = require('child_process');
 
-// fichiers stagés
+//todo : use this file in huskey
+// files
 const files = execSync('git diff --cached --name-only', {
   encoding: 'utf-8',
 })
   .split('\n')
   .filter(Boolean);
 
-// 🔥 fichiers interdits (.env + similaires)
+// 🔥 not allowed
 const forbiddenPatterns = [
   /^\.env(\..*)?$/, // .env, .env.local, .env.production...
   /^meta\.env$/, // meta.env
 ];
 
-// ❌ secrets hardcodés
+// ❌ secrets
 const secretPatterns = [
   /API_KEY\s*=\s*['"`][^'"`]+['"`]/i,
   /SECRET\s*=\s*['"`][^'"`]+['"`]/i,
@@ -25,7 +26,7 @@ const ignoredFiles = ['scripts/check-secrets.cjs'];
 
 let found = false;
 
-// 1. check fichiers interdits
+// 1. check files
 for (const file of files) {
   const isForbidden = forbiddenPatterns.some((p) => p.test(file));
 
@@ -36,7 +37,7 @@ for (const file of files) {
   }
 }
 
-// 2. scan contenu des fichiers
+// 2. scan
 for (const file of files) {
   if (ignoredFiles.includes(file)) continue;
 
@@ -50,15 +51,15 @@ for (const file of files) {
     for (const line of lines) {
       const trimmed = line.trim();
 
-      // ❌ ignorer commentaires
+      // ❌ ignore comment
       if (trimmed.startsWith('//') || trimmed.startsWith('/*') || trimmed.startsWith('*')) {
         continue;
       }
 
-      // ✅ autoriser Vite env
+      // ✅ autorise vite
       if (trimmed.includes('import.meta.env')) continue;
 
-      // ❌ détecter secrets en dur
+      // ❌ detect secret
       const isSecret = secretPatterns.some((p) => p.test(trimmed)) || trimmed.includes('meta.env');
 
       if (isSecret) {
@@ -68,7 +69,7 @@ for (const file of files) {
       }
     }
   } catch (e) {
-    // ignore fichiers binaires
+    // ignore files
   }
 }
 

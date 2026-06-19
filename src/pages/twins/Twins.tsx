@@ -1,49 +1,81 @@
-import React from 'react';
-import DigitalTwinCard from '../../components/twin/DigitalTwinCard';
+import { useState } from 'react';
+
+import TwinsHeader from '../../components/twin/TwinsHeader';
+import TwinsList from '../../components/twin/TwinsList';
+import { TwinModal } from '../../components/twin/TwinModal';
+import { useTwins } from '../../hooks/twins/useTwins';
+
 import type { DigitalTwin } from '../../types/types';
 
-const twins: DigitalTwin[] = [
-  { id: 1, name: 'Étudiant A', behavior: 'Toujours absent', attention: 40, absence: 90 },
-  { id: 2, name: 'Étudiant B', behavior: 'Très attentif', attention: 95, absence: 5 },
-  { id: 3, name: 'Étudiant C', behavior: 'En retard souvent', attention: 60, absence: 30 },
-  { id: 4, name: 'Étudiant D', behavior: 'Handicap dyslexie', attention: 80, absence: 10 },
-];
+const Twins = () => {
+  const { data: twins, isLoading, isError } = useTwins();
 
-const Twins: React.FC = () => {
-  return (
-    <div className="space-y-6">
-      <section className="rounded-3xl border border-base-300/70 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-sky-500/10 p-6 shadow-sm">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-              Vos jumeaux
-            </p>
-            <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-            <p className="mt-2 max-w-2xl text-base-content/70">
-              Pilotez vos jumeaux numériques, identifiez rapidement les profils à risque et lancez
-              vos simulations en un clic.
-            </p>
-          </div>
-          <div className="stats stats-vertical border border-base-300/70 bg-base-100 shadow-sm md:stats-horizontal">
-            <div className="stat px-5 py-3">
-              <div className="stat-title text-xs">Jumeaux suivis</div>
-              <div className="stat-value text-2xl">{twins.length}</div>
-            </div>
-            <div className="stat px-5 py-3">
-              <div className="stat-title text-xs">Attention moyenne</div>
-              <div className="stat-value text-2xl">
-                {Math.round(twins.reduce((sum, twin) => sum + twin.attention, 0) / twins.length)}%
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  const [selectedTwin, setSelectedTwin] = useState<DigitalTwin | null>(null);
+  const [open, setOpen] = useState(false);
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        {twins.map((twin) => (
-          <DigitalTwinCard key={twin.id} twin={twin} />
-        ))}
+  const handleCreate = () => {
+    setSelectedTwin(null);
+    setOpen(true);
+  };
+
+  const handleEdit = (twin: DigitalTwin) => {
+    setSelectedTwin(twin);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedTwin(null);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center py-20">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
       </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="p-6">
+        <div className="alert alert-error">Erreur lors du chargement des jumeaux.</div>
+      </div>
+    );
+  }
+
+  const hasTwins = twins && twins.length > 0;
+
+  return (
+    <div className="space-y-6 p-6">
+      {/* HEADER */}
+      <TwinsHeader twins={twins ?? []} />
+
+      {/* ACTION */}
+      <div className="flex justify-between items-center">
+        <button onClick={handleCreate} className="btn btn-primary">
+          + Nouveau Twin
+        </button>
+      </div>
+
+      {/* EMPTY STATE */}
+      {!hasTwins && (
+        <div className="card bg-base-100 border border-base-300 p-6 text-center">
+          <h2 className="text-lg font-semibold">Aucun Jumeau trouvé</h2>
+          <p className="text-sm text-base-content/70 mt-1">Crée ton premier jumeau numérique.</p>
+        </div>
+      )}
+
+      {/* LIST */}
+      {hasTwins && <TwinsList twins={twins ?? []} onEdit={handleEdit} />}
+
+      {/* MODAL */}
+      <TwinModal
+        key={selectedTwin?.id ?? 'create'}
+        open={open}
+        twin={selectedTwin}
+        onClose={handleClose}
+      />
     </div>
   );
 };

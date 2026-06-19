@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { GraduationCap, Globe, BookOpen, Target, FileText, Tag } from 'lucide-react';
 
 import { ObjectiveInput } from './ObjectiveInput';
-import { GenericModal } from '../modals/GenericModal';
+import { GenericModal } from '../ui/modals/GenericModal';
 
 import { useCreateContext } from '../../hooks/twins/useCreateContext';
 import { useUpdateContext } from '../../hooks/twins/useUpdateContext';
