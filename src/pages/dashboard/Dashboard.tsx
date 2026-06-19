@@ -1,4 +1,4 @@
-import StatCard from '../../components/dashboard/StatCard';
+import StatCard from '../../components/ui/stats/StatCard';
 import { Users, FileText, Brain, TrendingUp } from 'lucide-react';
 import SuccessRatesCard from '../../components/dashboard/SuccessRatesCard';
 import ActiveTwinsCard from '../../components/dashboard/ActiveTwinsCard';
