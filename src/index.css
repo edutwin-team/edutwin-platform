@@ -8,6 +8,23 @@
 [data-theme='light'] .layout-app {
   background-color: #f5f6fa;
 }
+.radial-progress::after {
+  display: none !important;
+}
+.animate-step {
+  animation: fadeSlide 0.2s ease-out;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 

@@ -2,7 +2,7 @@ import { GraduationCap, Globe, BookOpen, Target, Brain, Trash2, Edit2 } from 'lu
 import type { Context } from '../../types/types';
 import { useDeleteContext } from '../../hooks/twins/useDeleteContext';
 import { useState } from 'react';
-import { GenericModal } from '../modals/GenericModal';
+import { GenericModal } from '../ui/modals/GenericModal';
 
 type ContextProps = {
   context: Context;
@@ -22,7 +22,7 @@ export const ContextCard = ({ context, onEdit }: ContextProps) => {
   };
   return (
     <div className="relative rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-base-200 shadow-sm hover:shadow-md transition p-5">
-      {/* Delete button */}
+      {/* action buttons */}
       <button
         onClick={() => setOpenDelete(true)}
         className="absolute top-4 right-4 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition"
@@ -82,7 +82,6 @@ export const ContextCard = ({ context, onEdit }: ContextProps) => {
           </span>
         </div>
 
-        {/* Button */}
         <button className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white text-sm px-4 py-2 rounded-xl flex items-center gap-2 transition">
           <Target size={16} />
           Appliquer

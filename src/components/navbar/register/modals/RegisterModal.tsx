@@ -239,7 +239,7 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
               <div className="text-red-500 text-sm text-center bg-red-50 p-2 rounded">{error}</div>
             )}
 
-            {/* BUTTONS */}
+            {/* btns */}
             <div className="flex justify-between pt-6 border-t">
               <button type="button" onClick={handleClose} className="btn btn-ghost">
                 Fermer
