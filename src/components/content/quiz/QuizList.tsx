@@ -1,33 +1,17 @@
-import { useEffect, useState } from 'react';
-import { type Quiz } from '../../../types/types';
-import { quizService } from '../../../api/quizService';
 import { Link } from 'react-router-dom';
+import { type Quiz } from '../../../types/types';
+import { useQuizzes } from '../../../hooks/content/quiz/useQuizzes';
 
 export function QuizList() {
-  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { data: quizzes, isLoading, isError } = useQuizzes();
 
-  useEffect(() => {
-    const fetchQuizzes = async () => {
-      try {
-        const data = await quizService.getAll();
-        setQuizzes(data);
-      } catch {
-        setError('Erreur lors de la récupération des données');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchQuizzes();
-  }, []);
-
-  if (loading) return <span className="loading loading-spinner loading-lg" />;
-  if (error) return <span className="text-error">{error}</span>;
+  if (isLoading) return <span className="loading loading-spinner loading-lg" />;
+  if (isError)
+    return <span className="text-error">Erreur lors de la récupération des données</span>;
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {quizzes.map((quiz) => (
+      {quizzes?.map((quiz: Quiz) => (
         <div key={quiz.id} className="card bg-base-100 shadow-sm border border-base-300">
           <div className="card-body">
             <h2 className="card-title">{quiz.title}</h2>

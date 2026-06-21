@@ -1,30 +1,16 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { type Quiz, type Question, type Answer } from '../../../types/types';
-import { quizService } from '../../../api/quizService';
+import { type Question, type Answer } from '../../../types/types';
+import { useQuiz } from '../../../hooks/content/quiz/useQuiz';
 
 export default function QuizDetail() {
   const { id } = useParams<{ id: string }>();
-  const [quiz, setQuiz] = useState<Quiz | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const data = await quizService.getById(Number(id));
-        setQuiz(data);
-      } catch {
-        setError('Impossible de charger le quiz');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetch();
-  }, [id]);
+  const { data: quiz, isLoading, isError } = useQuiz(Number(id));
 
-  if (loading) return <span className="loading loading-spinner loading-lg" />;
-  if (error) return <span className="text-error">{error}</span>;
+  if (isLoading) return <span className="loading loading-spinner loading-lg" />;
+
+  if (isError) return <span className="text-error">Impossible de charger le quiz</span>;
+
   if (!quiz) return null;
 
   return (
@@ -59,7 +45,7 @@ export default function QuizDetail() {
           >
             <input type="radio" name="questions" />
             <div className="collapse-title font-medium">
-              {index + 1}. {question.title}
+              {index + 1}. {question.text}
             </div>
             <div className="collapse-content">
               <ul className="space-y-2 pt-2">

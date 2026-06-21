@@ -1,42 +1,50 @@
 //todo : seperate these type in diffrent files
+//todo: now we have id? not best solution we need to seperate types between get types and dto backend types exp : Quiz (GET) CreateQuizDto (POST) UpdateQuizDto (PATCH)
 export type QuizService = {
   getAll: () => Promise<Quiz[]>;
   getById: (id: number) => Promise<Quiz>;
 };
 
-export type Content = {
-  id: number;
+export const ContentSourceType = {
+  MANUAL: 'manual',
+  IMPORT_FILE: 'import_file',
+} as const;
+export type Quiz = {
+  id?: number;
   title: string;
-  content_type: ContentType;
-  is_published: boolean;
-  created_at: string;
-  created_by: number;
-};
-
-export type Quiz = Content & {
-  content_type: ContentType;
+  description: string | null;
   passing_score: number;
   time_limit_minutes: number;
+  source_type: typeof ContentSourceType;
+  course: number | null;
   questions: Question[];
+  is_published: boolean; //todo : a voir si on garde ca ou non
+  //todo add course here since we have 1:n relation with course
 };
 
-export type Course = Content & {
-  content_type: ContentType;
-  description: string;
-  body: string;
+export type Course = {
+  id?: number;
+  title: string;
+  description: string | null;
+  content: string;
+
+  source_type: typeof ContentSourceType;
 };
 
 export type Question = {
-  id: number;
-  title: string;
+  id?: number;
+  text: string;
   question_type: QuestionType;
+  difficulty_level: number;
+  order_index: number;
   answers: Answer[];
 };
 
 export type Answer = {
-  id: number;
+  id?: number;
   text: string;
   is_correct?: boolean; // optionnel — masqué côté student
+  order_index: number;
 };
 
 //AS CONST replaces backend models type variants
@@ -56,7 +64,7 @@ export const ContentType = {
 export type ContentType = (typeof ContentType)[keyof typeof ContentType];
 
 export type Objective = {
-  id: number;
+  id?: number;
   label: string;
 };
 
@@ -93,7 +101,7 @@ export type Behavior = {
 };
 
 export type DigitalTwin = {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   age: number;
