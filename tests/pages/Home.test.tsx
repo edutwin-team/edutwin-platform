@@ -1,5 +1,3 @@
-// src/pages/home/Home.test.tsx
-
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Home from '../../src/pages/home/Home';
@@ -12,11 +10,10 @@ describe('Home Page', () => {
       </BrowserRouter>
     );
 
-    expect(
-      screen.getByText(/What do you want to validate first in your lesson/i)
-    ).toBeInTheDocument();
-    expect(screen.getByText(/Maintain student attention/i)).toBeInTheDocument();
-    expect(screen.getByText(/Check concept understanding/i)).toBeInTheDocument();
-    expect(screen.getByText(/Ensure inclusive accessibility/i)).toBeInTheDocument();
+    expect(screen.getByText(/Jumeau numérique/i)).toBeInTheDocument();
+    expect(screen.getByText(/Essayer la démo/i)).toBeInTheDocument();
+    expect(screen.getByText(/Pourquoi/i)).toBeInTheDocument();
+    expect(screen.getByText(/Comment ça marche/i)).toBeInTheDocument();
+    expect(screen.getByText(/Approuvé par les éducateurs/i)).toBeInTheDocument();
   });
 });
