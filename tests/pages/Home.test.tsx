@@ -10,10 +10,10 @@ describe('Home Page', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText(/Jumeau numérique/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
     expect(screen.getByText(/Essayer la démo/i)).toBeInTheDocument();
-    expect(screen.getByText(/Pourquoi/i)).toBeInTheDocument();
-    expect(screen.getByText(/Comment ça marche/i)).toBeInTheDocument();
-    expect(screen.getByText(/Approuvé par les éducateurs/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Pourquoi/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Comment ça marche/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Approuvé par les éducateurs/i })).toBeInTheDocument();
   });
 });
