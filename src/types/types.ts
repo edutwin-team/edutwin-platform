@@ -35,7 +35,7 @@ export type Question = {
   id?: number;
   text: string;
   question_type: QuestionType;
-  difficulty_level: number;
+  difficulty_level: DifficultyLevel;
   order_index: number;
   answers: Answer[];
 };
@@ -49,12 +49,20 @@ export type Answer = {
 
 //AS CONST replaces backend models type variants
 export const QuestionType = {
-  single_choice: 1,
-  multiple_choice: 2,
-  true_false: 3,
+  single_choice: 'single_choice',
+  multiple_choice: 'multiple_choice',
+  true_false: 'true_false',
 } as const;
 
 export type QuestionType = (typeof QuestionType)[keyof typeof QuestionType];
+
+export const DifficultyLevel = {
+  easy: 'easy',
+  medium: 'medium',
+  hard: 'hard',
+} as const;
+
+export type DifficultyLevel = (typeof DifficultyLevel)[keyof typeof DifficultyLevel];
 
 export const ContentType = {
   course: 1,

@@ -30,6 +30,26 @@ export const deleteQuiz = async (id: number) => {
   return response.data;
 };
 
+export const exportQuiz = async (id: number): Promise<Blob> => {
+  const response = await api.get(`content/quizzes/${id}/export/`, {
+    responseType: 'blob',
+  });
+
+  return response.data;
+};
+export const importQuiz = async (file: File) => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await api.post('content/quizzes/import/', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  return response.data;
+};
+
 //todo : a voir si on garde ca
 export const submitQuiz = async (
   quizId: number,

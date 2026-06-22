@@ -1,11 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { type Question, type Answer } from '../../../types/types';
 import { useQuiz } from '../../../hooks/content/quiz/useQuiz';
+import { useExportQuiz } from '../../../hooks/content/quiz/useExportQuiz';
 
 export default function QuizDetail() {
   const { id } = useParams<{ id: string }>();
+  const quizId = Number(id);
 
   const { data: quiz, isLoading, isError } = useQuiz(Number(id));
+  const exportMutation = useExportQuiz();
 
   if (isLoading) return <span className="loading loading-spinner loading-lg" />;
 
@@ -13,8 +16,24 @@ export default function QuizDetail() {
 
   if (!quiz) return null;
 
+  const handleExport = async () => {
+    const blob = await exportMutation.mutateAsync(quizId);
+
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+
+    a.href = url;
+    a.download = `${quiz.title}.csv`;
+    a.click();
+  };
+
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6">
+      <div className="flex gap-2">
+        <button onClick={handleExport} className="btn btn-primary">
+          Export CSV
+        </button>
+      </div>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{quiz.title}</h1>
         <span className={`badge ${quiz.is_published ? 'badge-success' : 'badge-ghost'}`}>
