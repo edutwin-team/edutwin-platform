@@ -1,47 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/Footer';
-
-interface QuizOption {
-  id: string;
-  label: string;
-}
-
-interface QuizQuestion {
-  id: string;
-  prompt: string;
-  options: QuizOption[];
-}
-
-const quizQuestions: QuizQuestion[] = [
-  {
-    id: 'focus',
-    prompt: 'What do you want to validate first in hello lesson?',
-    options: [
-      { id: 'attention', label: 'Maintain student attention' },
-      { id: 'comprehension', label: 'Check concept understanding' },
-      { id: 'inclusion', label: 'Ensure inclusive accessibility' },
-    ],
-  },
-  {
-    id: 'level',
-    prompt: 'Which level are you preparing this class for?',
-    options: [
-      { id: 'middle', label: 'Middle school' },
-      { id: 'high', label: 'High school' },
-      { id: 'higher', label: 'Higher education' },
-    ],
-  },
-  {
-    id: 'format',
-    prompt: 'Which format would you like to test first?',
-    options: [
-      { id: 'lesson', label: 'Lecture session' },
-      { id: 'activity', label: 'Hands-on activity' },
-      { id: 'quiz', label: 'QCM assessment' },
-    ],
-  },
-];
 
 /* ── Neural network illustration (hero) ── */
 const NeuralIllustration: React.FC = () => (
@@ -126,88 +85,6 @@ const NeuralIllustration: React.FC = () => (
 );
 
 const Home: React.FC = () => {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [motionDirection, setMotionDirection] = useState<'next' | 'back'>('next');
-  const quizSectionRef = useRef<HTMLElement | null>(null);
-
-  const currentQuestion = quizQuestions[step];
-  const isLastQuestion = step === quizQuestions.length - 1;
-  const isCompleted = step >= quizQuestions.length;
-  const selectedOption = !isCompleted ? answers[currentQuestion.id] : undefined;
-  const progress = Math.round((Math.min(step, quizQuestions.length) / quizQuestions.length) * 100);
-
-  const recommendation = useMemo(() => {
-    const focus = answers.focus;
-    if (focus === 'attention')
-      return {
-        title: 'Recommended path: attention simulation',
-        description: 'Run a short scenario with engagement checkpoints every 10 minutes.',
-        primaryCta: 'Start simulation',
-        primaryPath: '/question',
-      };
-    if (focus === 'inclusion')
-      return {
-        title: 'Recommended path: inclusive validation',
-        description:
-          'Check accessibility first, then generate a QCM adapted to multiple learning profiles.',
-        primaryCta: 'Generate inclusive QCM',
-        primaryPath: '/quiz',
-      };
-    return {
-      title: 'Recommended path: comprehension diagnostic',
-      description: 'Identify fragile concepts before class and improve your content immediately.',
-      primaryCta: 'Open dashboard',
-      primaryPath: '/dashboard',
-    };
-  }, [answers.focus]);
-
-  const profileLabel = useMemo(() => {
-    const focus = answers.focus;
-    if (focus === 'attention') return 'Attention-sensitive class';
-    if (focus === 'inclusion') return 'Inclusion-priority class';
-    if (focus === 'comprehension') return 'Comprehension-focused class';
-    return 'Profile in progress';
-  }, [answers.focus]);
-
-  const confidenceScore = useMemo(() => {
-    return Math.min(40 + Object.keys(answers).length * 20, 95);
-  }, [answers]);
-
-  useEffect(() => {
-    if (isCompleted || !quizSectionRef.current) return;
-    quizSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, [step, isCompleted]);
-
-  const handleSelect = (qId: string, oId: string) =>
-    setAnswers((prev) => ({ ...prev, [qId]: oId }));
-
-  const handleBack = () => {
-    if (step <= 0) return;
-    setMotionDirection('back');
-    setStep((p) => p - 1);
-  };
-
-  const handleNext = () => {
-    if (isCompleted || !selectedOption) return;
-    setMotionDirection('next');
-    if (isLastQuestion) {
-      setStep(quizQuestions.length);
-      return;
-    }
-    setStep((p) => p + 1);
-  };
-
-  const restartQuiz = () => {
-    setAnswers({});
-    setStep(0);
-    setMotionDirection('next');
-  };
-
-  const answerSummary = quizQuestions
-    .map((q) => q.options.find((o) => o.id === answers[q.id])?.label ?? null)
-    .filter(Boolean) as string[];
-
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: '#ffffff', color: '#111827' }}>
       <section
