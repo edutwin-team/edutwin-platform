@@ -6,6 +6,7 @@ import { TwinModal } from '../../components/twin/TwinModal';
 import { useTwins } from '../../hooks/twins/useTwins';
 
 import type { DigitalTwin } from '../../types/types';
+import { SimpleLoader } from '../../components/ui/loaders/SimpleLoader';
 
 const Twins = () => {
   const { data: twins, isLoading, isError } = useTwins();
@@ -29,11 +30,7 @@ const Twins = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center py-20">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
-    );
+    return <SimpleLoader />;
   }
 
   if (isError) {

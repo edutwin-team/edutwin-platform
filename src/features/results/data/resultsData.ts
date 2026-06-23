@@ -1,7 +1,7 @@
 import type { ResultsPageData } from '../types';
 
 export const resultsPageData: ResultsPageData = {
-  heading: 'Résultats & Feedback',
+  heading: 'Résultats & Feedback (Page en cours de développement)',
   description: 'Analyse des réponses de l’élève et recommandations pédagogiques.',
   kpis: {
     successRate: {

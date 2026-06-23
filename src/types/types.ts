@@ -9,16 +9,18 @@ export const ContentSourceType = {
   MANUAL: 'manual',
   IMPORT_FILE: 'import_file',
 } as const;
+
+export type ContentSourceType = (typeof ContentSourceType)[keyof typeof ContentSourceType];
+
 export type Quiz = {
   id?: number;
   title: string;
   description: string | null;
   passing_score: number;
   time_limit_minutes: number;
-  source_type: typeof ContentSourceType;
+  source_type: ContentSourceType;
   course: number | null;
   questions: Question[];
-  is_published: boolean; //todo : a voir si on garde ca ou non
   //todo add course here since we have 1:n relation with course
 };
 
@@ -28,7 +30,7 @@ export type Course = {
   description: string | null;
   content: string;
 
-  source_type: typeof ContentSourceType;
+  source_type: ContentSourceType;
 };
 
 export type Question = {

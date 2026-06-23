@@ -1,25 +1,29 @@
-// Quiz.tsx
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+
 import { QuizList } from '../../components/content/quiz/QuizList';
-import { useImportQuiz } from '../../hooks/content/quiz/useImportQuiz';
+import { AddQuizModal } from '../../components/content/quiz/modals/AddQuizModal';
 
 export default function Quiz() {
-  const importMutation = useImportQuiz();
-  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const [isOpen, setIsOpen] = useState(false);
 
-    importMutation.mutate(file);
-  };
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Quizzes</h1>
-      <label className="btn btn-secondary">
-        Import CSV
-        <input type="file" accept=".csv" hidden onChange={handleImport} />
-      </label>
+    <div className=" space-y-6 p-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold">Quiz</h1>
+          <p className="text-gray-500">Gérez vos quiz et suivez les résultats.</p>
+        </div>
+        <button onClick={() => setIsOpen(true)} className="btn btn-primary mb-4">
+          Ajouter un quiz
+        </button>
+      </div>
+
       <QuizList />
+
       <Outlet />
+
+      <AddQuizModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }

@@ -14,8 +14,8 @@ const Dashboard = () => {
           <p className="text-gray-500">Welcome back, Professor. Here's your simulation overview.</p>
         </div>
 
-        <Link to={'/content'} className="btn btn-primary rounded-xl shadow-md">
-          + Contenue pedagogique
+        <Link to={'/quizzes'} className="btn btn-primary rounded-xl shadow-md">
+          + Jumeaux numériques
         </Link>
       </div>
 
