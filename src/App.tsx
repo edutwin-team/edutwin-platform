@@ -8,7 +8,6 @@ import Home from './pages/home/Home';
 import Dashboard from './pages/dashboard/Dashboard';
 import Profile from './pages/profile/Profile';
 import Quiz from './pages/quiz/Quiz';
-import QuizDetail from './pages/quiz/QuizDetail';
 import Question from './pages/question/Question';
 import Results from './pages/results/Results';
 import Teacher from './pages/teacher/Teacher';
@@ -45,9 +44,8 @@ const Layout: React.FC = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/twins" element={<Twins />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/quiz" element={<Quiz />}>
-                <Route path=":id" element={<QuizDetail />} />
-              </Route>
+              <Route path="/quizzes" element={<Quiz />}></Route>
+              {/* todo : add seperate quiz detail if needed */}
               <Route path="/question" element={<Question />} />
               <Route path="/results" element={<Results />} />
               <Route path="/teacher" element={<Teacher />} />

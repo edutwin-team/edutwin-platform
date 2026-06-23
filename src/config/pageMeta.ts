@@ -16,11 +16,6 @@ export const PAGE_META: Record<string, PageMeta> = {
     context: 'Gestion des profils d’apprenants simulés',
   },
 
-  '/content': {
-    title: 'Contenu pédagogique',
-    context: 'Créez et gérez vos contenus pédagogiques',
-  },
-
   '/contexts': {
     title: 'Contexte pédagogique',
     context: 'Définissez les groupes et environnements de simulation',
@@ -54,6 +49,10 @@ export const PAGE_META: Record<string, PageMeta> = {
   '/about': {
     title: 'À propos',
     context: 'Informations sur la plateforme',
+  },
+  '/quizzes': {
+    title: 'Quiz',
+    context: 'Créez, gérez et consultez vos quiz',
   },
 };
 

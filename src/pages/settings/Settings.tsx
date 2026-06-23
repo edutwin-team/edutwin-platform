@@ -17,7 +17,7 @@ export default function Settings() {
     <div className="p-4 md:p-6">
       <div className="mx-auto max-w-5xl space-y-6">
         <header className="rounded-2xl border border-base-300/70 bg-base-100 p-5 shadow-sm">
-          <h1 className="text-3xl font-bold">Paramètres</h1>
+          <h1 className="text-3xl font-bold">Paramètres (Page en cours de développement)</h1>
           <p className="mt-2 text-sm text-base-content/70">
             Personnalisez votre expérience selon vos besoins pédagogiques, d’accessibilité et de
             confidentialité.

@@ -1,5 +1,6 @@
 import { useContexts } from '../../hooks/twins/useContexts';
 import type { Context } from '../../types/types';
+import { SimpleLoader } from '../ui/loaders/SimpleLoader';
 import { ContextCard } from './ContextCard';
 
 type ContextListProps = {
@@ -8,11 +9,7 @@ type ContextListProps = {
 export const ContextList = ({ onEdit }: ContextListProps) => {
   const { data: contexts, isLoading, isError } = useContexts();
   if (isLoading) {
-    return (
-      <div className="flex justify-center py-10">
-        <span className="loading loading-spinner loading-md"></span>
-      </div>
-    );
+    return <SimpleLoader />;
   }
 
   if (isError) {

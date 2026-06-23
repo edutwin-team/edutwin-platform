@@ -1,7 +1,7 @@
 import type { TeacherPageData } from '../types';
 
 export const teacherPageData: TeacherPageData = {
-  heading: 'Espace Enseignant',
+  heading: 'Espace Enseignant (Page en cours de développement)',
   description: 'Pilotez les performances, la qualité des questions et les ajustements.',
   kpis: {
     studentPerformance: {
