@@ -1,7 +1,7 @@
 import type { ProfilePageData } from '../types';
 
 export const profilePageData: ProfilePageData = {
-  heading: 'Profil Élève',
+  heading: 'Profil Élève (Page en cours de développement)',
   description:
     'Cette page représente le jumeau numérique de l’élève. Les données affichées servent à personnaliser les contenus générés par IA.',
   academic: {

@@ -1,52 +1,70 @@
 //todo : seperate these type in diffrent files
+//todo: now we have id? not best solution we need to seperate types between get types and dto backend types exp : Quiz (GET) CreateQuizDto (POST) UpdateQuizDto (PATCH)
 export type QuizService = {
   getAll: () => Promise<Quiz[]>;
   getById: (id: number) => Promise<Quiz>;
 };
 
-export type Content = {
-  id: number;
-  title: string;
-  content_type: ContentType;
-  is_published: boolean;
-  created_at: string;
-  created_by: number;
-};
+export const ContentSourceType = {
+  MANUAL: 'manual',
+  IMPORT_FILE: 'import_file',
+} as const;
 
-export type Quiz = Content & {
-  content_type: ContentType;
+export type ContentSourceType = (typeof ContentSourceType)[keyof typeof ContentSourceType];
+
+export type Quiz = {
+  id?: number;
+  title: string;
+  description: string | null;
   passing_score: number;
   time_limit_minutes: number;
+  source_type: ContentSourceType;
+  course: number | null;
   questions: Question[];
+  //todo add course here since we have 1:n relation with course
 };
 
-export type Course = Content & {
-  content_type: ContentType;
-  description: string;
-  body: string;
+export type Course = {
+  id?: number;
+  title: string;
+  description: string | null;
+  content: string;
+
+  source_type: ContentSourceType;
 };
 
 export type Question = {
-  id: number;
-  title: string;
+  id?: number;
+  text: string;
   question_type: QuestionType;
+  difficulty_level: DifficultyLevel;
+  order_index: number;
   answers: Answer[];
 };
 
 export type Answer = {
-  id: number;
+  id?: number;
   text: string;
   is_correct?: boolean; // optionnel — masqué côté student
+  order_index: number;
 };
 
 //AS CONST replaces backend models type variants
 export const QuestionType = {
-  single_choice: 1,
-  multiple_choice: 2,
-  true_false: 3,
+  single_choice: 'single_choice',
+  multiple_choice: 'multiple_choice',
+  true_false: 'true_false',
 } as const;
 
 export type QuestionType = (typeof QuestionType)[keyof typeof QuestionType];
+
+export const DifficultyLevel = {
+  easy: 'easy',
+  medium: 'medium',
+  hard: 'hard',
+} as const;
+
+export type DifficultyLevel = (typeof DifficultyLevel)[keyof typeof DifficultyLevel];
 
 export const ContentType = {
   course: 1,
@@ -56,7 +74,7 @@ export const ContentType = {
 export type ContentType = (typeof ContentType)[keyof typeof ContentType];
 
 export type Objective = {
-  id: number;
+  id?: number;
   label: string;
 };
 
@@ -93,7 +111,7 @@ export type Behavior = {
 };
 
 export type DigitalTwin = {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   age: number;

@@ -158,7 +158,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
       context: form.context ?? undefined,
     };
 
-    if (twin) updateTwin({ id: twin.id, data: payload });
+    if (twin && twin.id !== undefined) updateTwin({ id: twin.id, data: payload });
     else createTwin(payload);
   };
 

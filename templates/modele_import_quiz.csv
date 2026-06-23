@@ -1,0 +1,14 @@
+Titre du quiz;Description;Score minimum (%);Temps limite (minutes);
+Quiz d'exemple - Culture generale;Ceci est un exemple. Remplacez ces informations par celles de votre propre quiz.;60;20;
+;;;;
+Question;Type de question;Difficulté;Réponse;Bonne réponse
+Quelle est la capitale de la France ?;Choix unique;Facile;Paris;Vrai
+Quelle est la capitale de la France ?;Choix unique;Facile;Lyon;Faux
+Quelle est la capitale de la France ?;Choix unique;Facile;Marseille;Faux
+Quelle est la capitale de la France ?;Choix unique;Facile;Toulouse;Faux
+Lesquels sont des langages de programmation ?;Choix multiple;Moyen;Python;Vrai
+Lesquels sont des langages de programmation ?;Choix multiple;Moyen;Java;Vrai
+Lesquels sont des langages de programmation ?;Choix multiple;Moyen;HTML;Faux
+Lesquels sont des langages de programmation ?;Choix multiple;Moyen;CSS;Faux
+Le Soleil tourne autour de la Terre.;Vrai / Faux;Difficile;Vrai;Faux
+Le Soleil tourne autour de la Terre.;Vrai / Faux;Difficile;Faux;Vrai

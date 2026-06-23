@@ -14,6 +14,8 @@ describe('Home Page', () => {
     expect(screen.getByText(/Essayer la démo/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Pourquoi/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Comment ça marche/i })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /Approuvé par les éducateurs/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Approuvé par les éducateurs/i })
+    ).toBeInTheDocument();
   });
 });
