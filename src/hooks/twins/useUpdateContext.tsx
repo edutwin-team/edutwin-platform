@@ -6,7 +6,7 @@ export const useUpdateContext = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: number; data: Context }) => updateContext(id, data),
+    mutationFn: ({ id, data }: { id: number; data: Partial<Context> }) => updateContext(id, data),
 
     onSuccess: () => {
       queryClient.invalidateQueries({

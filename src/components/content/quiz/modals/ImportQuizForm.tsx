@@ -9,17 +9,16 @@ type Props = {
 export function ImportQuizForm({ onBack, onSuccess }: Props) {
   const importMutation = useImportQuiz();
 
-  const [toast, setToast] = useState<{
+  const [alert, setAlert] = useState<{
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
 
-  //todo : we can add a toaster basic component after mvp
-  const showToast = (type: 'success' | 'error', message: string) => {
-    setToast({ type, message });
+  const showAlert = (type: 'success' | 'error', message: string) => {
+    setAlert({ type, message });
 
     setTimeout(() => {
-      setToast({ type: null, message: '' });
+      setAlert({ type: null, message: '' });
     }, 5000);
   };
 
@@ -29,25 +28,25 @@ export function ImportQuizForm({ onBack, onSuccess }: Props) {
 
     importMutation.mutate(file, {
       onSuccess: () => {
-        showToast('success', 'Quiz importé avec succès');
+        showAlert('success', 'Quiz importé avec succès');
 
         setTimeout(() => {
           onSuccess(); // close modal
         }, 500);
       },
       onError: () => {
-        showToast('error', 'Format de quiz invalide');
+        showAlert('error', 'Format de quiz invalide');
       },
     });
   };
 
   return (
     <div className="flex flex-col gap-4 relative">
-      {/* toast */}
-      {toast.type && (
+      {/* ALERT */}
+      {alert.type && (
         <div className="toast toast-top toast-center z-50">
-          <div className={`toast ${toast.type === 'success' ? 'toast-success' : 'toast-error'}`}>
-            <span>{toast.message}</span>
+          <div className={`alert ${alert.type === 'success' ? 'alert-success' : 'alert-error'}`}>
+            <span>{alert.message}</span>
           </div>
         </div>
       )}
@@ -61,7 +60,7 @@ export function ImportQuizForm({ onBack, onSuccess }: Props) {
         </button>
       </div>
 
-      {/* file */}
+      {/* FILE */}
       <input
         type="file"
         accept=".csv"

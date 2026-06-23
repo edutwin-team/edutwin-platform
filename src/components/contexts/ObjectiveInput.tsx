@@ -48,13 +48,13 @@ export const ObjectiveInput = ({ objectives, setObjectives }: ObjectiveInputProp
       <div className="flex flex-col gap-2">
         {objectives.map((obj) => (
           <div
-            key={obj.id}
+            key={obj.id ?? obj.label}
             className="flex items-center justify-between bg-base-200 border border-base-300 px-3 py-2 rounded-xl hover:bg-base-300 transition"
           >
             <span className="text-sm text-base-content">{obj.label}</span>
 
             <button
-              onClick={() => removeObjective(obj.id)}
+              onClick={() => (obj.id !== undefined ? removeObjective(obj.id) : undefined)}
               className="text-base-content/40 hover:text-red-500 transition"
             >
               <Trash2 className="cursor-pointer" size={16} />

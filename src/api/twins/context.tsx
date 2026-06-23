@@ -11,12 +11,12 @@ export const getContext = async (id: number) => {
   return response.data;
 };
 
-export const createContext = async (data: Context) => {
+export const createContext = async (data: Omit<Context, 'id' | 'twins'>) => {
   const response = await api.post('twins/contexts/', data);
   return response.data;
 };
 
-export const updateContext = async (id: number, data: Context) => {
+export const updateContext = async (id: number, data: Partial<Context>) => {
   const response = await api.put(`twins/contexts/${id}/`, data);
   return response.data;
 };
