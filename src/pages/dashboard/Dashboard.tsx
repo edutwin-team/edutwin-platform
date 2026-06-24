@@ -4,12 +4,13 @@ import SimulationsChart from '../../components/dashboard/SimulationsChart';
 import LatestTwinsCard from '../../components/dashboard/LatestTwinsCard';
 import { Link } from 'react-router-dom';
 import { useDashboard } from '../../hooks/dashboard/useDashboard';
+import { SimpleLoader } from '../../components/ui/loaders/SimpleLoader';
 
 const Dashboard = () => {
   const { data, isLoading } = useDashboard();
 
   if (isLoading) {
-    return <div className="p-6">Loading dashboard...</div>;
+    return <SimpleLoader />;
   }
 
   const stats = data?.counts;
