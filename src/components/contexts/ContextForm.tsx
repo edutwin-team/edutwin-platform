@@ -6,6 +6,9 @@ import { GenericModal } from '../ui/modals/GenericModal';
 
 import { useCreateContext } from '../../hooks/twins/useCreateContext';
 import { useUpdateContext } from '../../hooks/twins/useUpdateContext';
+import { useContexts } from '../../hooks/twins/useContexts';
+import { useUsageLimit } from '../../hooks/limits/useUsageLimit';
+import { UsageLimitAlert } from '../limits/UsageLimit';
 
 import type { Context, Objective } from '../../types/types';
 
@@ -35,6 +38,9 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
   const { mutate: createContext, isPending: isCreating } = useCreateContext();
 
   const { mutate: updateContext, isPending: isUpdating } = useUpdateContext();
+  const { data: contexts } = useContexts();
+  const contextUsage = useUsageLimit('contexts', contexts?.length ?? 0);
+  const isCreateBlocked = !context && contextUsage.isLimitReached;
 
   const isPending = isCreating || isUpdating;
 
@@ -66,10 +72,12 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isCreateBlocked) return;
     setOpenConfirm(true);
   };
 
   const handleConfirm = () => {
+    if (isCreateBlocked) return;
     const payload = {
       ...formData,
       objectives: objectives.map((obj) => ({
@@ -106,137 +114,141 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
         onSubmit={handleSubmit}
         className="card bg-base-100 border border-base-200 shadow-sm p-6 space-y-5 rounded-2xl"
       >
-        {/* Title */}
-        <div className="flex items-center gap-2">
-          <Target className="text-primary" size={20} />
+        {isCreateBlocked ? <UsageLimitAlert usage={contextUsage} /> : null}
 
-          <h2 className="text-xl font-bold text-base-content">
-            {context ? 'Modifier le contexte' : 'Nouveau contexte d’apprentissage'}
-          </h2>
-        </div>
+        <fieldset disabled={isCreateBlocked} className="space-y-5">
+          {/* Title */}
+          <div className="flex items-center gap-2">
+            <Target className="text-primary" size={20} />
 
-        {/* Name */}
-        <div className="space-y-1">
-          <label className="text-sm text-base-content/70 flex items-center gap-2">
-            <Tag size={16} className="text-primary" />
-            Nom du contexte
-          </label>
+            <h2 className="text-xl font-bold text-base-content">
+              {context ? 'Modifier le contexte' : 'Nouveau contexte d’apprentissage'}
+            </h2>
+          </div>
 
-          <input
-            required
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="input input-bordered w-full bg-base-200 focus:bg-base-100"
-            placeholder="Ex: Algèbre linéaire - Niveau débutant"
-          />
-        </div>
-
-        {/* Description */}
-        <div className="space-y-1">
-          <label className="text-sm text-base-content/70 flex items-center gap-2">
-            <FileText size={16} className="text-base-content/60" />
-            Description
-          </label>
-
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            className="textarea textarea-bordered w-full bg-base-200 focus:bg-base-100"
-            placeholder="Décris ton contexte d'apprentissage..."
-          />
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-2 gap-3">
+          {/* Name */}
           <div className="space-y-1">
-            <label className="text-xs text-base-content/60 flex items-center gap-1">
-              <GraduationCap size={14} className="text-primary" />
-              École
+            <label className="text-sm text-base-content/70 flex items-center gap-2">
+              <Tag size={16} className="text-primary" />
+              Nom du contexte
             </label>
 
             <input
               required
-              name="school"
-              value={formData.school}
+              name="name"
+              value={formData.name}
               onChange={handleChange}
-              className="input input-bordered bg-base-200 w-full"
-              placeholder="Ex: École Hexagone"
+              className="input input-bordered w-full bg-base-200 focus:bg-base-100"
+              placeholder="Ex: Algèbre linéaire - Niveau débutant"
             />
           </div>
 
+          {/* Description */}
           <div className="space-y-1">
-            <label className="text-xs text-base-content/60 flex items-center gap-1">
-              <Globe size={14} className="text-secondary" />
-              Pays
+            <label className="text-sm text-base-content/70 flex items-center gap-2">
+              <FileText size={16} className="text-base-content/60" />
+              Description
             </label>
 
-            <input
-              required
-              name="country"
-              value={formData.country}
+            <textarea
+              name="description"
+              value={formData.description}
               onChange={handleChange}
-              className="input input-bordered bg-base-200 w-full"
-              placeholder="Ex: France"
+              className="textarea textarea-bordered w-full bg-base-200 focus:bg-base-100"
+              placeholder="Décris ton contexte d'apprentissage..."
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs text-base-content/60 flex items-center gap-1">
-              <BookOpen size={14} className="text-accent" />
-              Niveau
-            </label>
+          {/* Grid */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label className="text-xs text-base-content/60 flex items-center gap-1">
+                <GraduationCap size={14} className="text-primary" />
+                École
+              </label>
 
-            <input
-              required
-              name="level"
-              value={formData.level}
-              onChange={handleChange}
-              className="input input-bordered bg-base-200 w-full"
-              placeholder="Ex: Bac +3"
-            />
+              <input
+                required
+                name="school"
+                value={formData.school}
+                onChange={handleChange}
+                className="input input-bordered bg-base-200 w-full"
+                placeholder="Ex: École Hexagone"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs text-base-content/60 flex items-center gap-1">
+                <Globe size={14} className="text-secondary" />
+                Pays
+              </label>
+
+              <input
+                required
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className="input input-bordered bg-base-200 w-full"
+                placeholder="Ex: France"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs text-base-content/60 flex items-center gap-1">
+                <BookOpen size={14} className="text-accent" />
+                Niveau
+              </label>
+
+              <input
+                required
+                name="level"
+                value={formData.level}
+                onChange={handleChange}
+                className="input input-bordered bg-base-200 w-full"
+                placeholder="Ex: Bac +3"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-xs text-base-content/60 flex items-center gap-1">
+                <Tag size={14} className="text-info" />
+                Matière
+              </label>
+
+              <input
+                required
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="input input-bordered bg-base-200 w-full"
+                placeholder="Ex: Informatique"
+              />
+            </div>
+
+            <div className="space-y-1 col-span-2">
+              <label className="text-xs text-base-content/60">📅 Année académique</label>
+
+              <input
+                required
+                name="academic_year"
+                value={formData.academic_year}
+                onChange={handleChange}
+                className="input input-bordered bg-base-200 w-full"
+                placeholder="Ex: 2025-2026"
+              />
+            </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs text-base-content/60 flex items-center gap-1">
-              <Tag size={14} className="text-info" />
-              Matière
-            </label>
+          {/* Objectives */}
+          <div className="space-y-2">
+            <h3 className="font-semibold text-base-content flex items-center gap-2">
+              <Target size={18} className="text-success" />
+              Objectifs
+            </h3>
 
-            <input
-              required
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              className="input input-bordered bg-base-200 w-full"
-              placeholder="Ex: Informatique"
-            />
+            <ObjectiveInput objectives={objectives} setObjectives={setObjectives} />
           </div>
-
-          <div className="space-y-1 col-span-2">
-            <label className="text-xs text-base-content/60">📅 Année académique</label>
-
-            <input
-              required
-              name="academic_year"
-              value={formData.academic_year}
-              onChange={handleChange}
-              className="input input-bordered bg-base-200 w-full"
-              placeholder="Ex: 2025-2026"
-            />
-          </div>
-        </div>
-
-        {/* Objectives */}
-        <div className="space-y-2">
-          <h3 className="font-semibold text-base-content flex items-center gap-2">
-            <Target size={18} className="text-success" />
-            Objectifs
-          </h3>
-
-          <ObjectiveInput objectives={objectives} setObjectives={setObjectives} />
-        </div>
+        </fieldset>
 
         {/* Actions */}
         <div className="flex justify-end gap-2 pt-2">
@@ -244,7 +256,11 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
             {context ? 'Annuler la modification' : 'Réinitialiser'}
           </button>
 
-          <button type="submit" disabled={isPending} className="btn btn-primary text-white">
+          <button
+            type="submit"
+            disabled={isPending || isCreateBlocked}
+            className="btn btn-primary text-white"
+          >
             {isPending
               ? context
                 ? 'Modification...'

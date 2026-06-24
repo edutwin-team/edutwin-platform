@@ -1,19 +1,31 @@
 import { DEFAULT_SETTINGS, SETTINGS_STORAGE_KEY } from './defaults';
-import type { Theme, UserSettings } from './types';
+import type { FontScale, Theme, UserSettings } from './types';
 
 const LEGACY_THEME_KEY = 'theme';
 
-function isUserSettings(value: unknown): value is UserSettings {
-  if (!value || typeof value !== 'object') return false;
+function parseUserSettings(value: unknown): UserSettings | null {
+  if (!value || typeof value !== 'object') return null;
+
   const candidate = value as Partial<UserSettings>;
-  return (
-    (candidate.theme === 'light' || candidate.theme === 'dark') &&
-    typeof candidate.reduceMotion === 'boolean' &&
-    typeof candidate.highContrast === 'boolean' &&
-    typeof candidate.analyticsConsent === 'boolean' &&
-    typeof candidate.shareProgress === 'boolean' &&
-    typeof candidate.anonymizeData === 'boolean'
-  );
+
+  if (candidate.theme !== 'light' && candidate.theme !== 'dark') return null;
+  if (typeof candidate.reduceMotion !== 'boolean' || typeof candidate.highContrast !== 'boolean') {
+    return null;
+  }
+
+  const fontScale: FontScale =
+    candidate.fontScale === 'compact' ||
+    candidate.fontScale === 'normal' ||
+    candidate.fontScale === 'large'
+      ? candidate.fontScale
+      : DEFAULT_SETTINGS.fontScale;
+
+  return {
+    theme: candidate.theme,
+    reduceMotion: candidate.reduceMotion,
+    highContrast: candidate.highContrast,
+    fontScale,
+  };
 }
 
 export function loadUserSettings(): UserSettings {
@@ -21,8 +33,10 @@ export function loadUserSettings(): UserSettings {
     const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
     if (raw) {
       const parsed: unknown = JSON.parse(raw);
-      if (isUserSettings(parsed)) {
-        return { ...DEFAULT_SETTINGS, ...parsed };
+      const settings = parseUserSettings(parsed);
+      if (settings) {
+        saveUserSettings(settings);
+        return settings;
       }
     }
   } catch {

@@ -23,6 +23,8 @@ import {
 import { useContexts } from '../../hooks/twins/useContexts';
 import { useCreateTwin } from '../../hooks/twins/useCreateTwin';
 import { useUpdateTwin } from '../../hooks/twins/useUpdateTwin';
+import { useTwins } from '../../hooks/twins/useTwins';
+import { useUsageLimit } from '../../hooks/limits/useUsageLimit';
 
 import type { Behavior, DigitalTwin } from '../../types/types';
 import { Slider } from '../ui/stats/Slider';
@@ -92,6 +94,9 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
 
   //react query mutation functions
   const { data: contexts } = useContexts();
+  const { data: twins } = useTwins();
+  const twinUsage = useUsageLimit('twins', twins?.length ?? 0);
+  const isCreateBlocked = !twin && twinUsage.isLimitReached;
   const { mutate: createTwin, isPending: isCreating } = useCreateTwin({
     onSuccess: () => handleClose(),
   });
@@ -151,6 +156,8 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
   };
 
   const handleSubmit = () => {
+    if (isCreateBlocked) return;
+
     const payload = {
       ...form,
       age: form.age ?? undefined,
@@ -400,7 +407,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
             <button
               className="btn btn-success"
               onClick={handleSubmit}
-              disabled={!canSave || isPending}
+              disabled={!canSave || isPending || isCreateBlocked}
             >
               {isPending ? (
                 <span className="flex items-center gap-2">

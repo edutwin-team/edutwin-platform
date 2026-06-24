@@ -4,12 +4,15 @@ import TwinsHeader from '../../components/twin/TwinsHeader';
 import TwinsList from '../../components/twin/TwinsList';
 import { TwinModal } from '../../components/twin/TwinModal';
 import { useTwins } from '../../hooks/twins/useTwins';
+import { useUsageLimit } from '../../hooks/limits/useUsageLimit';
+import { UsageLimitAlert } from '../../components/limits/UsageLimit';
 
 import type { DigitalTwin } from '../../types/types';
 import { SimpleLoader } from '../../components/ui/loaders/SimpleLoader';
 
 const Twins = () => {
   const { data: twins, isLoading, isError } = useTwins();
+  const twinUsage = useUsageLimit('twins', twins?.length ?? 0);
 
   const [selectedTwin, setSelectedTwin] = useState<DigitalTwin | null>(null);
   const [open, setOpen] = useState(false);
@@ -46,13 +49,18 @@ const Twins = () => {
   return (
     <div className="space-y-6 p-6">
       {/* HEADER */}
-      <TwinsHeader twins={twins ?? []} />
+      <TwinsHeader twins={twins ?? []} usage={twinUsage} />
 
       {/* ACTION */}
-      <div className="flex justify-between items-center">
-        <button onClick={handleCreate} className="btn btn-primary">
+      <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <button
+          onClick={handleCreate}
+          className="btn btn-primary"
+          disabled={twinUsage.isLimitReached}
+        >
           + Nouveau Twin
         </button>
+        <UsageLimitAlert usage={twinUsage} />
       </div>
 
       {/* EMPTY STATE */}

@@ -1,10 +1,13 @@
 import type { DigitalTwin } from '../../types/types';
+import type { UsageLimitState } from '../../features/limits/usageLimits';
+import { UsageLimitBadge } from '../limits/UsageLimit';
 
 interface Props {
   twins: DigitalTwin[];
+  usage: UsageLimitState;
 }
 
-const TwinsHeader: React.FC<Props> = ({ twins }) => {
+const TwinsHeader: React.FC<Props> = ({ twins, usage }) => {
   //todo better to use avg grade in the future
   const avgAttention =
     twins.reduce((acc, t) => acc + (t.behavior?.attention_level || 0), 0) / (twins.length || 1);
@@ -28,8 +31,10 @@ const TwinsHeader: React.FC<Props> = ({ twins }) => {
         {/* STATS */}
         <div className="stats border border-base-300/70 bg-base-100 shadow-sm">
           <div className="stat">
-            <div className="stat-title">Total jumeaux</div>
-            <div className="stat-value text-2xl">{twins.length}</div>
+            <div className="stat-title">Quota jumeaux</div>
+            <div className="stat-value text-2xl">
+              <UsageLimitBadge usage={usage} />
+            </div>
           </div>
 
           <div className="stat">

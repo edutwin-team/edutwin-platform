@@ -1,30 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react';
-import {
-  Accessibility,
-  BookOpen,
-  CheckCircle2,
-  Palette,
-  RotateCcw,
-  Save,
-  Shield,
-} from 'lucide-react';
+import { Accessibility, CheckCircle2, Palette, RotateCcw, Save } from 'lucide-react';
 import { ThemeSwitch } from '../../components/navbar/ThemeSwitch';
 import { DEFAULT_SETTINGS } from '../../features/settings/defaults';
 import { useSettings } from '../../features/settings/useSettings';
 import type { UserSettings } from '../../features/settings/types';
-
-const difficultyLabels: Record<UserSettings['difficulty'], string> = {
-  debutant: 'Débutant',
-  intermediaire: 'Intermédiaire',
-  avance: 'Avancé',
-  adaptatif: 'Adaptatif',
-};
-
-const feedbackLabels: Record<UserSettings['feedbackMode'], string> = {
-  immediat: 'Immédiat',
-  'fin-session': 'Fin de session',
-  mixte: 'Mixte',
-};
 
 const fontScaleLabels: Record<UserSettings['fontScale'], string> = {
   compact: 'Compacte',
@@ -133,8 +112,8 @@ export default function Settings() {
             </p>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Paramètres</h1>
             <p className="mt-2 max-w-2xl text-sm text-base-content/70 md:text-base">
-              Ajustez l’apparence, l’accessibilité et vos préférences pédagogiques. Vos choix sont
-              conservés et réappliqués automatiquement à chaque visite.
+              Ajustez le thème, l’affichage et le confort de lecture. Vos choix sont conservés et
+              réappliqués automatiquement à chaque visite.
             </p>
 
             <div className="mt-4 flex flex-wrap gap-2">
@@ -144,10 +123,6 @@ export default function Settings() {
               <span className="badge badge-outline badge-sm">
                 Texte {fontScaleLabels[draft.fontScale].toLowerCase()}
               </span>
-              <span className="badge badge-outline badge-sm">
-                {difficultyLabels[draft.difficulty]}
-              </span>
-              <span className="badge badge-outline badge-sm">{draft.sessionDuration} min</span>
             </div>
           </div>
 
@@ -231,106 +206,15 @@ export default function Settings() {
         </SettingsSectionCard>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-2">
-        <SettingsSectionCard
-          icon={<BookOpen className="h-5 w-5" />}
-          eyebrow="Préférences pédagogiques"
-          title="Rythme et niveau"
-          description="Définissez le niveau et le rythme adaptés à vos pratiques d’enseignement."
-        >
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="mb-2 block text-sm font-medium">Niveau de difficulté</label>
-              <select
-                className="select select-bordered w-full"
-                value={draft.difficulty}
-                onChange={(e) =>
-                  patchDraft({ difficulty: e.target.value as UserSettings['difficulty'] })
-                }
-              >
-                {Object.entries(difficultyLabels).map(([value, label]) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="mb-2 block text-sm font-medium">Type de feedback</label>
-              <select
-                className="select select-bordered w-full"
-                value={draft.feedbackMode}
-                onChange={(e) =>
-                  patchDraft({ feedbackMode: e.target.value as UserSettings['feedbackMode'] })
-                }
-              >
-                {Object.entries(feedbackLabels).map(([value, label]) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="sm:col-span-2">
-              <label className="mb-2 block text-sm font-medium">Durée d’une session (min)</label>
-              <select
-                className="select select-bordered w-full sm:max-w-xs"
-                value={draft.sessionDuration}
-                onChange={(e) =>
-                  patchDraft({
-                    sessionDuration: e.target.value as UserSettings['sessionDuration'],
-                  })
-                }
-              >
-                <option value="30">30</option>
-                <option value="45">45</option>
-                <option value="60">60</option>
-                <option value="90">90</option>
-              </select>
-            </div>
-          </div>
-        </SettingsSectionCard>
-
-        <SettingsSectionCard
-          icon={<Shield className="h-5 w-5" />}
-          eyebrow="Confidentialité"
-          title="Données et partage"
-          description="Contrôlez l’usage de vos données et le partage des informations."
-        >
-          <div className="space-y-3">
-            <SettingToggleRow
-              title="Consentement analytics"
-              description="Autoriser les statistiques d’usage anonymes."
-              checked={draft.analyticsConsent}
-              onChange={(checked) => patchDraft({ analyticsConsent: checked })}
-            />
-            <SettingToggleRow
-              title="Partager la progression"
-              description="Visible pour les enseignants référents."
-              checked={draft.shareProgress}
-              onChange={(checked) => patchDraft({ shareProgress: checked })}
-            />
-            <SettingToggleRow
-              title="Anonymiser les exports"
-              description="Retirer les données nominatives des rapports."
-              checked={draft.anonymizeData}
-              onChange={(checked) => patchDraft({ anonymizeData: checked })}
-            />
-          </div>
-        </SettingsSectionCard>
-      </section>
-
       <section className="settings-action-bar rounded-2xl p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="text-sm text-base-content/70">
             <p>
               <span className="font-medium text-base-content">Résumé :</span>{' '}
               {draft.theme === 'dark' ? 'thème sombre' : 'thème clair'}, texte{' '}
-              {fontScaleLabels[draft.fontScale].toLowerCase()}, difficulté{' '}
-              {difficultyLabels[draft.difficulty].toLowerCase()}, feedback{' '}
-              {feedbackLabels[draft.feedbackMode].toLowerCase()}.
+              {fontScaleLabels[draft.fontScale].toLowerCase()}
+              {draft.reduceMotion ? ', animations réduites' : ''}
+              {draft.highContrast ? ', contraste élevé' : ''}.
             </p>
             {saveMessage ? (
               <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-success">
