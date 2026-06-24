@@ -12,6 +12,7 @@ export const useCreateQuiz = () => {
       queryClient.invalidateQueries({
         queryKey: ['quizzes'],
       });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
   });
 };

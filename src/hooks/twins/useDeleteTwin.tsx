@@ -9,6 +9,7 @@ export const useDeleteTwin = () => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['twins'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
   });
 };

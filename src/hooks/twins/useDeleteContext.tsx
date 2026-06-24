@@ -11,6 +11,7 @@ export const useDeleteContext = () => {
       queryClient.invalidateQueries({
         queryKey: ['contexts'],
       });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
   });
 };

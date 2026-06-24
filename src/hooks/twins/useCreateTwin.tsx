@@ -10,6 +10,7 @@ export const useCreateTwin = (options?: { onSuccess?: () => void }) => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['twins'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
 
       options?.onSuccess?.();
     },
