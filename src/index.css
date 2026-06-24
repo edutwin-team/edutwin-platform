@@ -384,3 +384,132 @@
     animation: none;
   }
 }
+
+html {
+  font-size: 16px;
+}
+
+html[data-font-scale='compact'] {
+  font-size: 14px;
+}
+
+html[data-font-scale='large'] {
+  font-size: 18px;
+}
+
+html[data-high-contrast='true'] {
+  --settings-border-strong: rgb(15 23 42 / 0.62);
+}
+
+html[data-high-contrast='true'] [class*='border-base-300'] {
+  border-color: var(--settings-border-strong) !important;
+}
+
+html[data-high-contrast='true'] .text-base-content\/70,
+html[data-high-contrast='true'] .text-base-content\/65,
+html[data-high-contrast='true'] .text-base-content\/75 {
+  opacity: 1 !important;
+}
+
+html[data-reduce-motion='true'] .home-shell,
+html[data-reduce-motion='true'] .teacher-kpi-card,
+html[data-reduce-motion='true'] .teacher-kpi-value,
+html[data-reduce-motion='true'] .wizard-step-next,
+html[data-reduce-motion='true'] .wizard-step-back {
+  animation: none !important;
+}
+
+html[data-reduce-motion='true'] *,
+html[data-reduce-motion='true'] *::before,
+html[data-reduce-motion='true'] *::after {
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+.settings-hero {
+  background:
+    radial-gradient(circle at 12% 18%, rgb(99 102 241 / 0.16), transparent 34%),
+    radial-gradient(circle at 88% 8%, rgb(56 189 248 / 0.12), transparent 28%),
+    linear-gradient(135deg, rgb(99 102 241 / 0.08), rgb(139 92 246 / 0.06), rgb(56 189 248 / 0.08));
+}
+
+.settings-card {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.settings-card:hover {
+  border-color: rgb(99 102 241 / 0.28);
+  box-shadow: 0 10px 28px -18px rgb(79 70 229 / 0.45);
+}
+
+.settings-section-icon {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.9rem;
+  border: 1px solid rgb(99 102 241 / 0.2);
+  background: linear-gradient(145deg, rgb(99 102 241 / 0.14), rgb(139 92 246 / 0.08));
+  color: rgb(79 70 229);
+}
+
+.settings-toggle-row {
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.settings-toggle-row:hover {
+  border-color: rgb(99 102 241 / 0.24);
+  background-color: rgb(99 102 241 / 0.05);
+}
+
+.settings-scale-btn {
+  border-radius: 0.85rem;
+  border: 1px solid rgb(148 163 184 / 0.45);
+  background-color: rgb(255 255 255 / 0.7);
+  padding: 0.55rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgb(71 85 105);
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.settings-scale-btn:hover {
+  border-color: rgb(99 102 241 / 0.35);
+}
+
+.settings-scale-btn-active {
+  border-color: rgb(99 102 241 / 0.55);
+  background: linear-gradient(145deg, rgb(99 102 241 / 0.16), rgb(139 92 246 / 0.1));
+  color: rgb(67 56 202);
+  box-shadow: 0 8px 20px -16px rgb(79 70 229 / 0.8);
+}
+
+.settings-action-bar {
+  background: linear-gradient(to right, rgb(255 255 255 / 0.92), rgb(248 250 252 / 0.96));
+  border: 1px solid rgb(148 163 184 / 0.35);
+  box-shadow: 0 14px 36px -24px rgb(15 23 42 / 0.35);
+}
+
+html[data-theme='dark'] .settings-scale-btn {
+  background-color: rgb(30 41 59 / 0.55);
+  color: rgb(203 213 225);
+}
+
+html[data-theme='dark'] .settings-scale-btn-active {
+  color: rgb(199 210 254);
+}
+
+html[data-theme='dark'] .settings-action-bar {
+  background: linear-gradient(to right, rgb(30 41 59 / 0.92), rgb(15 23 42 / 0.96));
+  border-color: rgb(100 116 139 / 0.35);
+}
