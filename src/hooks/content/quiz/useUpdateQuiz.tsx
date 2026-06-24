@@ -14,6 +14,7 @@ export const useUpdateQuiz = () => {
       queryClient.invalidateQueries({
         queryKey: ['quiz', variables.id],
       });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
   });
 };
