@@ -18,7 +18,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     (next: UserSettings) => {
       persistSettings(next);
     },
-    [persistSettings],
+    [persistSettings]
   );
 
   const resetSettings = useCallback(() => {
@@ -44,7 +44,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       resetSettings,
       toggleTheme,
     }),
-    [settings, saveSettings, resetSettings, toggleTheme],
+    [settings, saveSettings, resetSettings, toggleTheme]
   );
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;

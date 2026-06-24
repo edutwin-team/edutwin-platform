@@ -77,7 +77,9 @@ function SettingsSectionCard({
       <div className="flex items-start gap-3">
         <span className="settings-section-icon shrink-0">{icon}</span>
         <div className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
+            {eyebrow}
+          </p>
           <h2 className="mt-1 text-xl font-bold">{title}</h2>
           <p className="mt-2 text-sm text-base-content/70">{description}</p>
         </div>
@@ -182,9 +184,7 @@ export default function Settings() {
               </div>
               <ThemeSwitch
                 isDark={draft.theme === 'dark'}
-                onToggle={() =>
-                  patchDraft({ theme: draft.theme === 'light' ? 'dark' : 'light' })
-                }
+                onToggle={() => patchDraft({ theme: draft.theme === 'light' ? 'dark' : 'light' })}
               />
             </div>
 
@@ -327,8 +327,8 @@ export default function Settings() {
           <div className="text-sm text-base-content/70">
             <p>
               <span className="font-medium text-base-content">Résumé :</span>{' '}
-              {draft.theme === 'dark' ? 'thème sombre' : 'thème clair'},{' '}
-              texte {fontScaleLabels[draft.fontScale].toLowerCase()}, difficulté{' '}
+              {draft.theme === 'dark' ? 'thème sombre' : 'thème clair'}, texte{' '}
+              {fontScaleLabels[draft.fontScale].toLowerCase()}, difficulté{' '}
               {difficultyLabels[draft.difficulty].toLowerCase()}, feedback{' '}
               {feedbackLabels[draft.feedbackMode].toLowerCase()}.
             </p>
