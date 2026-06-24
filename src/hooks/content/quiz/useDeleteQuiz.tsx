@@ -11,6 +11,7 @@ export const useDeleteQuiz = () => {
       queryClient.invalidateQueries({
         queryKey: ['quizzes'],
       });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
   });
 };
