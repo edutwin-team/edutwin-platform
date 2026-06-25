@@ -1,0 +1,14 @@
+
+
+set -euo pipefail
+
+echo "🧹 Prettier (format)..."
+npx prettier --write .
+
+echo "🔍 TypeScript check..."
+npx tsc --noEmit
+
+# echo "🛡️ Scan des secrets + fichiers sensibles..."
+# node scripts/check-secrets.cjs
+
+echo "📦 OK"

@@ -1,18 +1,21 @@
-import { render, screen } from '@testing-library/react'
-import Home from '../../src/pages/home/Home'
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import Home from '../../src/pages/home/Home';
 
 describe('Home Page', () => {
-  it('affiche le titre principal', () => {
-    render(<Home />)
-    expect(
-      screen.getByText(/Jumeaux numériques pour l’éducation/i)
-    ).toBeInTheDocument()
-  })
+  test('renders Home component correctly', () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    );
 
-  it('affiche la liste des fonctionnalités', () => {
-    render(<Home />)
-    expect(screen.getByText(/Analyse du profil/i)).toBeInTheDocument()
-    expect(screen.getByText(/Génération de quiz adaptatifs/i)).toBeInTheDocument()
-    expect(screen.getByText(/Amélioration continue/i)).toBeInTheDocument()
-  })
-})
+    expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();
+    expect(screen.getByText(/Essayer la démo/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Pourquoi/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Comment ça marche/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Approuvé par les éducateurs/i })
+    ).toBeInTheDocument();
+  });
+});
