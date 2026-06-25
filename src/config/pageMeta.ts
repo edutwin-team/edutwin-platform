@@ -21,7 +21,7 @@ export const PAGE_META: Record<string, PageMeta> = {
     context: 'Définissez les groupes et environnements de simulation',
   },
 
-  '/question': {
+  '/simulation': {
     title: 'Simulation',
     context: 'Lancez et analysez des simulations pédagogiques',
   },

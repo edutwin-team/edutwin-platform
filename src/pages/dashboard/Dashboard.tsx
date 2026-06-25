@@ -25,8 +25,8 @@ const Dashboard = () => {
           <p className="text-gray-500">Bienvenue. Voici l’aperçu de vos simulations.</p>
         </div>
 
-        <Link to="/twins" className="btn btn-primary rounded-xl shadow-md">
-          + Jumeaux numériques
+        <Link to="/contexts" className="btn btn-primary rounded-xl shadow-md">
+          + Contextes pédagogiques
         </Link>
       </div>
 

@@ -51,7 +51,7 @@ const Twins = () => {
       {/* ACTION */}
       <div className="flex justify-between items-center">
         <button onClick={handleCreate} className="btn btn-primary">
-          + Nouveau Twin
+          + Nouveau Jumeau
         </button>
       </div>
 
