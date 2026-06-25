@@ -27,7 +27,7 @@ const LatestTwinsCard = ({ twins }: Props) => {
         {twins.map((twin) => (
           <div key={twin.id} className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <TwinAvatar seed={`${twin.id}-${twin.name}`} size={56} />
+              <TwinAvatar seed={`twin-${twin.id}`} size={56} />
 
               <div>
                 <p className="font-bold dark:text-white">{twin.name}</p>

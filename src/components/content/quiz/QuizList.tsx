@@ -14,6 +14,7 @@ import { quizSourceLabel } from '../../../utils/quiz/quizSourceLabel';
 import { type Quiz } from '../../../types/types';
 import { useRef } from 'react';
 import { SimpleLoader } from '../../ui/loaders/SimpleLoader';
+import QuizAvatar from '../../ui/avatars/QuizAvatar';
 
 export function QuizList() {
   const { data: quizzes, isLoading, isError } = useQuizzes();
@@ -85,6 +86,7 @@ export function QuizList() {
             {/* quiz info */}
             <div className="card-body">
               <div className="flex justify-between items-start gap-2">
+                <QuizAvatar seed={`quiz-${quiz.id}`} size={42} />
                 <h2 className="card-title text-lg">{quiz.title}</h2>
 
                 <QuizBadge label={quizSourceLabel(quiz.source_type)} variant="outline" />

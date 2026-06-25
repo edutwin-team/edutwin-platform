@@ -53,7 +53,7 @@ const TwinCard: React.FC<Props> = ({ twin, onEdit }) => {
       {/* HEADER */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-4 min-w-0">
-          <TwinAvatar seed={`${twin.id}-${twin.name}`} size={56} />
+          <TwinAvatar seed={`twin-${twin.id}`} size={56} />
 
           <div className="min-w-0">
             <h2 className="font-semibold text-lg leading-tight truncate">{twin.name}</h2>
