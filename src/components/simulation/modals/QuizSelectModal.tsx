@@ -3,6 +3,7 @@ import { useQuizzes } from '../../../hooks/content/quiz/useQuizzes';
 import type { Quiz } from '../../../types/types';
 import { SimpleLoader } from '../../ui/loaders/SimpleLoader';
 import { PlayCircle } from 'lucide-react';
+import QuizAvatar from '../../ui/avatars/QuizAvatar';
 type Props = {
   onSelect: (id: number) => void;
   onBack: () => void;
@@ -51,7 +52,11 @@ export function QuizSelectModal({ onSelect, onBack, onClose }: Props) {
                 ${isSelected ? 'border-primary bg-primary/10 shadow-sm' : 'border-base-300'}
               `}
             >
-              <div className="text-lg font-semibold">📘 {quiz.title}</div>
+              <div className="flex items-center gap-3">
+                <QuizAvatar seed={`quiz-${quiz.id}`} size={48} />
+
+                <div className="text-lg font-semibold">{quiz.title}</div>
+              </div>
               <div className="text-sm text-base-content/60">{quiz.description}</div>
             </button>
           );

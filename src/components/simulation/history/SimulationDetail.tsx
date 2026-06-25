@@ -16,10 +16,7 @@ export default function SimulationDetail({ simulation }: Props) {
     <div className="p-6 max-w-4xl mx-auto space-y-6">
       {/* header */}
       <div className="flex items-center gap-4">
-        <SimulationAvatar
-          twinName={simulation.twin_name}
-          quizTitle={simulation.quiz_title || 'course'}
-        />
+        <SimulationAvatar simulationId={simulation.id} />
 
         <div>
           <h1 className="text-xl font-bold">{simulation.twin_name}</h1>

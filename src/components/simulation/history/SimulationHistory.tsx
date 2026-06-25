@@ -31,11 +31,7 @@ export default function SimulationHistory({ simulations }: SimulationHistoryProp
             <div className="card-body">
               {/* header */}
               <div className="flex items-center gap-3">
-                <SimulationAvatar
-                  twinName={simulation.twin_name}
-                  quizTitle={simulation.quiz_title || 'course'}
-                  size={48}
-                />
+                <SimulationAvatar simulationId={simulation.id} size={48} />
 
                 <div className="flex-1">
                   <h2 className="font-semibold">{simulation.twin_name}</h2>

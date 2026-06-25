@@ -2,13 +2,12 @@ import { createAvatar } from '@dicebear/core';
 import { botttsNeutral } from '@dicebear/collection';
 
 interface Props {
-  twinName: string;
-  quizTitle: string;
+  simulationId: number;
   size?: number;
 }
 
-const SimulationAvatar: React.FC<Props> = ({ twinName, quizTitle, size = 56 }) => {
-  const seed = `${twinName}-${quizTitle}-simulation`;
+const SimulationAvatar: React.FC<Props> = ({ simulationId, size = 56 }) => {
+  const seed = `simulation-${simulationId}`;
 
   const avatar = createAvatar(botttsNeutral, {
     seed,

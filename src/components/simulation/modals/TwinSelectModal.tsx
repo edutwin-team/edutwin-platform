@@ -46,7 +46,7 @@ export function TwinSelectModal({ onSelect, onClose }: Props) {
               `}
             >
               <div className="flex gap-4 items-center">
-                <TwinAvatar seed={twin.name} size={48} />
+                <TwinAvatar seed={`twin-${twin.id}`} size={48} />
 
                 <div>
                   <div className="text-lg font-semibold"> {twin.name}</div>
