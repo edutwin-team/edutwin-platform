@@ -11,7 +11,7 @@ const Simulation: React.FC = () => {
 
   if (isLoading) return <SimpleLoader />;
   if (isError) return <p className="text-error">Erreur de chargement</p>;
-  if (!data?.length) return <p className="text-center">Aucune simulation</p>;
+
   return (
     <div className="space-y-6 p-6 relative">
       <SimulationsHeader simulationsCount={data?.length ?? 0} onStart={() => setOpenFlow(true)} />
