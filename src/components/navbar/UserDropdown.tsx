@@ -68,7 +68,7 @@ export const UserDropdown = () => {
           <li>
             <Link to="/profile" className="flex items-center gap-2 rounded-xl">
               <HiOutlineUser className="w-4 h-4" />
-              Profil
+              Profil utilisateur
             </Link>
           </li>
 
