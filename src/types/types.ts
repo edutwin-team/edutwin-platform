@@ -1,6 +1,8 @@
 //todo : seperate these type in diffrent files
 //todo: now we have id? not best solution we need to seperate types between get types and dto backend types exp : Quiz (GET) CreateQuizDto (POST) UpdateQuizDto (PATCH)
 
+//user types
+
 //content types
 export type QuizService = {
   getAll: () => Promise<Quiz[]>;
