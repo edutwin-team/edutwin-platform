@@ -32,7 +32,7 @@ export const PAGE_META: Record<string, PageMeta> = {
   },
 
   '/profile': {
-    title: 'Profil',
+    title: 'Profil utilisateur',
     context: 'Gérez vos informations personnelles',
   },
 

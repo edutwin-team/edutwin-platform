@@ -24,4 +24,17 @@ export type AuthContextType = {
   isLoading: boolean;
 };
 
+export type EducationalProfileUpdate = Partial<{
+  school: string;
+  diploma: string;
+  institution_type: string;
+  education_level: string;
+  experience_years: number;
+}>;
+export type UserUpdateData = Partial<{
+  first_name: string;
+  last_name: string;
+  educational_profile: EducationalProfileUpdate;
+}>;
+
 export const AuthContext = createContext<AuthContextType | null>(null);
