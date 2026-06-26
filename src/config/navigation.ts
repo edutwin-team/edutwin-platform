@@ -21,9 +21,9 @@ export const sidebarLinks: NavigationLink[] = [
   { name: 'Contexte pédagogique', path: '/contexts', icon: HiCollection },
   { name: 'Jumeau numérique', path: '/twins', icon: HiUsers },
   { name: 'Quiz', path: '/quizzes', icon: HiDocumentText },
-  { name: 'Simulation', path: '/question', icon: HiPlay },
+  { name: 'Simulation', path: '/simulation', icon: HiPlay },
   { name: 'Résultats', path: '/results', icon: HiChartBar },
-  { name: 'Profil', path: '/profile', icon: HiUser },
+  { name: 'Profil utilisateur', path: '/profile', icon: HiUser },
   { name: 'Espace enseignant', path: '/teacher', icon: HiUser },
   { name: 'Paramètres', path: '/settings', icon: HiCog },
 ];

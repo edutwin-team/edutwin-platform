@@ -1,3 +1,4 @@
+import type { UserUpdateData } from '../../context/AuthContext';
 import api from '../axios';
 
 export type RegisterData = {
@@ -34,4 +35,7 @@ export const logout = () => {
 
 export const getMe = () => {
   return api.get('auth/me/');
+};
+export const updateMe = (data: UserUpdateData) => {
+  return api.put('auth/me/', data);
 };

@@ -12,6 +12,7 @@ export const useUpdateContext = () => {
       queryClient.invalidateQueries({
         queryKey: ['contexts'],
       });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
   });
 };

@@ -8,6 +8,7 @@ export const useImportQuiz = () => {
     mutationFn: importQuiz,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['quizzes'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
   });
 };

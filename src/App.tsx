@@ -8,7 +8,7 @@ import Home from './pages/home/Home';
 import Dashboard from './pages/dashboard/Dashboard';
 import Profile from './pages/profile/Profile';
 import Quiz from './pages/quiz/Quiz';
-import Question from './pages/question/Question';
+
 import Results from './pages/results/Results';
 import Teacher from './pages/teacher/Teacher';
 import About from './pages/about/About';
@@ -20,6 +20,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthProvider';
 import { ContextPage } from './pages/contexts/ContextPage';
 import { SettingsProvider } from './features/settings/SettingsProvider';
+import { useCSRF } from './hooks/csrf/useCSRF';
 
 const queryClient = new QueryClient();
 
@@ -47,7 +48,7 @@ const Layout: React.FC = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/quizzes" element={<Quiz />}></Route>
               {/* todo : add seperate quiz detail if needed */}
-              <Route path="/question" element={<Question />} />
+
               <Route path="/results" element={<Results />} />
               <Route path="/teacher" element={<Teacher />} />
               <Route path="/about" element={<About />} />
@@ -63,16 +64,20 @@ const Layout: React.FC = () => {
   );
 };
 
-const App: React.FC = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <SettingsProvider>
-        <BrowserRouter>
-          <Layout />
-        </BrowserRouter>
-      </SettingsProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+const App: React.FC = () => {
+  useCSRF();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <SettingsProvider>
+          <BrowserRouter>
+            <Layout />
+          </BrowserRouter>
+        </SettingsProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
