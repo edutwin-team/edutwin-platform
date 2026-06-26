@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LoginModal } from './login/LoginModal';
 import { Register } from './register/Register';
@@ -9,23 +9,17 @@ import { AuthActions } from './AuthActions';
 import { PAGE_META, DEFAULT_PAGE_META } from '../../config/pageMeta';
 import { useAuth } from '../../context/useAuth';
 import { UserDropdown } from './UserDropdown';
+import { useSettings } from '../../features/settings/useSettings';
 
 export default function Navbar() {
   const version = __APP_VERSION__;
   const location = useLocation();
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const { settings, toggleTheme } = useSettings();
   const { user } = useAuth();
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
   const currentPage = PAGE_META[location.pathname] ?? DEFAULT_PAGE_META;
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   return (
     <>
@@ -39,7 +33,7 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end gap-3">
-          <ThemeSwitch isDark={theme === 'dark'} onToggle={toggleTheme} />
+          <ThemeSwitch isDark={settings.theme === 'dark'} onToggle={toggleTheme} />
 
           {user ? (
             <UserDropdown />
