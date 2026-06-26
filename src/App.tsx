@@ -19,6 +19,7 @@ import Twins from './pages/twins/Twins';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthProvider';
 import { ContextPage } from './pages/contexts/ContextPage';
+import { useCSRF } from './hooks/csrf/useCSRF';
 
 const queryClient = new QueryClient();
 
@@ -62,14 +63,18 @@ const Layout: React.FC = () => {
   );
 };
 
-const App: React.FC = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+const App: React.FC = () => {
+  useCSRF();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
