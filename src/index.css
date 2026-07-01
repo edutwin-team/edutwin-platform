@@ -513,3 +513,47 @@ html[data-theme='dark'] .settings-action-bar {
   background: linear-gradient(to right, rgb(30 41 59 / 0.92), rgb(15 23 42 / 0.96));
   border-color: rgb(100 116 139 / 0.35);
 }
+
+/* ===== EDT-130 : fix textes mode sombre — auth modals ===== */
+
+[data-theme='dark'] .auth-title {
+  color: rgb(248 250 252);
+}
+
+[data-theme='dark'] .auth-subtitle {
+  color: rgb(148 163 184);
+}
+
+[data-theme='dark'] .auth-field-label {
+  color: rgb(148 163 184);
+}
+
+[data-theme='dark'] .auth-header-badge {
+  border-color: rgb(99 102 241 / 0.35);
+  background-color: rgb(99 102 241 / 0.15);
+  color: rgb(165 180 252);
+}
+
+[data-theme='dark'] .auth-info-card {
+  background-color: rgb(30 41 59 / 0.7);
+  border-color: rgb(100 116 139 / 0.3);
+}
+
+[data-theme='dark'] .auth-info-list {
+  color: rgb(203 213 225);
+}
+
+[data-theme='dark'] .auth-summary-card {
+  background-color: rgb(30 41 59 / 0.7);
+  border-color: rgb(100 116 139 / 0.4);
+  color: rgb(203 213 225);
+}
+
+[data-theme='dark'] .auth-soft-panel {
+  background-color: rgb(30 41 59 / 0.7);
+  border-color: rgb(100 116 139 / 0.4);
+}
+
+[data-theme='dark'] .right-panel-bg {
+  background-color: rgb(15 23 42 / 0.95);
+}

@@ -22,22 +22,17 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
 
   const validate = () => {
     const newErrors: { email?: string; password?: string } = {};
-    // Email
     if (!email) {
       newErrors.email = 'Email requis';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Email invalide';
     }
-
-    // Password min 6 letters
     if (!password) {
       newErrors.password = 'Mot de passe requis';
     } else if (password.length < 6) {
       newErrors.password = 'Minimum 6 caractères';
     }
-
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
@@ -45,19 +40,15 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     setShowPassword(!showPassword);
   };
 
-  // Use the useLogin hook to get the mutate function and loading state
   const { mutate: loginUser, isPending } = useLogin();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validate()) return;
-
     loginUser(
       { email, password },
       {
         onSuccess: () => {
-          // Invalidate the 'me' query to refetch user data
           queryClient.invalidateQueries({ queryKey: ['me'] });
           onClose();
           window.location.href = '/dashboard';
@@ -101,7 +92,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         </div>
       }
       rightContent={
-        <section className="p-8 md:p-10 lg:p-12  right-panel-bg">
+        <section className="p-8 md:p-10 lg:p-12 right-panel-bg">
           <form
             onSubmit={(e) => {
               handleSubmit(e);
@@ -110,7 +101,8 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
           >
             <div className="space-y-3">
               <span className="auth-header-badge">Espace personnel</span>
-              <h1 className="auth-title dark:text-white">Connexion</h1>
+              {/* EDT-130 : dark:text-white retiré, géré par index.css */}
+              <h1 className="auth-title">Connexion</h1>
               <p className="auth-subtitle">Renseignez vos identifiants pour vous connecter.</p>
             </div>
 
@@ -193,7 +185,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             >
               S&apos;inscrire
             </button>
-          </p>{' '}
+          </p>
         </section>
       }
     />
