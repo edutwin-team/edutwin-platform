@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { logout } from '../../api/user/auth';
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   return useMutation({
     mutationFn: logout,
@@ -12,7 +14,7 @@ export const useLogout = () => {
 
       //  remove all cached queries
       queryClient.removeQueries();
-      window.location.href = '/';
+      navigate('/');
     },
   });
 };

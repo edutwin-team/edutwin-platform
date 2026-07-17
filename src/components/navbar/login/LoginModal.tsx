@@ -3,6 +3,7 @@ import { HiOutlineLockClosed, HiOutlineMail, HiOutlineEye, HiOutlineEyeOff } fro
 import { AuthModalShell } from '../auth/AuthModalShell';
 import { useLogin } from '../../../hooks/user/useLogin';
 import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -11,6 +12,7 @@ type LoginModalProps = {
 
 export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -51,7 +53,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ['me'] });
           onClose();
-          window.location.href = '/dashboard';
+          navigate('/dashboard');
         },
         onError: () => {
           setErrors({
