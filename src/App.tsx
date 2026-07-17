@@ -19,6 +19,7 @@ import { ContextPage } from './pages/contexts/ContextPage';
 import { SettingsProvider } from './features/settings/SettingsProvider';
 import { useCSRF } from './hooks/csrf/useCSRF';
 import { isNotFoundRoute } from './utils/routes/routes';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 const queryClient = new QueryClient();
 
@@ -42,16 +43,27 @@ const Layout: React.FC = () => {
         <div className={`flex-1 flex flex-col ${isHome ? 'home-layout-bg' : 'right-panel-bg'}`}>
           <div className="flex-1 overflow-y-auto">
             <Routes>
+              {/* Public */}
               <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/twins" element={<Twins />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/quizzes" element={<Quiz />}></Route>
-              {/* todo : add seperate quiz detail if needed */}
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/simulation" element={<Simulation />} />
-              <Route path="/contexts" element={<ContextPage />} />
               <Route path="*" element={<NotFound />} />
+              {/* todo : add seperate quiz detail if needed */}
+
+              {/* Protected */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+
+                <Route path="/twins" element={<Twins />} />
+
+                <Route path="/profile" element={<Profile />} />
+
+                <Route path="/quizzes" element={<Quiz />} />
+
+                <Route path="/settings" element={<Settings />} />
+
+                <Route path="/simulation" element={<Simulation />} />
+
+                <Route path="/contexts" element={<ContextPage />} />
+              </Route>
 
               {/* 
              Experimental pages disabled:

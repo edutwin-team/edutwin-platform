@@ -1,5 +1,6 @@
 import type { UserUpdateData } from '../../context/AuthContext';
 import api from '../axios';
+import { initCSRF } from '../initCSRF';
 
 export type RegisterData = {
   email: string;
@@ -25,12 +26,16 @@ export const register = (data: RegisterData) => {
   return api.post('auth/register/', data);
 };
 
-export const login = (data: LoginData) => {
-  return api.post('auth/login/', data);
+export const login = async (data: LoginData) => {
+  const response = await api.post('auth/login/', data);
+  await initCSRF();
+  return response;
 };
 
-export const logout = () => {
-  return api.post('auth/logout/');
+export const logout = async () => {
+  const response = await api.post('auth/logout/');
+  await initCSRF();
+  return response;
 };
 
 export const getMe = () => {
