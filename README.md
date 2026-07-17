@@ -54,28 +54,47 @@ npm run test
 npm run test:watch
 ```
 
+## 🔧 Configuration des variables d'environnement
+
+Le projet utilise des fichiers `.env` pour configurer l'URL de l'API backend selon l'environnement utilisé.
+
+### Fichiers disponibles
+
+- `.env` : utilise le backend local (développement local)
+- `.env.remote` : utilise le backend hébergé
+
+### Configuration locale
+
+Créer un fichier `.env` à la racine du projet :
+
+```env
+VITE_API_URL=http://localhost:8000/api
+```
+
 ## 🧩 Scripts utiles
 
-| Commande             | Description                                 |
-| -------------------- | ------------------------------------------- |
-| `npm run dev`        | Lance le serveur de développement Vite      |
-| `npm run build`      | Compile le projet pour la production        |
-| `npm run preview`    | Prévisualise la build production localement |
-| `npm run test`       | Lance tous les tests Vitest                 |
-| `npm run test:watch` | Lance les tests en mode watch               |
+| Commande             | Description                                                    |
+| -------------------- | -------------------------------------------------------------- |
+| `npm run dev`        | Lance le serveur de développement Vite avec le backend local   |
+| `npm run dev:remote` | Lance le serveur de développement Vite avec le backend hébergé |
+| `npm run build`      | Compile le projet pour la production                           |
+| `npm run preview`    | Prévisualise la build production localement                    |
+| `npm run test`       | Lance tous les tests Vitest                                    |
+| `npm run test:watch` | Lance les tests Vitest en mode watch                           |
+| `npm run lint`       | Vérifie la qualité du code avec ESLint                         |
+| `npm run lint:fix`   | Corrige automatiquement les erreurs ESLint possibles           |
+| `npm run type-check` | Vérifie les erreurs de typage TypeScript                       |
 
 # 📘 Workflow Git pour le projet
 
 ## 1. Introduction
 
-Ce document explique le **workflow Git recommandé** pour notre projet.  
+Ce document explique le **workflow Git recommandé** pour notre projet.
 Il est conçu pour :
 
 - garder un historique clair et propre
 - éviter les conflits
 - faciliter la collaboration via GitHub et Jira
-
----
 
 ## 2. Branches principales
 
