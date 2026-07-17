@@ -21,7 +21,7 @@ export type EvaluationHistoryRow = {
   trendTone: 'success' | 'warning';
 };
 
-export type ProfilePageData = {
+export type TwinProfilePageData = {
   heading: string;
   description: string;
   academic: {
