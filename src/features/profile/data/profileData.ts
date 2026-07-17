@@ -1,6 +1,6 @@
-import type { ProfilePageData } from '../types';
+import type { TwinProfilePageData } from '../types';
 
-export const profilePageData: ProfilePageData = {
+export const twinProfilePageData: TwinProfilePageData = {
   heading: 'Profil Élève (Page en cours de développement)',
   description:
     'Cette page représente le jumeau numérique de l’élève. Les données affichées servent à personnaliser les contenus générés par IA.',

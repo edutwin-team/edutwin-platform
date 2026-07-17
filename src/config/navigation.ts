@@ -1,5 +1,4 @@
 import {
-  HiChartBar,
   HiCog,
   HiCollection,
   HiDocumentText,
@@ -22,8 +21,13 @@ export const sidebarLinks: NavigationLink[] = [
   { name: 'Jumeau numérique', path: '/twins', icon: HiUsers },
   { name: 'Quiz', path: '/quizzes', icon: HiDocumentText },
   { name: 'Simulation', path: '/simulation', icon: HiPlay },
-  { name: 'Résultats', path: '/results', icon: HiChartBar },
   { name: 'Profil utilisateur', path: '/profile', icon: HiUser },
-  { name: 'Espace enseignant', path: '/teacher', icon: HiUser },
   { name: 'Paramètres', path: '/settings', icon: HiCog },
+
+  // Unused navigation items:
+  // These sections are currently disabled from the application menu.
+  // They are kept temporarily for evaluation and may be implemented, modified, or removed later.
+  // { name: 'Espace enseignant', path: '/teacher', icon: HiUser },
+  // { name: 'Résultats', path: '/results', icon: HiChartBar },
+  // { name: 'Profil du jumeau numérique', path: '/twin-profile', icon: HiUserCircle },
 ];
