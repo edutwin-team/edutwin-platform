@@ -9,9 +9,6 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Profile from './pages/profile/Profile';
 import Quiz from './pages/quiz/Quiz';
 
-import Results from './pages/results/Results';
-import Teacher from './pages/teacher/Teacher';
-import About from './pages/about/About';
 import Settings from './pages/settings/Settings';
 import NotFound from './pages/static/NotFound';
 import Simulation from './pages/simulation/Simulation';
@@ -21,13 +18,16 @@ import { AuthProvider } from './context/AuthProvider';
 import { ContextPage } from './pages/contexts/ContextPage';
 import { SettingsProvider } from './features/settings/SettingsProvider';
 import { useCSRF } from './hooks/csrf/useCSRF';
+import { isNotFoundRoute } from './utils/routes/routes';
 
 const queryClient = new QueryClient();
 
 const Layout: React.FC = () => {
   const location = useLocation();
-  const hideSidebar = location.pathname === '/';
+
   const isHome = location.pathname === '/';
+  const isNotFound = isNotFoundRoute(location.pathname);
+  const hideSidebar = isHome || isNotFound;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -48,14 +48,22 @@ const Layout: React.FC = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/quizzes" element={<Quiz />}></Route>
               {/* todo : add seperate quiz detail if needed */}
-
-              <Route path="/results" element={<Results />} />
-              <Route path="/teacher" element={<Teacher />} />
-              <Route path="/about" element={<About />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/simulation" element={<Simulation />} />
               <Route path="/contexts" element={<ContextPage />} />
               <Route path="*" element={<NotFound />} />
+
+              {/* 
+             Experimental pages disabled:
+             These routes are kept temporarily while their future integration is evaluated.
+             They may be implemented, modified, or removed depending on project requirements.
+
+              <Route path="/results" element={<Results />} />
+              <Route path="/teacher" element={<Teacher />} />
+              <Route path="/twin-profile" element={<TwinProfilePage />} />
+              <Route path="/about" element={<About />} /> 
+              
+              */}
             </Routes>
           </div>
         </div>

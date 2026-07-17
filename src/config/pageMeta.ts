@@ -36,6 +36,12 @@ export const PAGE_META: Record<string, PageMeta> = {
     context: 'Gérez vos informations personnelles',
   },
 
+  '/twin-profile': {
+    title: 'Profil du jumeau numérique',
+    context:
+      'Consultez les informations, les caractéristiques et l’évolution de votre jumeau numérique',
+  },
+
   '/teacher': {
     title: 'Espace enseignant',
     context: 'Pilotage des activités pédagogiques',

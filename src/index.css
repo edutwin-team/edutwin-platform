@@ -411,6 +411,15 @@ html[data-high-contrast='true'] .text-base-content\/75 {
   opacity: 1 !important;
 }
 
+html[data-reduce-motion='true'] .motion-element {
+  animation: none !important;
+}
+
+html[data-reduce-motion='true'] .motion-element,
+html[data-reduce-motion='true'] .transition-transform {
+  transition: none !important;
+}
+
 html[data-reduce-motion='true'] .home-shell,
 html[data-reduce-motion='true'] .teacher-kpi-card,
 html[data-reduce-motion='true'] .teacher-kpi-value,
