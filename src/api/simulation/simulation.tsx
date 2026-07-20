@@ -1,4 +1,4 @@
-import type { QuizSimulationResult, SimulateQuizPayload } from '../../types/types';
+import type { QuizSimulationResult, SimulateQuizPayload } from '../../types';
 import api from '../axios';
 
 export const simulateQuiz = async (data: SimulateQuizPayload): Promise<QuizSimulationResult> => {

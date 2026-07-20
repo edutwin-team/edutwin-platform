@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useTwins } from '../../../hooks/twins/useTwins';
-import type { DigitalTwin } from '../../../types/types';
+
 import { SimpleLoader } from '../../ui/loaders/SimpleLoader';
 import TwinAvatar from '../../twin/TwinAvatar';
+import type { DigitalTwin } from '../../../types';
 
 type Props = {
   onSelect: (id: number) => void;

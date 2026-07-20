@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateQuiz } from '../../../api/content/quiz/quiz';
-import type { Quiz } from '../../../types/types';
+import type { Quiz } from '../../../types';
 
 export const useUpdateQuiz = () => {
   const queryClient = useQueryClient();

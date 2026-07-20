@@ -11,7 +11,7 @@ import QuizDetail from './QuizDetail';
 import { QuizBadge } from '../../ui/badges/QuizBadge';
 import { quizSourceLabel } from '../../../utils/quiz/quizSourceLabel';
 
-import { type Quiz } from '../../../types/types';
+import { type Quiz } from '../../../types/content';
 import { useRef } from 'react';
 import { SimpleLoader } from '../../ui/loaders/SimpleLoader';
 import QuizAvatar from '../../ui/avatars/QuizAvatar';

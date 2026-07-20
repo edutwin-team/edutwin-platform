@@ -5,8 +5,8 @@ import TwinsList from '../../components/twin/TwinsList';
 import { TwinModal } from '../../components/twin/TwinModal';
 import { useTwins } from '../../hooks/twins/useTwins';
 
-import type { DigitalTwin } from '../../types/types';
 import { SimpleLoader } from '../../components/ui/loaders/SimpleLoader';
+import type { DigitalTwin } from '../../types';
 
 const Twins = () => {
   const { data: twins, isLoading, isError } = useTwins();
