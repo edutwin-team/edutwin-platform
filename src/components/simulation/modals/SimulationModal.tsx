@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { QuizSimulationResult } from '../../../types/types';
+import type { QuizSimulationResult } from '../../../types';
 
 type Props = {
   loading: boolean;

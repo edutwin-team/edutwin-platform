@@ -1,4 +1,4 @@
-import type { Quiz } from '../../../types/types';
+import type { Quiz } from '../../../types';
 import api from '../../axios';
 
 /**

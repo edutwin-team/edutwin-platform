@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useQuizzes } from '../../../hooks/content/quiz/useQuizzes';
-import type { Quiz } from '../../../types/types';
+
 import { SimpleLoader } from '../../ui/loaders/SimpleLoader';
 import { PlayCircle } from 'lucide-react';
 import QuizAvatar from '../../ui/avatars/QuizAvatar';
+import type { Quiz } from '../../../types';
 type Props = {
   onSelect: (id: number) => void;
   onBack: () => void;

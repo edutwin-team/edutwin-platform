@@ -1,4 +1,4 @@
-import { type Quiz } from '../types/types';
+import type { Quiz } from '../types';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 

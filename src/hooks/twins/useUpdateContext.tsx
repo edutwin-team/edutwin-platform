@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateContext } from '../../api/twins/context';
-import type { Context } from '../../types/types';
+import type { Context } from '../../types';
 
 export const useUpdateContext = () => {
   const queryClient = useQueryClient();

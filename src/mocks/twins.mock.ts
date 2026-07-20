@@ -1,4 +1,4 @@
-import type { DigitalTwin } from '../types/types';
+import type { DigitalTwin } from '../types';
 
 export const twinsMock: DigitalTwin[] = [
   {

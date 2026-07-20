@@ -1,4 +1,4 @@
-import type { Context, Objective } from '../types/types';
+import type { Context, Objective } from '../types';
 
 export const mockObjectives: Objective[] = [
   {

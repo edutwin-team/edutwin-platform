@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import type { QuizSimulationResult } from '../../types/types';
+
 import { useSimulateQuiz } from '../../hooks/simulation/useSimulateQuiz';
 import { TwinSelectModal } from './modals/TwinSelectModal';
 import { QuizSelectModal } from './modals/QuizSelectModal';
 import { SimulationModal } from './modals/SimulationModal';
 import { useQueryClient } from '@tanstack/react-query';
+import type { QuizSimulationResult } from '../../types';
 
 type Step = 'twin' | 'quiz' | 'loading' | 'result';
 

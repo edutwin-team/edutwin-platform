@@ -1,5 +1,6 @@
 import { useContexts } from '../../hooks/twins/useContexts';
-import type { Context } from '../../types/types';
+import type { Context } from '../../types';
+
 import { SimpleLoader } from '../ui/loaders/SimpleLoader';
 import { ContextCard } from './ContextCard';
 
