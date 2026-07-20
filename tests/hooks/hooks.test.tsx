@@ -59,7 +59,7 @@ import {
   submitQuiz,
 } from '../../src/api/content/quiz/quiz';
 import { simulateQuiz, getSimulationHistory } from '../../src/api/simulation/simulation';
-import { login, logout, register, updateMe } from '../../src/api/user/auth';
+import { login, register, updateMe } from '../../src/api/user/auth';
 import { initCSRF } from '../../src/api/initCSRF';
 import { useDashboard } from '../../src/hooks/dashboard/useDashboard';
 import { useTwins } from '../../src/hooks/twins/useTwins';

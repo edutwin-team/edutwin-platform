@@ -1,4 +1,4 @@
-import { ContentSourceType } from '../../src/types/types';
+import { ContentSourceType } from '../../src/types';
 import { quizSourceLabel } from '../../src/utils/quiz/quizSourceLabel';
 
 describe('quizSourceLabel', () => {

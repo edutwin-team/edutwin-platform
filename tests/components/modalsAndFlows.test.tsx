@@ -15,7 +15,7 @@ import { LoginModal } from '../../src/components/navbar/login/LoginModal';
 import { RegisterModal } from '../../src/components/navbar/register/modals/RegisterModal';
 import QuizDetail from '../../src/components/content/quiz/QuizDetail';
 import { ObjectiveInput } from '../../src/components/contexts/ObjectiveInput';
-import { ContentSourceType } from '../../src/types/types';
+import { ContentSourceType, type QuizSimulationResult } from '../../src/types';
 import { QueryWrapper, renderWithRouter } from '../utils/testProviders';
 
 vi.mock('../../src/hooks/content/quiz/useImportQuiz');
@@ -42,13 +42,19 @@ vi.mock('react-router-dom', async () => {
 });
 
 const simulationResult = {
+  id: 1,
+  twin_id: 1,
+  twin_name: 'Twin A',
+  quiz_id: 2,
+  quiz_title: 'Quiz Flow',
   simulated_score: 85,
   simulated_time_seconds: 120,
   correct: 8,
   total: 10,
   passed: true,
   feedback: 'Très bon résultat',
-};
+  behavior_snapshot: {} as QuizSimulationResult['behavior_snapshot'],
+} satisfies QuizSimulationResult;
 
 const quizWithQuestions = {
   id: 1,

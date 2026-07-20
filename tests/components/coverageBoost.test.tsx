@@ -8,7 +8,7 @@ import SimulationHistory from '../../src/components/simulation/history/Simulatio
 import { ContextCard } from '../../src/components/contexts/ContextCard';
 import LatestTwinsCard from '../../src/components/dashboard/LatestTwinsCard';
 import { GenericModal } from '../../src/components/ui/modals/GenericModal';
-import { ContentSourceType } from '../../src/types/types';
+import { ContentSourceType } from '../../src/types';
 import { QueryWrapper } from '../utils/testProviders';
 
 vi.mock('../../src/hooks/twins/useDeleteTwin');

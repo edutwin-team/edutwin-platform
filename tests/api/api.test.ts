@@ -1,7 +1,7 @@
 import '../mocks/api';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { apiMock, resetApiMock } from '../mocks/api';
-import { ContentSourceType } from '../../src/types/types';
+import { ContentSourceType } from '../../src/types';
 
 describe('auth api', () => {
   beforeEach(() => {
@@ -124,7 +124,16 @@ describe('context api', () => {
 
     await contextApi.getContexts();
     await contextApi.getContext(3);
-    await contextApi.createContext({ name: 'Ctx', description: 'Desc', objectives: [] });
+    await contextApi.createContext({
+      name: 'Ctx',
+      description: 'Desc',
+      school: 'Lycée',
+      country: 'France',
+      level: 'Lycée',
+      subject: 'Maths',
+      academic_year: '2025-2026',
+      objectives: [],
+    });
     await contextApi.updateContext(3, { name: 'Ctx' });
     await contextApi.deleteContext(3);
 
