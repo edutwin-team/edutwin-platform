@@ -195,7 +195,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
           <div className="flex items-center gap-2">
             <User className="text-primary" size={20} />
             <h2 className="text-xl font-bold">
-              {twin ? 'Modifier le twin' : 'Créer un jumeau numérique'}
+              {twin ? 'Modifier le jumeau numérique' : 'Créer un jumeau numérique'}
             </h2>
           </div>
 

@@ -78,7 +78,7 @@ export default function SimulationDetail({ simulation }: Props) {
               </span>
 
               <div className={`badge ${answer.is_correct ? 'badge-success' : 'badge-error'}`}>
-                {answer.is_correct ? 'Correct' : 'Incorrect'}
+                {answer.is_correct ? 'Correcte' : 'Incorrecte'}
               </div>
             </div>
 

@@ -1,8 +1,19 @@
-import { GraduationCap, Globe, BookOpen, Target, Brain, Trash2, Edit2 } from 'lucide-react';
+import {
+  GraduationCap,
+  Globe,
+  BookOpen,
+  Target,
+  Brain,
+  Trash2,
+  Edit2,
+  Users,
+  AlertTriangle,
+} from 'lucide-react';
 import type { Context } from '../../types/types';
 import { useDeleteContext } from '../../hooks/twins/useDeleteContext';
 import { useState } from 'react';
 import { GenericModal } from '../ui/modals/GenericModal';
+import { Link } from 'react-router-dom';
 
 type ContextProps = {
   context: Context;
@@ -82,10 +93,13 @@ export const ContextCard = ({ context, onEdit }: ContextProps) => {
           </span>
         </div>
 
-        <button className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white text-sm px-4 py-2 rounded-xl flex items-center gap-2 transition">
-          <Target size={16} />
-          Appliquer
-        </button>
+        <Link
+          to="/twins"
+          className="bg-green-500 hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 text-white text-sm px-4 py-2 rounded-xl flex items-center gap-2 transition"
+        >
+          <Users size={16} />
+          Ajouter un jumeau
+        </Link>
       </div>
       <GenericModal
         isOpen={openDelete}
@@ -100,6 +114,13 @@ export const ContextCard = ({ context, onEdit }: ContextProps) => {
           Voulez-vous vraiment supprimer
           <span className="font-semibold"> {context.name}</span>?
         </p>
+        <div className="mt-4 flex items-start gap-2 rounded-md bg-red-50 p-3 text-sm text-red-700">
+          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
+          <p>
+            <span className="font-semibold">Attention :</span> tous les jumeaux associés à ce
+            contexte seront également supprimés.
+          </p>
+        </div>
       </GenericModal>
     </div>
   );
