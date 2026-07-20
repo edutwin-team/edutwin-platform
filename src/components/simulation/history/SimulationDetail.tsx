@@ -1,4 +1,3 @@
-
 import type { AnswerDetail, SimulationHistoryItem } from '../../../types';
 import SimulationAvatar from '../../ui/avatars/SimulationAvatar';
 
