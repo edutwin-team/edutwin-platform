@@ -24,10 +24,10 @@ import { useContexts } from '../../hooks/twins/useContexts';
 import { useCreateTwin } from '../../hooks/twins/useCreateTwin';
 import { useUpdateTwin } from '../../hooks/twins/useUpdateTwin';
 
-import type { Behavior, DigitalTwin } from '../../types/types';
 import { Slider } from '../ui/stats/Slider';
 import { Input, TextArea } from '../ui/form/inputs';
 import { IoCloseSharp } from 'react-icons/io5';
+import type { Behavior, DigitalTwin } from '../../types';
 
 //types
 type TwinModalProps = {

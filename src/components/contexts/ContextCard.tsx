@@ -9,11 +9,12 @@ import {
   Users,
   AlertTriangle,
 } from 'lucide-react';
-import type { Context } from '../../types/types';
+
 import { useDeleteContext } from '../../hooks/twins/useDeleteContext';
 import { useState } from 'react';
 import { GenericModal } from '../ui/modals/GenericModal';
 import { Link } from 'react-router-dom';
+import type { Context } from '../../types';
 
 type ContextProps = {
   context: Context;

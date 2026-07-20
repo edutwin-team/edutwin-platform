@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { DigitalTwin } from '../../types/types';
+
 import { HiPlay, HiChevronDown } from 'react-icons/hi';
 
 import PercentRadial from '../ui/stats/PercentRadial';
@@ -11,6 +11,7 @@ import TwinAvatar from './TwinAvatar';
 import { useDeleteTwin } from '../../hooks/twins/useDeleteTwin';
 import { GenericModal } from '../ui/modals/GenericModal';
 import { Link } from 'react-router-dom';
+import type { DigitalTwin } from '../../types';
 
 interface Props {
   twin: DigitalTwin;

@@ -1,4 +1,4 @@
-import type { DashboardResponse } from '../../types/types';
+import type { DashboardResponse } from '../../types';
 import api from '../axios';
 
 export const getDashboard = async (): Promise<DashboardResponse> => {

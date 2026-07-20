@@ -1,4 +1,4 @@
-import type { Context } from '../../types/types';
+import type { Context } from '../../types';
 import api from '../axios';
 
 export const getContexts = async () => {
