@@ -1,5 +1,4 @@
-import { ContentSourceType } from "../../types";
-
+import { ContentSourceType } from '../../types';
 
 export const quizSourceLabel = (sourceType: ContentSourceType) => {
   switch (sourceType) {
