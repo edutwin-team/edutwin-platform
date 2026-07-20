@@ -18,12 +18,18 @@ describe('appRoutes', () => {
 });
 
 describe('isNotFoundRoute', () => {
-  it.each(['/', '/dashboard', '/twins', '/profile', '/quizzes', '/settings', '/simulation', '/contexts'])(
-    'retourne false pour %s',
-    (pathname) => {
-      expect(isNotFoundRoute(pathname)).toBe(false);
-    }
-  );
+  it.each([
+    '/',
+    '/dashboard',
+    '/twins',
+    '/profile',
+    '/quizzes',
+    '/settings',
+    '/simulation',
+    '/contexts',
+  ])('retourne false pour %s', (pathname) => {
+    expect(isNotFoundRoute(pathname)).toBe(false);
+  });
 
   it.each(['/unknown', '/admin', '/dashboard/extra', '/twins/42/edit'])(
     'retourne true pour %s',

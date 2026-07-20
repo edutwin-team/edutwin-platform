@@ -117,7 +117,10 @@ describe('ContextForm', () => {
 
   it('soumet le formulaire de création', () => {
     const createContext = vi.fn((_payload, opts) => opts.onSuccess());
-    vi.mocked(useCreateContext).mockReturnValue({ mutate: createContext, isPending: false } as never);
+    vi.mocked(useCreateContext).mockReturnValue({
+      mutate: createContext,
+      isPending: false,
+    } as never);
     vi.mocked(useUpdateContext).mockReturnValue({ mutate: vi.fn(), isPending: false } as never);
 
     render(

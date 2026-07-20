@@ -1,4 +1,7 @@
-import { LOGIN_PROGRESS_STEPS, REGISTER_PROGRESS_STEPS } from '../../../src/features/auth/config/steps';
+import {
+  LOGIN_PROGRESS_STEPS,
+  REGISTER_PROGRESS_STEPS,
+} from '../../../src/features/auth/config/steps';
 
 describe('LOGIN_PROGRESS_STEPS', () => {
   it('définit 3 étapes de connexion', () => {

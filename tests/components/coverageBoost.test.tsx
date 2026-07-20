@@ -9,7 +9,7 @@ import { ContextCard } from '../../src/components/contexts/ContextCard';
 import LatestTwinsCard from '../../src/components/dashboard/LatestTwinsCard';
 import { GenericModal } from '../../src/components/ui/modals/GenericModal';
 import { ContentSourceType } from '../../src/types';
-import { QueryWrapper } from '../utils/testProviders';
+import { QueryWrapper, RouterQueryWrapper } from '../utils/testProviders';
 
 vi.mock('../../src/hooks/twins/useDeleteTwin');
 vi.mock('../../src/hooks/content/quiz/useQuizzes');
@@ -72,16 +72,16 @@ describe('TwinCard', () => {
     vi.mocked(useDeleteTwin).mockReturnValue({ mutate: deleteTwin, isPending: false } as never);
 
     const { container } = render(
-      <QueryWrapper>
+      <RouterQueryWrapper>
         <TwinCard twin={twin} onEdit={vi.fn()} />
-      </QueryWrapper>
+      </RouterQueryWrapper>
     );
 
     expect(screen.getByText('Twin Alpha')).toBeInTheDocument();
     const deleteBtn = container.querySelector('button.text-error');
     expect(deleteBtn).toBeTruthy();
     fireEvent.click(deleteBtn!);
-    expect(screen.getByText('Supprimer le twin')).toBeInTheDocument();
+    expect(screen.getByText('Supprimer le jumeau numérique')).toBeInTheDocument();
   });
 });
 
@@ -131,7 +131,9 @@ describe('QuizList', () => {
       isError: false,
     } as never);
     vi.mocked(useDeleteQuiz).mockReturnValue({ mutate: deleteQuiz, isPending: false } as never);
-    vi.mocked(useExportQuiz).mockReturnValue({ mutateAsync: vi.fn().mockResolvedValue(blob) } as never);
+    vi.mocked(useExportQuiz).mockReturnValue({
+      mutateAsync: vi.fn().mockResolvedValue(blob),
+    } as never);
 
     URL.createObjectURL = vi.fn(() => 'blob:mock');
     URL.revokeObjectURL = vi.fn();
@@ -145,10 +147,14 @@ describe('QuizList', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Voir' }));
     fireEvent.click(screen.getByRole('button', { name: 'Masquer' }));
 
-    const exportBtn = screen.getAllByRole('button').find((btn) => btn.className.includes('btn-ghost') && !btn.className.includes('text-error'));
+    const exportBtn = screen
+      .getAllByRole('button')
+      .find((btn) => btn.className.includes('btn-ghost') && !btn.className.includes('text-error'));
     fireEvent.click(exportBtn!);
 
-    const deleteBtn = screen.getAllByRole('button').find((btn) => btn.className.includes('text-error'));
+    const deleteBtn = screen
+      .getAllByRole('button')
+      .find((btn) => btn.className.includes('text-error'));
     fireEvent.click(deleteBtn!);
 
     expect(screen.getByText('Supprimer le quiz')).toBeInTheDocument();
@@ -186,21 +192,23 @@ describe('ContextCard', () => {
     const onEdit = vi.fn();
 
     render(
-      <ContextCard
-        context={{
-          id: 1,
-          name: 'Classe 3A',
-          description: 'Maths',
-          school: 'Lycée',
-          country: 'France',
-          level: 'Lycée',
-          subject: 'Mathématiques',
-          academic_year: '2025-2026',
-          objectives: [{ label: 'Algèbre' }],
-          twins: 2,
-        }}
-        onEdit={onEdit}
-      />
+      <MemoryRouter>
+        <ContextCard
+          context={{
+            id: 1,
+            name: 'Classe 3A',
+            description: 'Maths',
+            school: 'Lycée',
+            country: 'France',
+            level: 'Lycée',
+            subject: 'Mathématiques',
+            academic_year: '2025-2026',
+            objectives: [{ label: 'Algèbre' }],
+            twins: 2,
+          }}
+          onEdit={onEdit}
+        />
+      </MemoryRouter>
     );
 
     expect(screen.getByText('Classe 3A')).toBeInTheDocument();
@@ -220,7 +228,10 @@ describe('LatestTwinsCard', () => {
     );
 
     expect(screen.getByText('Twin 1')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Gérer vos jumeaux/i })).toHaveAttribute('href', '/twins');
+    expect(screen.getByRole('link', { name: /Gérer vos jumeaux/i })).toHaveAttribute(
+      'href',
+      '/twins'
+    );
   });
 });
 

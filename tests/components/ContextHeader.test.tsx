@@ -7,6 +7,8 @@ describe('ContextHeader', () => {
     render(<ContextHeader />);
 
     expect(screen.getByRole('heading', { name: 'Contextes Pédagogiques' })).toBeInTheDocument();
-    expect(screen.getByText('Gérez les contextes pour vos simulations éducatives.')).toBeInTheDocument();
+    expect(
+      screen.getByText('Gérez les contextes pour vos simulations éducatives.')
+    ).toBeInTheDocument();
   });
 });

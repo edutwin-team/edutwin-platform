@@ -201,9 +201,7 @@ describe('SimulationModal', () => {
 
   it('affiche une erreur', () => {
     const onClose = vi.fn();
-    render(
-      <SimulationModal loading={false} error="Limite atteinte" onClose={onClose} />
-    );
+    render(<SimulationModal loading={false} error="Limite atteinte" onClose={onClose} />);
 
     expect(screen.getByText('Simulation impossible')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Compris' }));
@@ -212,13 +210,7 @@ describe('SimulationModal', () => {
 
   it('affiche le résultat', () => {
     const onClose = vi.fn();
-    render(
-      <SimulationModal
-        loading={false}
-        result={simulationResult}
-        onClose={onClose}
-      />
-    );
+    render(<SimulationModal loading={false} result={simulationResult} onClose={onClose} />);
 
     expect(screen.getByText('85')).toBeInTheDocument();
     expect(screen.getByText('Très bon résultat')).toBeInTheDocument();
@@ -289,36 +281,32 @@ describe('SimulationFlow', () => {
     } as never);
   });
 
-  it(
-    'enchaîne twin, quiz et résultat',
-    async () => {
-      vi.mocked(useSimulateQuiz).mockReturnValue({
-        mutateAsync: vi.fn().mockResolvedValue(simulationResult),
-      } as never);
+  it('enchaîne twin, quiz et résultat', async () => {
+    vi.mocked(useSimulateQuiz).mockReturnValue({
+      mutateAsync: vi.fn().mockResolvedValue(simulationResult),
+    } as never);
 
-      render(
-        <QueryWrapper>
-          <SimulationFlow onClose={vi.fn()} />
-        </QueryWrapper>
-      );
+    render(
+      <QueryWrapper>
+        <SimulationFlow onClose={vi.fn()} />
+      </QueryWrapper>
+    );
 
-      fireEvent.click(screen.getByText('Twin Flow'));
-      fireEvent.click(screen.getByRole('button', { name: /Suivant/i }));
+    fireEvent.click(screen.getByText('Twin Flow'));
+    fireEvent.click(screen.getByRole('button', { name: /Suivant/i }));
 
-      fireEvent.click(screen.getByText('Quiz Flow'));
-      fireEvent.click(screen.getByRole('button', { name: /Lancer la simulation/i }));
+    fireEvent.click(screen.getByText('Quiz Flow'));
+    fireEvent.click(screen.getByRole('button', { name: /Lancer la simulation/i }));
 
-      expect(screen.getByText('Simulation IA en cours...')).toBeInTheDocument();
+    expect(screen.getByText('Simulation IA en cours...')).toBeInTheDocument();
 
-      await waitFor(
-        () => {
-          expect(screen.getByText('Très bon résultat')).toBeInTheDocument();
-        },
-        { timeout: 5000 }
-      );
-    },
-    10000
-  );
+    await waitFor(
+      () => {
+        expect(screen.getByText('Très bon résultat')).toBeInTheDocument();
+      },
+      { timeout: 5000 }
+    );
+  }, 10000);
 
   it('affiche une erreur de limite', async () => {
     vi.mocked(useSimulateQuiz).mockReturnValue({

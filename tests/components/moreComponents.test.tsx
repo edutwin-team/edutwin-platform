@@ -67,10 +67,12 @@ describe('TwinsHeader', () => {
   it('calcule les statistiques des jumeaux', () => {
     render(
       <TwinsHeader
-        twins={[
-          { id: 1, behavior: { attention_level: 80 } },
-          { id: 2, behavior: { attention_level: 60 } },
-        ] as never}
+        twins={
+          [
+            { id: 1, behavior: { attention_level: 80 } },
+            { id: 2, behavior: { attention_level: 60 } },
+          ] as never
+        }
       />
     );
 

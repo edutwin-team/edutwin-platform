@@ -22,7 +22,12 @@ describe('TextArea', () => {
     const onChange = vi.fn();
 
     render(
-      <TextArea icon={MessageSquare} value="Description initiale" onChange={onChange} placeholder="Description" />
+      <TextArea
+        icon={MessageSquare}
+        value="Description initiale"
+        onChange={onChange}
+        placeholder="Description"
+      />
     );
 
     const textarea = screen.getByPlaceholderText('Description');

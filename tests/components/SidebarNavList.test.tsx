@@ -17,7 +17,10 @@ describe('SidebarNavList', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole('link', { name: /Tableau de bord/i })).toHaveAttribute('href', '/dashboard');
+    expect(screen.getByRole('link', { name: /Tableau de bord/i })).toHaveAttribute(
+      'href',
+      '/dashboard'
+    );
     expect(screen.getByRole('link', { name: /Quiz/i })).toHaveAttribute('href', '/quizzes');
   });
 
