@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 
 import SimulationDetail from './SimulationDetail';
-import { type SimulationHistoryItem } from '../../../types/simulation';
+
 import SimulationAvatar from '../../ui/avatars/SimulationAvatar';
+import type { SimulationHistoryItem } from '../../../types';
 
 type SimulationHistoryProps = {
   simulations: SimulationHistoryItem[];

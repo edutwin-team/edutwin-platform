@@ -1,4 +1,5 @@
-import { type AnswerDetail, type SimulationHistoryItem } from '../../../types/simulation';
+
+import type { AnswerDetail, SimulationHistoryItem } from '../../../types';
 import SimulationAvatar from '../../ui/avatars/SimulationAvatar';
 
 type Props = {
