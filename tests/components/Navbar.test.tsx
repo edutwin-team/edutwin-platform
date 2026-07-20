@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 
 import Navbar from '../../src/components/navbar/Navbar';
 import { renderWithProviders } from '../utils/renderWithProviders';
@@ -22,5 +22,11 @@ describe('Navbar', () => {
     expect(screen.getByRole('button', { name: /Connexion/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /S'inscrire/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/Activer le mode sombre/i)).toBeInTheDocument();
+  });
+
+  it('ouvre la modale de connexion', () => {
+    renderWithProviders(<Navbar />);
+    fireEvent.click(screen.getByRole('button', { name: /Connexion/i }));
+    expect(screen.getByPlaceholderText('nom@ecole.fr')).toBeInTheDocument();
   });
 });
