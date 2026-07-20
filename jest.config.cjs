@@ -16,7 +16,7 @@ module.exports = {
   },
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '^(.+/src/api/axios|\\.\\./axios)$': '<rootDir>/tests/mocks/axios.ts',
+    '^(\\.\\./)+axios$|^\\./axios$': '<rootDir>/tests/mocks/axios.ts',
   },
   globals: {
     __APP_VERSION__: '1.1.0',
