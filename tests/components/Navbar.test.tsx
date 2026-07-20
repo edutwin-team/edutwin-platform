@@ -4,10 +4,10 @@ import Navbar from '../../src/components/navbar/Navbar';
 import { renderWithProviders } from '../utils/renderWithProviders';
 
 const localStorageMock = {
-  getItem: jest.fn(() => null),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
+  getItem: vi.fn(() => null),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
 };
 Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
