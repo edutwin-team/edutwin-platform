@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import {
   User,
   Calendar,
@@ -27,6 +28,7 @@ import { useUpdateTwin } from '../../hooks/twins/useUpdateTwin';
 import { Slider } from '../ui/stats/Slider';
 import { Input, TextArea } from '../ui/form/inputs';
 import { RequiredMark } from '../ui/form/FormLabel';
+import { SimpleLoader } from '../ui/loaders/SimpleLoader';
 import { IoCloseSharp } from 'react-icons/io5';
 import type { Behavior, DigitalTwin } from '../../types';
 
@@ -92,7 +94,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
   ] as const;
 
   //react query mutation functions
-  const { data: contexts } = useContexts();
+  const { data: contexts, isLoading: isLoadingContexts } = useContexts();
   const { mutate: createTwin, isPending: isCreating } = useCreateTwin({
     onSuccess: () => handleClose(),
   });
@@ -101,6 +103,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
   });
 
   const isPending = isCreating || isUpdating;
+  const hasContexts = (contexts?.length ?? 0) > 0;
 
   const [step, setStep] = useState(1);
   //get twin data when modal is on edit
@@ -301,23 +304,40 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
                 <RequiredMark />
               </label>
 
-              <select
-                className="select select-bordered bg-base-200 w-full"
-                value={form.context ?? ''}
-                onChange={(e) =>
-                  handleChange(
-                    'context',
-                    e.target.value === '' ? undefined : Number(e.target.value)
-                  )
-                }
-              >
-                <option value="">Sélectionner un contexte</option>
-                {contexts?.map((c: { id: number; name: string }) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
+              {isLoadingContexts && <SimpleLoader />}
+
+              {!isLoadingContexts && !hasContexts && (
+                <div className="rounded-xl border border-base-300 bg-base-200/40 p-8 text-center space-y-4">
+                  <h3 className="text-lg font-semibold">Aucun contexte pédagogique disponible</h3>
+                  <p className="text-sm text-base-content/70">
+                    Vous devez créer un contexte pédagogique avant de créer un jumeau numérique.
+                  </p>
+                  <Link to="/contexts" onClick={handleClose} className="btn btn-primary gap-2">
+                    <GraduationCap size={18} />
+                    Créer un contexte pédagogique
+                  </Link>
+                </div>
+              )}
+
+              {!isLoadingContexts && hasContexts && (
+                <select
+                  className="select select-bordered bg-base-200 w-full"
+                  value={form.context ?? ''}
+                  onChange={(e) =>
+                    handleChange(
+                      'context',
+                      e.target.value === '' ? undefined : Number(e.target.value)
+                    )
+                  }
+                >
+                  <option value="">Sélectionner un contexte</option>
+                  {contexts?.map((c: { id: number; name: string }) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
           )}
 
