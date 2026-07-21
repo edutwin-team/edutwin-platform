@@ -14,7 +14,7 @@ Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 describe('Navbar', () => {
   it('affiche le logo du projet', () => {
     renderWithProviders(<Navbar />);
-    expect(screen.getByAltText(/Logo EduTwin/i)).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Logo EduTwin/i })).toBeInTheDocument();
   });
 
   it('affiche les actions principales', () => {

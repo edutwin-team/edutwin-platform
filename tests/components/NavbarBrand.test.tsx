@@ -11,7 +11,7 @@ describe('NavbarBrand', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByAltText('Logo EduTwin')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Logo EduTwin' })).toBeInTheDocument();
     expect(screen.getByRole('link')).toHaveAttribute('href', '/');
   });
 });
