@@ -3,6 +3,7 @@ import { GraduationCap, Globe, BookOpen, Target, FileText, Tag } from 'lucide-re
 
 import { ObjectiveInput } from './ObjectiveInput';
 import { GenericModal } from '../ui/modals/GenericModal';
+import { RequiredMark } from '../ui/form/FormLabel';
 
 import { useCreateContext } from '../../hooks/twins/useCreateContext';
 import { useUpdateContext } from '../../hooks/twins/useUpdateContext';
@@ -119,6 +120,7 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
           <label className="text-sm text-base-content/70 flex items-center gap-2">
             <Tag size={16} className="text-primary" />
             Nom du contexte
+            <RequiredMark />
           </label>
 
           <input
@@ -153,6 +155,7 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
             <label className="text-xs text-base-content/60 flex items-center gap-1">
               <GraduationCap size={14} className="text-primary" />
               École
+              <RequiredMark />
             </label>
 
             <input
@@ -169,6 +172,7 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
             <label className="text-xs text-base-content/60 flex items-center gap-1">
               <Globe size={14} className="text-secondary" />
               Pays
+              <RequiredMark />
             </label>
 
             <input
@@ -185,6 +189,7 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
             <label className="text-xs text-base-content/60 flex items-center gap-1">
               <BookOpen size={14} className="text-accent" />
               Niveau
+              <RequiredMark />
             </label>
 
             <input
@@ -201,6 +206,7 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
             <label className="text-xs text-base-content/60 flex items-center gap-1">
               <Tag size={14} className="text-info" />
               Matière
+              <RequiredMark />
             </label>
 
             <input
@@ -214,7 +220,10 @@ export const ContextForm = ({ context, onCancelEdit }: ContextFormProps) => {
           </div>
 
           <div className="space-y-1 col-span-2">
-            <label className="text-xs text-base-content/60">📅 Année académique</label>
+            <label className="text-xs text-base-content/60">
+              📅 Année académique
+              <RequiredMark />
+            </label>
 
             <input
               required
