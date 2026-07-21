@@ -62,6 +62,7 @@ describe('TwinModal', () => {
     );
 
     expect(screen.getByText(/Créer un jumeau numérique/i)).toBeInTheDocument();
+    expect(screen.getAllByText('*').length).toBeGreaterThanOrEqual(4);
     fireEvent.change(screen.getByPlaceholderText(/Mohamed, Emma, Lucas/i), {
       target: { value: 'Nouveau Twin' },
     });
