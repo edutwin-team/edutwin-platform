@@ -55,6 +55,11 @@
   --auth-modal-border: rgb(148 163 184 / 0.28);
   --auth-right-surface-top: rgb(255 255 255 / 0.96);
   --auth-right-surface-bottom: rgb(248 250 252 / 0.96);
+  --logo-text-primary: #1e293b;
+  --logo-text-muted: #94a3b8;
+  --logo-grad-start: #6366f1;
+  --logo-grad-end: #8b5cf6;
+  --logo-icon-shadow: #4338ca;
 }
 
 [data-theme='light'] .right-panel-bg {
@@ -524,6 +529,14 @@ html[data-theme='dark'] .settings-action-bar {
 }
 
 /* ===== EDT-130 : fix textes mode sombre — auth modals ===== */
+
+[data-theme='dark'] {
+  --logo-text-primary: #f8fafc;
+  --logo-text-muted: #cbd5e1;
+  --logo-grad-start: #818cf8;
+  --logo-grad-end: #a78bfa;
+  --logo-icon-shadow: #6366f1;
+}
 
 [data-theme='dark'] .auth-title {
   color: rgb(248 250 252);
