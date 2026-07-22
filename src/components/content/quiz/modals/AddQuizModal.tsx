@@ -49,6 +49,7 @@ export function AddQuizModal({ isOpen, onClose }: Props) {
 
         {step === 'manual' && (
           <ManualQuizForm
+            onBack={() => setStep('choice')}
             open={true}
             onClose={() => {
               setStep('choice');

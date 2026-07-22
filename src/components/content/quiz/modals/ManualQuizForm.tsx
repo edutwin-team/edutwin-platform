@@ -29,6 +29,7 @@ type ManualQuizFormProps = {
   open: boolean;
   onClose: () => void;
   quiz?: Quiz | null;
+  onBack: () => void;
 };
 
 type QuizForm = Omit<Quiz, 'passing_score' | 'time_limit_minutes'> & {
@@ -46,7 +47,7 @@ const defaultQuizForm: QuizForm = {
   questions: [],
 };
 
-export function ManualQuizForm({ open, onClose, quiz }: ManualQuizFormProps) {
+export function ManualQuizForm({ open, onClose, quiz, onBack }: ManualQuizFormProps) {
   const [step, setStep] = useState(1);
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState<number | null>(
     quiz?.questions?.length ? 0 : null
@@ -247,9 +248,17 @@ export function ManualQuizForm({ open, onClose, quiz }: ManualQuizFormProps) {
         <div className="flex justify-between items-center mb-5">
           <h2 className="text-xl font-bold">{quiz ? 'Modifier le quiz' : 'Créer un quiz'}</h2>
 
-          <button className="btn btn-sm btn-ghost" onClick={closeManualQuizForm}>
-            <IoCloseSharp />
-          </button>
+          <div className="flex items-center gap-2">
+            {!quiz && (
+              <button onClick={onBack} className="btn btn-sm btn-ghost">
+                ← Importer un quiz
+              </button>
+            )}
+
+            <button className="btn btn-sm btn-ghost" onClick={closeManualQuizForm}>
+              <IoCloseSharp />
+            </button>
+          </div>
         </div>
 
         <div className="flex gap-2 mb-6">
