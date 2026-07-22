@@ -97,7 +97,7 @@ describe('QuizList', () => {
 
     render(
       <QueryWrapper>
-        <QuizList />
+        <QuizList onEdit={vi.fn()} />
       </QueryWrapper>
     );
 
@@ -108,17 +108,17 @@ describe('QuizList', () => {
 
   it('affiche le loader', () => {
     vi.mocked(useQuizzes).mockReturnValue({ isLoading: true } as never);
-    render(<QuizList />);
+    render(<QuizList onEdit={vi.fn()} />);
     expect(screen.getByText('Chargement des données...')).toBeInTheDocument();
   });
 
   it('affiche une erreur et l’état vide', () => {
     vi.mocked(useQuizzes).mockReturnValue({ isLoading: false, isError: true } as never);
-    render(<QuizList />);
+    render(<QuizList onEdit={vi.fn()} />);
     expect(screen.getByText('Erreur de chargement')).toBeInTheDocument();
 
     vi.mocked(useQuizzes).mockReturnValue({ data: [], isLoading: false, isError: false } as never);
-    render(<QuizList />);
+    render(<QuizList onEdit={vi.fn()} />);
     expect(screen.getByText('Aucun quiz')).toBeInTheDocument();
   });
 
@@ -140,7 +140,7 @@ describe('QuizList', () => {
 
     render(
       <QueryWrapper>
-        <QuizList />
+        <QuizList onEdit={vi.fn()} />
       </QueryWrapper>
     );
 

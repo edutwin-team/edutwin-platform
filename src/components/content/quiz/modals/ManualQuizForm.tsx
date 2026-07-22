@@ -30,7 +30,7 @@ type ManualQuizFormProps = {
   open: boolean;
   onClose: () => void;
   quiz?: Quiz | null;
-  onBack: () => void;
+  onBack?: () => void;
 };
 
 type QuizForm = Omit<Quiz, 'passing_score' | 'time_limit_minutes'> & {
