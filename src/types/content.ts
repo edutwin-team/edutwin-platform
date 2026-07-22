@@ -35,15 +35,13 @@ export type Question = {
   text: string;
   question_type: QuestionType;
   difficulty_level: DifficultyLevel;
-  order_index: number;
   answers: Answer[];
 };
 
 export type Answer = {
   id?: number;
   text: string;
-  is_correct?: boolean; // optionnel — masqué côté student
-  order_index: number;
+  is_correct?: boolean;
 };
 
 export const QuestionType = {

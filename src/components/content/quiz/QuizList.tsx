@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Trash2, Download } from 'lucide-react';
+import { Trash2, Download, Edit2 } from 'lucide-react';
 
 import { useQuizzes } from '../../../hooks/content/quiz/useQuizzes';
 import { useDeleteQuiz } from '../../../hooks/content/quiz/useDeleteQuiz';
@@ -16,7 +16,10 @@ import { SimpleLoader } from '../../ui/loaders/SimpleLoader';
 import QuizAvatar from '../../ui/avatars/QuizAvatar';
 import type { Quiz } from '../../../types';
 
-export function QuizList() {
+type QuizListProps = {
+  onEdit: (quiz: Quiz) => void;
+};
+export function QuizList({ onEdit }: QuizListProps) {
   const { data: quizzes, isLoading, isError } = useQuizzes();
 
   const { mutate: deleteQuiz, isPending } = useDeleteQuiz();
@@ -118,6 +121,10 @@ export function QuizList() {
 
                 <button onClick={() => handleExport(quiz)} className="btn btn-sm btn-ghost">
                   <Download size={16} />
+                </button>
+
+                <button onClick={() => onEdit(quiz)} className="btn btn-sm btn-ghost text-blue-500">
+                  <Edit2 size={16} />
                 </button>
 
                 <button
