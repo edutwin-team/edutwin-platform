@@ -24,6 +24,7 @@ import { useUpdateQuiz } from '../../../../hooks/content/quiz/useUpdateQuiz';
 import { Input, TextArea } from '../../../ui/form/inputs';
 import { SelectableCard } from '../../../ui/cards/SelectableCard';
 import { emptyQuestion } from '../../../../utils/question/emptyQuestion';
+import { getQuestionError } from '../../../../utils/question/validateQuestion';
 
 type ManualQuizFormProps = {
   open: boolean;
@@ -74,16 +75,7 @@ export function ManualQuizForm({ open, onClose, quiz, onBack }: ManualQuizFormPr
   const pending = creating || updating;
 
   const questionErrors = useMemo(
-    () =>
-      form.questions.map((question) => {
-        if (question.text.trim().length === 0) return 'La question est obligatoire.';
-        if (question.answers.length < 2) return 'Ajoutez au moins 2 réponses.';
-        if (question.answers.some((a) => a.text.trim().length === 0))
-          return 'Toutes les réponses doivent être remplies.';
-        if (!question.answers.some((a) => a.is_correct))
-          return 'Au moins une réponse correcte est requise.';
-        return null;
-      }),
+    () => form.questions.map((question) => getQuestionError(question)),
     [form.questions]
   );
 
