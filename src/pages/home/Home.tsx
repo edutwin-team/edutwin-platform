@@ -144,12 +144,12 @@ const Home: React.FC = () => {
             </p>
 
             {/* Vidéo — remplace le src par ton fichier */}
-            <video
-              src="/videos/demo-edutwin.mp4"
-              controls
-              autoPlay
-              style={{ width: '100%', borderRadius: 12, display: 'block' }}
-            />
+            <iframe
+  src="https://drive.google.com/file/d/1vrHuxsBeCnRDuW4q2CVcJxH8yUvAhGNp/preview"
+  width="100%"
+  style={{ borderRadius: 12, border: 'none', minHeight: 400 }}
+  allow="autoplay"
+/>
           </div>
         </div>
       )}
