@@ -62,7 +62,7 @@ export default function SimulationDetail({ simulation }: Props) {
 
       {/* simulation ai feedback */}
       <div className="bg-base-200 p-4 rounded-lg">
-        <h3 className="font-semibold mb-2">Feedback IA</h3>
+        <h3 className="font-semibold mb-2">Feedback global IA</h3>
         <p className="text-sm text-base-content/80">{simulation.feedback}</p>
       </div>
 
@@ -102,7 +102,20 @@ export default function SimulationDetail({ simulation }: Props) {
                 <span className="font-semibold">Bonne réponse :</span> {answer.correct_text}
               </p>
 
-              <p className="text-base-content/70 italic">{answer.reasoning}</p>
+              {answer.reasoning && (
+                <div className="mt-2 p-3 bg-base-200/60 rounded-md">
+                  <span className="font-semibold block mb-1">🧠 Raisonnement du jumeau :</span>
+                  <p className="text-xs text-base-content/80 italic">{answer.reasoning}</p>
+                </div>
+              )}
+              {answer.improvement && (
+                <div className="mt-3 p-3 bg-info/10 rounded-md border border-info/20">
+                  <span className="font-semibold text-info block mb-1">
+                    💡 Amélioration suggérée :
+                  </span>
+                  <p className="text-xs text-base-content/80">{answer.improvement}</p>
+                </div>
+              )}
             </div>
           </div>
         ))}

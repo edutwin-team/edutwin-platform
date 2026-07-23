@@ -25,6 +25,7 @@ export interface LLMAnswer {
   reasoning: string;
 
   chosen_text?: string;
+  improvement?: string;
   correct_text?: string;
 
   is_correct?: boolean;
@@ -60,6 +61,7 @@ export interface AnswerDetail {
 
   chosen_index: number;
   chosen_text: string;
+  improvement?: string;
 
   correct_text: string;
 
