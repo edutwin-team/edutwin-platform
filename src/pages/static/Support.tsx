@@ -272,7 +272,7 @@ export default function Support() {
                       </label>
                       <input
                         placeholder={f.placeholder}
-                        value={(form as any)[f.key]}
+                        value={form[f.key as keyof typeof form]}
                         onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
                         style={{
                           width: '100%',
