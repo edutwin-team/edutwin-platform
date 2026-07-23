@@ -85,8 +85,76 @@ const NeuralIllustration: React.FC = () => (
 );
 
 const Home: React.FC = () => {
+  const [showDemo, setShowDemo] = React.useState(false);
+
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: '#ffffff', color: '#111827' }}>
+      {/* ── Modale vidéo ── */}
+      {showDemo && (
+        <div
+          onClick={() => setShowDemo(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.75)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: '#fff',
+              borderRadius: 20,
+              padding: '28px 28px 24px',
+              maxWidth: 760,
+              width: '92%',
+              position: 'relative',
+              boxShadow: '0 32px 80px rgba(0,0,0,0.4)',
+            }}
+          >
+            {/* Bouton fermer */}
+            <button
+              onClick={() => setShowDemo(false)}
+              style={{
+                position: 'absolute',
+                top: 14,
+                right: 18,
+                background: '#f3f4f6',
+                border: 'none',
+                borderRadius: '50%',
+                width: 32,
+                height: 32,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 16,
+                cursor: 'pointer',
+                color: '#6b7280',
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
+
+            <p style={{ fontSize: 13, fontWeight: 600, color: '#4f46e5', marginBottom: 14 }}>
+              Démo EduTwin
+            </p>
+
+            {/* Vidéo — remplace le src par ton fichier */}
+            <video
+              src="/videos/demo-edutwin.mp4"
+              controls
+              autoPlay
+              style={{ width: '100%', borderRadius: 12, display: 'block' }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* ── Hero ── */}
       <section
         style={{
           background:
@@ -128,7 +196,6 @@ const Home: React.FC = () => {
           L'avenir de l'apprentissage
         </div>
 
-        {/* H1 */}
         <h1
           style={{
             fontSize: 'clamp(38px, 6vw, 60px)',
@@ -142,7 +209,6 @@ const Home: React.FC = () => {
           Jumeau numérique <span style={{ color: '#4f46e5', display: 'block' }}>d'élève</span>
         </h1>
 
-        {/* Subtitle */}
         <p
           style={{
             fontSize: 16,
@@ -156,7 +222,6 @@ const Home: React.FC = () => {
           d'apprentissage, suit ses progrès et offre un soutien en temps réel.
         </p>
 
-        {/* CTAs */}
         <div
           style={{
             display: 'flex',
@@ -166,8 +231,9 @@ const Home: React.FC = () => {
             marginBottom: 64,
           }}
         >
-          <Link
-            to="/quiz"
+          {/* Bouton démo → ouvre la modale */}
+          <button
+            onClick={() => setShowDemo(true)}
             style={{
               background: '#0f172a',
               color: '#fff',
@@ -175,12 +241,13 @@ const Home: React.FC = () => {
               padding: '13px 28px',
               fontWeight: 600,
               fontSize: 14,
-              textDecoration: 'none',
-              transition: 'background .2s',
+              border: 'none',
+              cursor: 'pointer',
             }}
           >
             Essayer la démo
-          </Link>
+          </button>
+
           <Link
             to="/dashboard"
             style={{
@@ -211,6 +278,8 @@ const Home: React.FC = () => {
           <NeuralIllustration />
         </div>
       </section>
+
+      {/* ── Pourquoi EduTwin ── */}
       <section style={{ background: '#ffffff', padding: '88px 24px' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontSize: 34, fontWeight: 800, color: '#111827', marginBottom: 10 }}>
@@ -240,21 +309,18 @@ const Home: React.FC = () => {
               {
                 icon: '🧠',
                 bg: '#ede9fe',
-                iconBg: '#7c3aed',
                 title: 'Apprentissage personnalisé',
                 desc: "S'adapte au rythme et au style de chaque élève, garantissant la maîtrise des concepts avant de progresser.",
               },
               {
                 icon: '📊',
                 bg: '#dbeafe',
-                iconBg: '#2563eb',
                 title: 'Analyses en temps réel',
                 desc: 'Les enseignants obtiennent des informations instantanées sur les performances de la classe, identifiant tôt les élèves en difficulté.',
               },
               {
                 icon: '🛡️',
                 bg: '#dcfce7',
-                iconBg: '#16a34a',
                 title: 'Sûr et sécurisé',
                 desc: 'Une sécurité de niveau entreprise garantit que les données des élèves sont protégées et conformes aux lois sur la confidentialité.',
               },
@@ -294,6 +360,8 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* ── Comment ça marche ── */}
       <section style={{ background: '#f9fafb', padding: '88px 24px' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontSize: 34, fontWeight: 800, color: '#111827', marginBottom: 10 }}>
@@ -398,10 +466,11 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* ── Témoignages ── */}
       <section style={{ background: '#ffffff', padding: '88px 24px' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontSize: 34, fontWeight: 800, color: '#111827', marginBottom: 48 }}>
-            Approuvé par les éducateurs
+            Approuvé par les éducateurs et les élèves
           </h2>
           <div
             style={{
@@ -414,12 +483,12 @@ const Home: React.FC = () => {
               {
                 quote:
                   "EduTwin a complètement transformé ma gestion de classe. Les analyses me permettent d'intervenir précisément quand un élève est en difficulté, plutôt que d'attendre le prochain examen.",
-                author: 'Enseignant(e), Collège',
+                author: "Chris Chevalier, Intervenant à l'École Supérieure",
               },
               {
                 quote:
-                  "Avoir un jumeau numérique signifie que je ne me sens jamais perdu. Si je ne comprends pas un concept en cours, mon EduTwin me l'explique plus tard d'une manière qui me parle.",
-                author: 'Élève, Lycée',
+                  "Franchement, quand j'ai raté un cours ou que j'accroche pas sur un truc, mon EduTwin est là. Il m'explique à ma façon, à mon rythme. C'est comme avoir un prof rien que pour moi.",
+                author: 'Inès Chouaib, Élève au Lycée Simone Veil',
               },
             ].map((t) => (
               <div

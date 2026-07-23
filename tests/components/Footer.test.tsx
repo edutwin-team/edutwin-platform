@@ -12,28 +12,20 @@ describe('Footer', () => {
   });
 
   it('affiche le titre du site', () => {
-    const title = screen.getByRole('heading', { level: 2, name: /Digital Twin EDU/i });
+    const title = screen.getByRole('heading', { level: 2, name: /EduTwin/i });
     expect(title).toBeInTheDocument();
   });
 
   it('affiche les sections principales', () => {
-    expect(screen.getByText(/Navigation/i)).toBeInTheDocument();
-    expect(screen.getByText(/Resources/i)).toBeInTheDocument();
-    expect(screen.getByText(/Follow Us/i)).toBeInTheDocument();
+    expect(screen.getByText(/Ressources/i)).toBeInTheDocument();
+    expect(screen.getByText(/Nous suivre/i)).toBeInTheDocument();
   });
 
-  it('affiche les liens de navigation', () => {
-    expect(screen.getByText(/Home/i)).toBeInTheDocument();
-    expect(screen.getByText(/Dashboard/i)).toBeInTheDocument();
-    expect(screen.getByText(/Digital Twins/i)).toBeInTheDocument();
-    expect(screen.getByText(/Contact/i)).toBeInTheDocument();
-  });
-
-  it('affiche les liens Resources', () => {
-    expect(screen.getByText(/Documentation/i)).toBeInTheDocument();
-    expect(screen.getByText(/API Guide/i)).toBeInTheDocument();
-    expect(screen.getByText(/Support/i)).toBeInTheDocument();
-    expect(screen.getByText(/FAQ/i)).toBeInTheDocument();
+  it('affiche les liens Ressources', () => {
+    expect(screen.getByRole('link', { name: /Documentation/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Support/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /FAQ/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Contact/i })).toBeInTheDocument();
   });
 
   it('affiche les icônes sociales', () => {
@@ -51,7 +43,6 @@ describe('Footer', () => {
   });
 
   it('affiche le texte copyright', () => {
-    const copyright = screen.getByText(/©\s*2026\s*Digital Twin EDU/i);
-    expect(copyright).toBeInTheDocument();
+    expect(screen.getByText(/EduTwin — Tous droits réservés/i)).toBeInTheDocument();
   });
 });
