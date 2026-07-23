@@ -145,11 +145,11 @@ const Home: React.FC = () => {
 
             {/* Vidéo — remplace le src par ton fichier */}
             <iframe
-  src="https://drive.google.com/file/d/1vrHuxsBeCnRDuW4q2CVcJxH8yUvAhGNp/preview"
-  width="100%"
-  style={{ borderRadius: 12, border: 'none', minHeight: 400 }}
-  allow="autoplay"
-/>
+              src="https://drive.google.com/file/d/1vrHuxsBeCnRDuW4q2CVcJxH8yUvAhGNp/preview"
+              width="100%"
+              style={{ borderRadius: 12, border: 'none', minHeight: 400 }}
+              allow="autoplay"
+            />
           </div>
         </div>
       )}
