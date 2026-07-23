@@ -82,17 +82,24 @@ const quizWithQuestions = {
 describe('AddQuizModal', () => {
   it('navigue entre les étapes et ferme la modale', () => {
     const onClose = vi.fn();
-    render(<AddQuizModal isOpen onClose={onClose} />);
+    render(
+      <QueryWrapper>
+        <AddQuizModal isOpen onClose={onClose} />
+      </QueryWrapper>
+    );
 
     expect(screen.getByText('Créer un quiz')).toBeInTheDocument();
     fireEvent.click(screen.getByText('📥 Importer'));
     expect(screen.getByText('Importer un quiz')).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: /Retour/i }));
-    fireEvent.click(screen.getByText('✍️ Manuel (not finished)'));
-    expect(screen.getByText('Création manuelle')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /← Retour/i }));
+    fireEvent.click(screen.getByText('✍️ Manuel'));
+    expect(screen.getByText('Créer un quiz')).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText('Ex. : Quiz de maths sur les fractions')
+    ).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: /Retour/i }));
+    fireEvent.click(screen.getByRole('button', { name: /← Importer un quiz/i }));
     fireEvent.click(document.querySelector('.bg-black\\/50')!);
     expect(onClose).toHaveBeenCalled();
   });
@@ -112,7 +119,7 @@ describe('AddQuizChoice', () => {
     render(<AddQuizChoice onImport={onImport} onManual={onManual} onClose={onClose} />);
 
     fireEvent.click(screen.getByText('📥 Importer'));
-    fireEvent.click(screen.getByText('✍️ Manuel (not finished)'));
+    fireEvent.click(screen.getByText('✍️ Manuel'));
     fireEvent.click(screen.getByRole('button', { name: '✕' }));
 
     expect(onImport).toHaveBeenCalled();
@@ -169,13 +176,17 @@ describe('ImportQuizForm', () => {
 describe('ManualQuizForm', () => {
   it('permet de saisir et revenir', () => {
     const onBack = vi.fn();
-    render(<ManualQuizForm onBack={onBack} />);
+    render(
+      <QueryWrapper>
+        <ManualQuizForm onBack={onBack} onClose={vi.fn()} open />
+      </QueryWrapper>
+    );
 
-    fireEvent.change(screen.getByPlaceholderText('Titre du quiz'), {
+    fireEvent.change(screen.getByPlaceholderText('Ex. : Quiz de maths sur les fractions'), {
       target: { value: 'Mon quiz' },
     });
     expect(screen.getByDisplayValue('Mon quiz')).toBeInTheDocument();
-    fireEvent.click(screen.getByRole('button', { name: /Retour/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Importer un quiz/i }));
     expect(onBack).toHaveBeenCalled();
   });
 });

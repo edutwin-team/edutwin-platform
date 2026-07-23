@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createQuiz } from '../../../api/content/quiz/quiz';
 import type { Quiz } from '../../../types';
 
-export const useCreateQuiz = () => {
+export const useCreateQuiz = (options?: { onSuccess?: () => void }) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -12,7 +12,12 @@ export const useCreateQuiz = () => {
       queryClient.invalidateQueries({
         queryKey: ['quizzes'],
       });
-      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
+
+      queryClient.invalidateQueries({
+        queryKey: ['dashboard'],
+      });
+
+      options?.onSuccess?.();
     },
   });
 };
