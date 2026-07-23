@@ -18,6 +18,16 @@ export default function Navbar() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const { settings, toggleTheme } = useSettings();
   const { user } = useAuth();
+  const [registerSuccess, setRegisterSuccess] = useState('');
+  const handleRegisterSuccess = () => {
+    setRegisterSuccess(
+      'Compte créé avec succès ! Vérifiez votre boîte mail pour activer votre compte.'
+    );
+
+    setTimeout(() => {
+      setRegisterSuccess('');
+    }, 6000);
+  };
 
   const currentPage = PAGE_META[location.pathname] ?? DEFAULT_PAGE_META;
 
@@ -50,8 +60,34 @@ export default function Navbar() {
         </div>
       </div>
 
-      <Register isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
+      <Register
+        isOpen={isRegisterOpen}
+        onClose={() => setIsRegisterOpen(false)}
+        onRegisterSuccess={handleRegisterSuccess}
+      />
       <LoginModal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+
+      {registerSuccess && (
+        <div className="fixed top-20 left-1/2 z-50 -translate-x-1/2">
+          <div className="alert alert-success shadow-lg max-w-md">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current h-6 w-6 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 12l2 2 4-4m6 2A9 9 0 1112 3a9 9 0 019 9z"
+              />
+            </svg>
+
+            <span>{registerSuccess}</span>
+          </div>
+        </div>
+      )}
     </>
   );
 }

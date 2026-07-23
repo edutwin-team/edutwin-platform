@@ -380,8 +380,10 @@ describe('LoginModal', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
   });
 
-  it('affiche une erreur de connexion', () => {
-    const mutate = vi.fn((_data, opts) => opts.onError());
+  it('affiche une erreur de connexion', async () => {
+    const mutate = vi.fn((_data, opts) =>
+      opts.onError({ response: { data: { error: 'invalid' } } })
+    );
     vi.mocked(useLogin).mockReturnValue({ mutate, isPending: false } as never);
 
     renderWithRouter(<LoginModal isOpen onClose={vi.fn()} />);
@@ -394,7 +396,9 @@ describe('LoginModal', () => {
     });
     fireEvent.click(screen.getByRole('button', { name: 'Se connecter' }));
 
-    expect(screen.getByText('Email ou mot de passe incorrect')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/Email ou mot de passe incorrect/i)).toBeInTheDocument();
+    });
   });
 });
 
@@ -402,7 +406,7 @@ describe('RegisterModal', () => {
   it('valide l’étape 1 et passe à l’étape 2', () => {
     vi.mocked(useRegister).mockReturnValue({ mutate: vi.fn(), isPending: false } as never);
 
-    renderWithRouter(<RegisterModal isOpen onClose={vi.fn()} />);
+    renderWithRouter(<RegisterModal onRegisterSuccess={vi.fn()} isOpen onClose={vi.fn()} />);
 
     const form = screen.getByRole('button', { name: 'Suivant' }).closest('form')!;
     fireEvent.submit(form);
