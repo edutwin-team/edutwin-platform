@@ -2,16 +2,10 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
-
-// Pages
 import Home from './pages/home/Home';
 import Dashboard from './pages/dashboard/Dashboard';
 import Profile from './pages/profile/Profile';
 import Quiz from './pages/quiz/Quiz';
-
-import Results from './pages/results/Results';
-import Teacher from './pages/teacher/Teacher';
-import About from './pages/about/About';
 import Settings from './pages/settings/Settings';
 import NotFound from './pages/static/NotFound';
 import Simulation from './pages/simulation/Simulation';
@@ -21,41 +15,60 @@ import { AuthProvider } from './context/AuthProvider';
 import { ContextPage } from './pages/contexts/ContextPage';
 import { SettingsProvider } from './features/settings/SettingsProvider';
 import { useCSRF } from './hooks/csrf/useCSRF';
+import { isNotFoundRoute } from './utils/routes/routes';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+
+// Pages statiques
+import Contact from './pages/static/Contact';
+import Documentation from './pages/static/Documentation';
+import FAQ from './pages/static/FAQ';
+import Support from './pages/static/Support';
 
 const queryClient = new QueryClient();
 
 const Layout: React.FC = () => {
   const location = useLocation();
-  const hideSidebar = location.pathname === '/';
+
   const isHome = location.pathname === '/';
+  const isNotFound = isNotFoundRoute(location.pathname);
+
+  const staticRoutes = ['/contact', '/documentation', '/faq', '/support', '/api-guide'];
+  const isStatic = staticRoutes.includes(location.pathname);
+
+  const hideSidebar = isHome || isNotFound || isStatic;
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar en haut */}
       <Navbar />
 
-      {/* Contenu principal */}
       <div className="flex flex-1">
         {!hideSidebar && <Sidebar />}
 
-        {/* Content wrapper */}
-        <div className={`flex-1 flex flex-col ${isHome ? 'home-layout-bg' : 'right-panel-bg'}`}>
+        <div
+          className={`flex-1 flex flex-col ${isHome || isStatic ? 'home-layout-bg' : 'right-panel-bg'}`}
+        >
           <div className="flex-1 overflow-y-auto">
             <Routes>
+              {/* Public */}
               <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/twins" element={<Twins />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/quizzes" element={<Quiz />}></Route>
-              {/* todo : add seperate quiz detail if needed */}
-
-              <Route path="/results" element={<Results />} />
-              <Route path="/teacher" element={<Teacher />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/simulation" element={<Simulation />} />
-              <Route path="/contexts" element={<ContextPage />} />
               <Route path="*" element={<NotFound />} />
+
+              {/* Pages statiques */}
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/documentation" element={<Documentation />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/support" element={<Support />} />
+
+              {/* Protected */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/twins" element={<Twins />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/quizzes" element={<Quiz />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/simulation" element={<Simulation />} />
+                <Route path="/contexts" element={<ContextPage />} />
+              </Route>
             </Routes>
           </div>
         </div>

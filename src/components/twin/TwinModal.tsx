@@ -24,10 +24,10 @@ import { useContexts } from '../../hooks/twins/useContexts';
 import { useCreateTwin } from '../../hooks/twins/useCreateTwin';
 import { useUpdateTwin } from '../../hooks/twins/useUpdateTwin';
 
-import type { Behavior, DigitalTwin } from '../../types/types';
 import { Slider } from '../ui/stats/Slider';
 import { Input, TextArea } from '../ui/form/inputs';
 import { IoCloseSharp } from 'react-icons/io5';
+import type { Behavior, DigitalTwin } from '../../types';
 
 //types
 type TwinModalProps = {
@@ -195,7 +195,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
           <div className="flex items-center gap-2">
             <User className="text-primary" size={20} />
             <h2 className="text-xl font-bold">
-              {twin ? 'Modifier le twin' : 'Créer un jumeau numérique'}
+              {twin ? 'Modifier le jumeau numérique' : 'Créer un jumeau numérique'}
             </h2>
           </div>
 
@@ -231,7 +231,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
                 <Input
                   icon={User}
                   value={form.name}
-                  onChange={(v) => handleChange('name', v)}
+                  onChange={(value) => handleChange('name', value)}
                   placeholder="Ex. : Mohamed, Emma, Lucas..."
                 />
               </div>
@@ -245,7 +245,9 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
                   icon={Calendar}
                   type="number"
                   value={form.age ?? ''}
-                  onChange={(v) => handleChange('age', v === '' ? undefined : Number(v))}
+                  onChange={(value) =>
+                    handleChange('age', value === '' ? undefined : Number(value))
+                  }
                   placeholder="Ex. : 18"
                 />
               </div>
@@ -259,7 +261,9 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
                   icon={Star}
                   type="number"
                   value={form.average_grade ?? ''}
-                  onChange={(v) => handleChange('average_grade', v === '' ? undefined : Number(v))}
+                  onChange={(value) =>
+                    handleChange('average_grade', value === '' ? undefined : Number(value))
+                  }
                   placeholder="Ex. : 14.5"
                 />
               </div>
@@ -272,7 +276,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
                 <TextArea
                   icon={FileText}
                   value={form.description}
-                  onChange={(v) => handleChange('description', v)}
+                  onChange={(value) => handleChange('description', value)}
                   placeholder="Ex. : Élève motivé..."
                 />
               </div>
@@ -372,7 +376,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
                 <TextArea
                   icon={MessageSquare}
                   value={form.behavior.comment || ''}
-                  onChange={(v) => handleBehaviorChange('comment', v)}
+                  onChange={(value) => handleBehaviorChange('comment', value)}
                   placeholder="Commentaire IA"
                 />
               </div>

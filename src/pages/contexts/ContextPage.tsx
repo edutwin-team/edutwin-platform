@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ContextForm } from '../../components/contexts/ContextForm';
 import { ContextHeader } from '../../components/contexts/ContextHeader';
 import { ContextList } from '../../components/contexts/ContextList';
-import type { Context } from '../../types/types';
+import type { Context } from '../../types';
 
 export const ContextPage = () => {
   const [selectedContext, setSelectedContext] = useState<Context | null>(null);

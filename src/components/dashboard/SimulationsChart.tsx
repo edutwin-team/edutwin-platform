@@ -16,14 +16,11 @@ const SimulationsChart = ({ data }: Props) => {
 
   // normalisation
   const normalizedData = useMemo(() => {
-    return orderedDays.map((day) => {
-      const found = data.find((d) => d.day === day);
-      return {
-        day,
-        label: dayToFrench[day],
-        count: found ? found.count : 0,
-      };
-    });
+    return data.map((d) => ({
+      day: d.day,
+      label: dayToFrench[d.day],
+      count: d.count,
+    }));
   }, [data]);
 
   const filteredData =

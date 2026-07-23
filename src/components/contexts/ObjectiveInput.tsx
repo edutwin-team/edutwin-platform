@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Trash2, Plus } from 'lucide-react';
-import type { Objective } from '../../types/types';
+import type { Objective } from '../../types';
 
 type ObjectiveInputProps = {
   objectives: Objective[];

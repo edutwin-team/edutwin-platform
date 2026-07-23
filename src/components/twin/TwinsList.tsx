@@ -1,4 +1,4 @@
-import type { DigitalTwin } from '../../types/types';
+import type { DigitalTwin } from '../../types';
 import TwinCard from './TwinCard';
 
 type TwinListProps = {

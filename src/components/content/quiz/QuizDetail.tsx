@@ -1,4 +1,4 @@
-import { type Quiz } from '../../../types/types';
+import type { Quiz } from '../../../types';
 import { quizSourceLabel } from '../../../utils/quiz/quizSourceLabel';
 import { QuestionTypeBadge } from '../../ui/badges/QuestionTypeBadge';
 import { QuizBadge } from '../../ui/badges/QuizBadge';

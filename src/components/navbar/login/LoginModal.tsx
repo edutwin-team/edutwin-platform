@@ -3,6 +3,7 @@ import { HiOutlineLockClosed, HiOutlineMail, HiOutlineEye, HiOutlineEyeOff } fro
 import { AuthModalShell } from '../auth/AuthModalShell';
 import { useLogin } from '../../../hooks/user/useLogin';
 import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 type LoginModalProps = {
   isOpen: boolean;
@@ -11,6 +12,7 @@ type LoginModalProps = {
 
 export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -22,22 +24,17 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
 
   const validate = () => {
     const newErrors: { email?: string; password?: string } = {};
-    // Email
     if (!email) {
       newErrors.email = 'Email requis';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Email invalide';
     }
-
-    // Password min 6 letters
     if (!password) {
       newErrors.password = 'Mot de passe requis';
     } else if (password.length < 6) {
       newErrors.password = 'Minimum 6 caractères';
     }
-
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
@@ -45,27 +42,33 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     setShowPassword(!showPassword);
   };
 
-  // Use the useLogin hook to get the mutate function and loading state
   const { mutate: loginUser, isPending } = useLogin();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validate()) return;
-
     loginUser(
       { email, password },
       {
         onSuccess: () => {
-          // Invalidate the 'me' query to refetch user data
           queryClient.invalidateQueries({ queryKey: ['me'] });
           onClose();
-          window.location.href = '/dashboard';
+          navigate('/dashboard');
         },
-        onError: () => {
-          setErrors({
-            password: 'Email ou mot de passe incorrect',
-          });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onError: (err: any) => {
+          const errorCode = err.response?.data?.error;
+
+          if (errorCode === 'unverified') {
+            setErrors({
+              password:
+                "Votre compte n'est pas encore activé. Vérifiez votre email pour activer votre compte.",
+            });
+          } else {
+            setErrors({
+              password: 'Email ou mot de passe incorrect.',
+            });
+          }
         },
       }
     );
@@ -101,7 +104,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         </div>
       }
       rightContent={
-        <section className="p-8 md:p-10 lg:p-12  right-panel-bg">
+        <section className="p-8 md:p-10 lg:p-12 right-panel-bg">
           <form
             onSubmit={(e) => {
               handleSubmit(e);
@@ -110,7 +113,8 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
           >
             <div className="space-y-3">
               <span className="auth-header-badge">Espace personnel</span>
-              <h1 className="auth-title dark:text-white">Connexion</h1>
+              {/* EDT-130 : dark:text-white retiré, géré par index.css */}
+              <h1 className="auth-title">Connexion</h1>
               <p className="auth-subtitle">Renseignez vos identifiants pour vous connecter.</p>
             </div>
 
@@ -193,7 +197,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             >
               S&apos;inscrire
             </button>
-          </p>{' '}
+          </p>
         </section>
       }
     />

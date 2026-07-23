@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createTwin } from '../../api/twins/twin';
-import type { DigitalTwin } from '../../types/types';
+import type { DigitalTwin } from '../../types';
 
 export const useCreateTwin = (options?: { onSuccess?: () => void }) => {
   const queryClient = useQueryClient();

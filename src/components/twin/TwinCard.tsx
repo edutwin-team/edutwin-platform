@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { DigitalTwin } from '../../types/types';
+
 import { HiPlay, HiChevronDown } from 'react-icons/hi';
 
 import PercentRadial from '../ui/stats/PercentRadial';
@@ -10,6 +10,8 @@ import { LearningStyleMap, PreferredContentTypeMap } from '../../utils/twins';
 import TwinAvatar from './TwinAvatar';
 import { useDeleteTwin } from '../../hooks/twins/useDeleteTwin';
 import { GenericModal } from '../ui/modals/GenericModal';
+import { Link } from 'react-router-dom';
+import type { DigitalTwin } from '../../types';
 
 interface Props {
   twin: DigitalTwin;
@@ -62,9 +64,13 @@ const TwinCard: React.FC<Props> = ({ twin, onEdit }) => {
           </div>
         </div>
 
-        <button className="btn btn-circle btn-ghost border border-base-300 shrink-0">
+        <Link
+          to="/simulation"
+          className="tooltip tooltip-left btn btn-circle btn-ghost border border-base-300 shrink-0"
+          data-tip="Lancer une simulation"
+        >
           <HiPlay size={18} />
-        </button>
+        </Link>
       </div>
       {/* META */}
       <div className="flex items-center justify-between text-xs mb-3">
@@ -163,7 +169,7 @@ const TwinCard: React.FC<Props> = ({ twin, onEdit }) => {
       <GenericModal
         isOpen={openDelete}
         onClose={() => setOpenDelete(false)}
-        title="Supprimer le twin"
+        title="Supprimer le jumeau numérique"
         confirmText="Supprimer"
         confirmColor="error"
         loading={isDeleting}

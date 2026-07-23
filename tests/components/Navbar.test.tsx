@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 
 import Navbar from '../../src/components/navbar/Navbar';
 import { renderWithProviders } from '../utils/renderWithProviders';
@@ -14,7 +14,7 @@ Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 describe('Navbar', () => {
   it('affiche le logo du projet', () => {
     renderWithProviders(<Navbar />);
-    expect(screen.getByAltText(/Logo EduTwin/i)).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Logo EduTwin/i })).toBeInTheDocument();
   });
 
   it('affiche les actions principales', () => {
@@ -22,5 +22,11 @@ describe('Navbar', () => {
     expect(screen.getByRole('button', { name: /Connexion/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /S'inscrire/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/Activer le mode sombre/i)).toBeInTheDocument();
+  });
+
+  it('ouvre la modale de connexion', () => {
+    renderWithProviders(<Navbar />);
+    fireEvent.click(screen.getByRole('button', { name: /Connexion/i }));
+    expect(screen.getByPlaceholderText('nom@ecole.fr')).toBeInTheDocument();
   });
 });

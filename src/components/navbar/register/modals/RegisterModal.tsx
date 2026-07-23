@@ -7,9 +7,10 @@ import { useRegister } from '../../../../hooks/user/useRegister';
 type RegisterModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  onRegisterSuccess: () => void;
 };
 
-export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
+export const RegisterModal = ({ isOpen, onClose, onRegisterSuccess }: RegisterModalProps) => {
   const [step, setStep] = useState(1);
 
   // Step 1
@@ -106,6 +107,7 @@ export const RegisterModal = ({ isOpen, onClose }: RegisterModalProps) => {
       {
         onSuccess: () => {
           handleClose();
+          onRegisterSuccess();
         },
         onError: (err) => {
           setError("Erreur lors de l'inscription");

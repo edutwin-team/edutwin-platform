@@ -6,8 +6,7 @@ import { GenericModal } from '../ui/modals/GenericModal';
 
 import { useCreateContext } from '../../hooks/twins/useCreateContext';
 import { useUpdateContext } from '../../hooks/twins/useUpdateContext';
-
-import type { Context, Objective } from '../../types/types';
+import type { Context, Objective } from '../../types';
 
 type ContextFormProps = {
   context?: Context | null;
