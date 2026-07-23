@@ -29,9 +29,9 @@ export function AddQuizChoice({ onImport, onManual, onClose }: Props) {
         {/* MANUAL */}
         <button
           onClick={onManual}
-          className="btn-disabled flex-1 p-6 border rounded-xl hover:bg-base-200 transition text-left cursor-pointer"
+          className=" flex-1 p-6 border rounded-xl hover:bg-base-200 transition text-left cursor-pointer"
         >
-          <div className="text-lg font-semibold">✍️ Manuel (not finished)</div>
+          <div className="text-lg font-semibold">✍️ Manuel</div>
           <div className="text-sm text-base-content/60">Création étape par étape</div>
         </button>
       </div>

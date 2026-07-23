@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Trash2, Download } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Trash2, Download, Edit2 } from 'lucide-react';
 
 import { useQuizzes } from '../../../hooks/content/quiz/useQuizzes';
 import { useDeleteQuiz } from '../../../hooks/content/quiz/useDeleteQuiz';
@@ -11,28 +11,33 @@ import QuizDetail from './QuizDetail';
 import { QuizBadge } from '../../ui/badges/QuizBadge';
 import { quizSourceLabel } from '../../../utils/quiz/quizSourceLabel';
 
-import { useRef } from 'react';
 import { SimpleLoader } from '../../ui/loaders/SimpleLoader';
 import QuizAvatar from '../../ui/avatars/QuizAvatar';
 import type { Quiz } from '../../../types';
 
-export function QuizList() {
+type QuizListProps = {
+  onEdit: (quiz: Quiz) => void;
+};
+export function QuizList({ onEdit }: QuizListProps) {
   const { data: quizzes, isLoading, isError } = useQuizzes();
 
   const { mutate: deleteQuiz, isPending } = useDeleteQuiz();
   const exportMutation = useExportQuiz();
 
-  const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
+  const [selectedQuizId, setSelectedQuizId] = useState<number | null>(null);
   const [quizToDelete, setQuizToDelete] = useState<Quiz | null>(null);
   const detailRef = useRef<HTMLDivElement | null>(null);
+  const selectedQuiz = quizzes?.find((quiz) => quiz.id === selectedQuizId) ?? null;
 
   const handleDelete = () => {
     if (!quizToDelete?.id) return;
 
     deleteQuiz(quizToDelete.id, {
       onSuccess: () => {
+        if (selectedQuizId === quizToDelete.id) {
+          setSelectedQuizId(null);
+        }
         setQuizToDelete(null);
-        setSelectedQuiz(null);
       },
     });
   };
@@ -50,13 +55,12 @@ export function QuizList() {
     exportLink.click();
 
     window.URL.revokeObjectURL(url);
-
-    setSelectedQuiz(null);
   };
 
-  //todo : better to add a deticated page for quiz detail later
   const handleViewQuiz = (quiz: Quiz) => {
-    setSelectedQuiz(selectedQuiz?.id === quiz.id ? null : quiz);
+    if (quiz.id == null) return;
+    const quizId = quiz.id;
+    setSelectedQuizId((prev) => (prev === quizId ? null : quizId));
 
     setTimeout(() => {
       detailRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -107,17 +111,16 @@ export function QuizList() {
 
               {/* btns actions */}
               <div className="flex gap-2 mt-4">
-                <button
-                  onClick={() => {
-                    handleViewQuiz(quiz);
-                  }}
-                  className="btn btn-sm btn-outline"
-                >
-                  {selectedQuiz?.id === quiz.id ? 'Masquer' : 'Voir'}
+                <button onClick={() => handleViewQuiz(quiz)} className="btn btn-sm btn-outline">
+                  {selectedQuizId === quiz.id ? 'Masquer' : 'Voir'}
                 </button>
 
                 <button onClick={() => handleExport(quiz)} className="btn btn-sm btn-ghost">
                   <Download size={16} />
+                </button>
+
+                <button onClick={() => onEdit(quiz)} className="btn btn-sm btn-ghost text-blue-500">
+                  <Edit2 size={16} />
                 </button>
 
                 <button

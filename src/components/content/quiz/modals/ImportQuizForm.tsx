@@ -73,7 +73,7 @@ export function ImportQuizForm({ onBack, onSuccess }: Props) {
         <button
           onClick={() => {
             const modelLink = document.createElement('a');
-            modelLink.href = '/public/templates/modele_import_quiz.csv';
+            modelLink.href = '/templates/modele_import_quiz.csv';
             modelLink.download = 'modele_import_quiz.csv';
             modelLink.click();
           }}
@@ -85,7 +85,7 @@ export function ImportQuizForm({ onBack, onSuccess }: Props) {
         <button
           onClick={() => {
             const guideLink = document.createElement('a');
-            guideLink.href = '/public/docs/guide_client.pdf';
+            guideLink.href = '/docs/guide_client.pdf';
             guideLink.download = 'guide_import_quiz.pdf';
             guideLink.click();
           }}
