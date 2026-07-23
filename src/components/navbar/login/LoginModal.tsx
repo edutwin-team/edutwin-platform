@@ -55,10 +55,20 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
           onClose();
           navigate('/dashboard');
         },
-        onError: () => {
-          setErrors({
-            password: 'Email ou mot de passe incorrect',
-          });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onError: (err: any) => {
+          const errorCode = err.response?.data?.error;
+
+          if (errorCode === 'unverified') {
+            setErrors({
+              password:
+                "Votre compte n'est pas encore activé. Vérifiez votre email pour activer votre compte.",
+            });
+          } else {
+            setErrors({
+              password: 'Email ou mot de passe incorrect.',
+            });
+          }
         },
       }
     );
