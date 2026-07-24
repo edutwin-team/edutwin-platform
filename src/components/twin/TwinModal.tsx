@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import {
   User,
   Calendar,
@@ -26,6 +27,8 @@ import { useUpdateTwin } from '../../hooks/twins/useUpdateTwin';
 
 import { Slider } from '../ui/stats/Slider';
 import { Input, TextArea } from '../ui/form/inputs';
+import { RequiredMark } from '../ui/form/FormLabel';
+import { SimpleLoader } from '../ui/loaders/SimpleLoader';
 import { IoCloseSharp } from 'react-icons/io5';
 import type { Behavior, DigitalTwin } from '../../types';
 
@@ -91,7 +94,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
   ] as const;
 
   //react query mutation functions
-  const { data: contexts } = useContexts();
+  const { data: contexts, isLoading: isLoadingContexts } = useContexts();
   const { mutate: createTwin, isPending: isCreating } = useCreateTwin({
     onSuccess: () => handleClose(),
   });
@@ -100,6 +103,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
   });
 
   const isPending = isCreating || isUpdating;
+  const hasContexts = (contexts?.length ?? 0) > 0;
 
   const [step, setStep] = useState(1);
   //get twin data when modal is on edit
@@ -226,7 +230,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* NAME */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Nom du twin</span>
+                  <span className="label-text font-medium">
+                    Nom du twin
+                    <RequiredMark />
+                  </span>
                 </label>
                 <Input
                   icon={User}
@@ -239,7 +246,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* AGE */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Âge</span>
+                  <span className="label-text font-medium">
+                    Âge
+                    <RequiredMark />
+                  </span>
                 </label>
                 <Input
                   icon={Calendar}
@@ -255,7 +265,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* AVERAGE GRADE */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Moyenne générale (/20)</span>
+                  <span className="label-text font-medium">
+                    Moyenne générale (/20)
+                    <RequiredMark />
+                  </span>
                 </label>
                 <Input
                   icon={Star}
@@ -271,7 +284,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* DESCRIPTION */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Description</span>
+                  <span className="label-text font-medium">
+                    Description
+                    <RequiredMark />
+                  </span>
                 </label>
                 <TextArea
                   icon={FileText}
@@ -289,25 +305,43 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               <label className="text-sm flex items-center gap-2">
                 <GraduationCap size={14} className="text-primary" />
                 Contexte pédagogique
+                <RequiredMark />
               </label>
 
-              <select
-                className="select select-bordered bg-base-200 w-full"
-                value={form.context ?? ''}
-                onChange={(e) =>
-                  handleChange(
-                    'context',
-                    e.target.value === '' ? undefined : Number(e.target.value)
-                  )
-                }
-              >
-                <option value="">Sélectionner un contexte</option>
-                {contexts?.map((c: { id: number; name: string }) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
+              {isLoadingContexts && <SimpleLoader />}
+
+              {!isLoadingContexts && !hasContexts && (
+                <div className="rounded-xl border border-base-300 bg-base-200/40 p-8 text-center space-y-4">
+                  <h3 className="text-lg font-semibold">Aucun contexte pédagogique disponible</h3>
+                  <p className="text-sm text-base-content/70">
+                    Vous devez créer un contexte pédagogique avant de créer un jumeau numérique.
+                  </p>
+                  <Link to="/contexts" onClick={handleClose} className="btn btn-primary gap-2">
+                    <GraduationCap size={18} />
+                    Créer un contexte pédagogique
+                  </Link>
+                </div>
+              )}
+
+              {!isLoadingContexts && hasContexts && (
+                <select
+                  className="select select-bordered bg-base-200 w-full"
+                  value={form.context ?? ''}
+                  onChange={(e) =>
+                    handleChange(
+                      'context',
+                      e.target.value === '' ? undefined : Number(e.target.value)
+                    )
+                  }
+                >
+                  <option value="">Sélectionner un contexte</option>
+                  {contexts?.map((c: { id: number; name: string }) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
           )}
 
@@ -332,7 +366,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* LEARNING STYLE options */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Style d’apprentissage</span>
+                  <span className="label-text font-medium">
+                    Style d’apprentissage
+                    <RequiredMark />
+                  </span>
                 </label>
 
                 <select
@@ -351,7 +388,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* CONTENT TYPE options */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Contenu préféré</span>
+                  <span className="label-text font-medium">
+                    Contenu préféré
+                    <RequiredMark />
+                  </span>
                 </label>
 
                 <select

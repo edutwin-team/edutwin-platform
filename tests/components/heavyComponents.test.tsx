@@ -5,7 +5,7 @@ import { TwinModal } from '../../src/components/twin/TwinModal';
 import { ContextForm } from '../../src/components/contexts/ContextForm';
 import SimulationsChart from '../../src/components/dashboard/SimulationsChart';
 import Twins from '../../src/pages/twins/Twins';
-import { QueryWrapper, renderWithFullProviders } from '../utils/testProviders';
+import { QueryWrapper, RouterQueryWrapper, renderWithFullProviders } from '../utils/testProviders';
 
 vi.mock('../../src/hooks/twins/useContexts');
 vi.mock('../../src/hooks/twins/useCreateTwin');
@@ -62,6 +62,7 @@ describe('TwinModal', () => {
     );
 
     expect(screen.getByText(/Créer un jumeau numérique/i)).toBeInTheDocument();
+    expect(screen.getAllByText('*').length).toBeGreaterThanOrEqual(4);
     fireEvent.change(screen.getByPlaceholderText(/Mohamed, Emma, Lucas/i), {
       target: { value: 'Nouveau Twin' },
     });
@@ -79,6 +80,33 @@ describe('TwinModal', () => {
     );
 
     expect(screen.getByDisplayValue('Twin Beta')).toBeInTheDocument();
+  });
+
+  it('affiche un message et redirige vers la création de contexte', () => {
+    vi.mocked(useContexts).mockReturnValue({ data: [], isLoading: false } as never);
+    vi.mocked(useCreateTwin).mockReturnValue({ mutate: vi.fn(), isPending: false } as never);
+    vi.mocked(useUpdateTwin).mockReturnValue({ mutate: vi.fn(), isPending: false } as never);
+
+    render(
+      <RouterQueryWrapper>
+        <TwinModal open onClose={vi.fn()} />
+      </RouterQueryWrapper>
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/Mohamed, Emma, Lucas/i), {
+      target: { value: 'Nouveau Twin' },
+    });
+    fireEvent.change(screen.getByPlaceholderText('Ex. : 18'), { target: { value: '18' } });
+    fireEvent.change(screen.getByPlaceholderText('Ex. : 14.5'), { target: { value: '14' } });
+    fireEvent.change(screen.getByPlaceholderText(/Élève motivé/i), {
+      target: { value: 'Description test' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /Suivant/i }));
+
+    expect(screen.getByText('Aucun contexte pédagogique disponible')).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: /Créer un contexte pédagogique/i })
+    ).toHaveAttribute('href', '/contexts');
   });
 });
 

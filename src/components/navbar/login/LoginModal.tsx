@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { HiOutlineLockClosed, HiOutlineMail, HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
 import { AuthModalShell } from '../auth/AuthModalShell';
+import { FormLabel } from '../../ui/form/FormLabel';
 import { useLogin } from '../../../hooks/user/useLogin';
 import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -120,7 +121,9 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
 
             {/* EMAIL */}
             <div className="space-y-2">
-              <label className="auth-field-label">Email</label>
+              <FormLabel className="auth-field-label" required>
+                Email
+              </FormLabel>
               <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
                 <HiOutlineMail className="h-4 w-4 opacity-70" />
                 <input
@@ -139,7 +142,9 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
 
             {/* PASSWORD */}
             <div className="space-y-2">
-              <label className="auth-field-label">Mot de passe</label>
+              <FormLabel className="auth-field-label" required>
+                Mot de passe
+              </FormLabel>
               <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
                 <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
                 <input

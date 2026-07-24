@@ -7,6 +7,8 @@ import {
   HiOutlineEyeOff,
 } from 'react-icons/hi';
 
+import { FormLabel } from '../../../ui/form/FormLabel';
+
 type StepOneProps = {
   firstName: string;
   setFirstName: (v: string) => void;
@@ -51,87 +53,113 @@ export const RegisterStepOne = ({
       <p className="auth-subtitle">Explorez une nouvelle façon d’apprendre.</p>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
-          <HiOutlineUser className="h-5 w-5 opacity-70" />
-          <input
-            type="text"
-            className="grow text-sm"
-            placeholder="Prénom"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </label>
+        <div className="space-y-2">
+          <FormLabel className="auth-field-label" required>
+            Prénom
+          </FormLabel>
+          <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
+            <HiOutlineUser className="h-5 w-5 opacity-70" />
+            <input
+              type="text"
+              className="grow text-sm"
+              placeholder="Prénom"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </label>
+        </div>
 
-        <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
-          <HiOutlineUser className="h-4 w-4 opacity-70" />
-          <input
-            type="text"
-            className="grow "
-            placeholder="Nom"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </label>
+        <div className="space-y-2">
+          <FormLabel className="auth-field-label" required>
+            Nom
+          </FormLabel>
+          <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
+            <HiOutlineUser className="h-4 w-4 opacity-70" />
+            <input
+              type="text"
+              className="grow "
+              placeholder="Nom"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </label>
+        </div>
       </div>
 
       {/* {firstName.trim() && lastName.trim() && (
         <p className={SUCCESS_FEEDBACK_CLASS}>Identité renseignée</p>
       )} */}
 
-      <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
-        <HiOutlineMail className="h-4 w-4 opacity-70" />
-        <input
-          type="email"
-          className="grow"
-          required
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
+      <div className="space-y-2">
+        <FormLabel className="auth-field-label" required>
+          Email
+        </FormLabel>
+        <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
+          <HiOutlineMail className="h-4 w-4 opacity-70" />
+          <input
+            type="email"
+            className="grow"
+            required
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+      </div>
 
-      <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
-        <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
-        <input
-          type={showPassword ? 'text' : 'password'}
-          className="grow"
-          placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {showPassword ? (
-          <HiOutlineEye
-            onClick={handlePasswordVisibility}
-            className="h-5 w-5 opacity-70 cursor-pointer"
+      <div className="space-y-2">
+        <FormLabel className="auth-field-label" required>
+          Mot de passe
+        </FormLabel>
+        <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
+          <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
+          <input
+            type={showPassword ? 'text' : 'password'}
+            className="grow"
+            placeholder="Mot de passe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
-        ) : (
-          <HiOutlineEyeOff
-            onClick={handlePasswordVisibility}
-            className="h-5 w-5 opacity-70 cursor-pointer"
+          {showPassword ? (
+            <HiOutlineEye
+              onClick={handlePasswordVisibility}
+              className="h-5 w-5 opacity-70 cursor-pointer"
+            />
+          ) : (
+            <HiOutlineEyeOff
+              onClick={handlePasswordVisibility}
+              className="h-5 w-5 opacity-70 cursor-pointer"
+            />
+          )}
+        </label>
+      </div>
+
+      <div className="space-y-2">
+        <FormLabel className="auth-field-label" required>
+          Confirmation du mot de passe
+        </FormLabel>
+        <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
+          <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
+          <input
+            type={showConfirmPassword ? 'text' : 'password'}
+            className="grow"
+            placeholder="Confirmer votre mot de passe"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
-        )}
-      </label>
-      <label className="input rounded-xl flex items-center gap-2 h-12 px-4">
-        <HiOutlineLockClosed className="h-4 w-4 opacity-70" />
-        <input
-          type={showConfirmPassword ? 'text' : 'password'}
-          className="grow"
-          placeholder="Confirmer votre mot de passe"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        {showConfirmPassword ? (
-          <HiOutlineEye
-            onClick={handleConfirmPasswordVisibility}
-            className="h-5 w-5 opacity-70 cursor-pointer"
-          />
-        ) : (
-          <HiOutlineEyeOff
-            onClick={handleConfirmPasswordVisibility}
-            className="h-5 w-5 opacity-70 cursor-pointer"
-          />
-        )}
-      </label>
+          {showConfirmPassword ? (
+            <HiOutlineEye
+              onClick={handleConfirmPasswordVisibility}
+              className="h-5 w-5 opacity-70 cursor-pointer"
+            />
+          ) : (
+            <HiOutlineEyeOff
+              onClick={handleConfirmPasswordVisibility}
+              className="h-5 w-5 opacity-70 cursor-pointer"
+            />
+          )}
+        </label>
+      </div>
     </div>
   );
 };

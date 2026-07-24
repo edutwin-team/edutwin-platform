@@ -16,7 +16,7 @@ import { RegisterModal } from '../../src/components/navbar/register/modals/Regis
 import QuizDetail from '../../src/components/content/quiz/QuizDetail';
 import { ObjectiveInput } from '../../src/components/contexts/ObjectiveInput';
 import { ContentSourceType, type QuizSimulationResult } from '../../src/types';
-import { QueryWrapper, renderWithRouter } from '../utils/testProviders';
+import { QueryWrapper, RouterQueryWrapper, renderWithRouter } from '../utils/testProviders';
 
 vi.mock('../../src/hooks/content/quiz/useImportQuiz');
 vi.mock('../../src/hooks/twins/useTwins');
@@ -277,6 +277,23 @@ describe('QuizSelectModal', () => {
     fireEvent.click(screen.getByText('Quiz B'));
     fireEvent.click(screen.getByRole('button', { name: /Lancer la simulation/i }));
     expect(onSelect).toHaveBeenCalledWith(2);
+  });
+
+  it('affiche un message et un lien de création sans quiz', () => {
+    vi.mocked(useQuizzes).mockReturnValue({ data: [], isLoading: false } as never);
+
+    render(
+      <RouterQueryWrapper>
+        <QuizSelectModal onSelect={vi.fn()} onBack={vi.fn()} onClose={vi.fn()} />
+      </RouterQueryWrapper>
+    );
+
+    expect(screen.getByText('Aucun quiz disponible')).toBeInTheDocument();
+    expect(
+      screen.getByText(/Vous devez créer un quiz avant de lancer une simulation/i)
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Créer un quiz/i })).toHaveAttribute('href', '/quizzes');
+    expect(screen.queryByRole('button', { name: /Lancer la simulation/i })).not.toBeInTheDocument();
   });
 });
 
