@@ -16,7 +16,7 @@ import { RegisterModal } from '../../src/components/navbar/register/modals/Regis
 import QuizDetail from '../../src/components/content/quiz/QuizDetail';
 import { ObjectiveInput } from '../../src/components/contexts/ObjectiveInput';
 import { ContentSourceType, type QuizSimulationResult } from '../../src/types';
-import { QueryWrapper, renderWithRouter } from '../utils/testProviders';
+import { QueryWrapper, RouterQueryWrapper, renderWithRouter } from '../utils/testProviders';
 
 vi.mock('../../src/hooks/content/quiz/useImportQuiz');
 vi.mock('../../src/hooks/twins/useTwins');
@@ -257,6 +257,23 @@ describe('TwinSelectModal', () => {
       </QueryWrapper>
     );
     expect(screen.getByText('Chargement des données...')).toBeInTheDocument();
+  });
+
+  it('affiche un message et un lien de création sans jumeau', () => {
+    vi.mocked(useTwins).mockReturnValue({ data: [], isLoading: false } as never);
+
+    render(
+      <RouterQueryWrapper>
+        <TwinSelectModal onSelect={vi.fn()} onClose={vi.fn()} />
+      </RouterQueryWrapper>
+    );
+
+    expect(screen.getByText('Aucun jumeau disponible')).toBeInTheDocument();
+    expect(
+      screen.getByText(/Vous devez créer un jumeau numérique avant de lancer une simulation/i)
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Créer un jumeau/i })).toHaveAttribute('href', '/twins');
+    expect(screen.queryByRole('button', { name: /Suivant/i })).not.toBeInTheDocument();
   });
 });
 
