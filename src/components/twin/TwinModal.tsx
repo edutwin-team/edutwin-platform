@@ -26,6 +26,7 @@ import { useUpdateTwin } from '../../hooks/twins/useUpdateTwin';
 
 import { Slider } from '../ui/stats/Slider';
 import { Input, TextArea } from '../ui/form/inputs';
+import { RequiredMark } from '../ui/form/FormLabel';
 import { IoCloseSharp } from 'react-icons/io5';
 import type { Behavior, DigitalTwin } from '../../types';
 
@@ -226,7 +227,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* NAME */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Nom du twin</span>
+                  <span className="label-text font-medium">
+                    Nom du twin
+                    <RequiredMark />
+                  </span>
                 </label>
                 <Input
                   icon={User}
@@ -239,7 +243,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* AGE */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Âge</span>
+                  <span className="label-text font-medium">
+                    Âge
+                    <RequiredMark />
+                  </span>
                 </label>
                 <Input
                   icon={Calendar}
@@ -255,7 +262,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* AVERAGE GRADE */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Moyenne générale (/20)</span>
+                  <span className="label-text font-medium">
+                    Moyenne générale (/20)
+                    <RequiredMark />
+                  </span>
                 </label>
                 <Input
                   icon={Star}
@@ -271,7 +281,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* DESCRIPTION */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Description</span>
+                  <span className="label-text font-medium">
+                    Description
+                    <RequiredMark />
+                  </span>
                 </label>
                 <TextArea
                   icon={FileText}
@@ -289,6 +302,7 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               <label className="text-sm flex items-center gap-2">
                 <GraduationCap size={14} className="text-primary" />
                 Contexte pédagogique
+                <RequiredMark />
               </label>
 
               <select
@@ -332,7 +346,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* LEARNING STYLE options */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Style d’apprentissage</span>
+                  <span className="label-text font-medium">
+                    Style d’apprentissage
+                    <RequiredMark />
+                  </span>
                 </label>
 
                 <select
@@ -351,7 +368,10 @@ export const TwinModal = ({ open, onClose, twin }: TwinModalProps) => {
               {/* CONTENT TYPE options */}
               <div>
                 <label className="label">
-                  <span className="label-text font-medium">Contenu préféré</span>
+                  <span className="label-text font-medium">
+                    Contenu préféré
+                    <RequiredMark />
+                  </span>
                 </label>
 
                 <select
